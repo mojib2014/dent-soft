@@ -1,7 +1,7 @@
 const db = require("../models");
 
 
-// Defining methods for the recordesController.
+// Defining methods for the recordsController.
 module.exports = {
     findAll: function(req, res) {
         db.Records

@@ -13,10 +13,10 @@ router.use("/note", noteRoutes);
 
 module.exports = router;
 
-const recordesRoutes = require("./recordes");
+const recordsRoutes = require("./records");
 
-// Recordes routes
-router.use("/recordes", recordesRoutes);
+// Records routes
+router.use("/records", recordsRoutes);
 
 module.exports = router;
 

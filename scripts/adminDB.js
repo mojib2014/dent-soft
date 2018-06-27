@@ -9,7 +9,7 @@ mongoose.connect(
 );
 
 const adminSeed = 
-  {
+  [{
     name: "",
     email: "",
     password: "",
@@ -17,7 +17,7 @@ const adminSeed =
     birth_date: "",
     phone: "",
     address: ""
-  }
+  }];
   
 
 db.Admin

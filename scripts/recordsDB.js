@@ -8,15 +8,15 @@ mongoose.connect(
   "mongodb://localhost/dent_soft"
 );
 
-const adminSeed = 
-  {
+const recordsSeed = 
+  [{
     record: ""
-  }
+  }];
   
 
-db.Record
+db.Records
   .remove({})
-  .then(() => db.Record.collection.insertMany(recordSeed))
+  .then(() => db.Records.collection.insertMany(recordsSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
