@@ -9,7 +9,7 @@ mongoose.connect(
 );
 
 const usersSeed = 
-  {
+  [{
     name: "",
     email: "",
     password: "",
@@ -20,7 +20,7 @@ const usersSeed =
     record: "",
     note: "",
     reservations: ""
-  }
+  }]
   
 
 db.Users

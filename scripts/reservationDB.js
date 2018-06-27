@@ -9,11 +9,11 @@ mongoose.connect(
 );
 
 const reservationSeed = 
-  {
+  [{
     data: "",
     start_time: "",
     user_id: ""
-  }
+  }]
   
 
 db.Reservation

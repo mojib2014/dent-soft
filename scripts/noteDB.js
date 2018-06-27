@@ -9,9 +9,9 @@ mongoose.connect(
 );
 
 const noteSeed = 
-  {
+  [{
     note: ""
-  }
+  }];
   
 
 db.Note
