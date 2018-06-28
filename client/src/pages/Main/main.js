@@ -1,6 +1,7 @@
-import React from "react";
-import Nav from "../../components/Nav";
+import React, {Component} from "react";
 import Login from "../../components/Login";
+import { Col, Row, Container } from "../../components/Grid";
+
 
 class Main extends Component {
     state = {
@@ -11,7 +12,6 @@ class Main extends Component {
     render() {
         return (
             <Container fluid> 
-                <Nav /> 
                     <Row>
                        <Col size="md-6">
                             <div className="intro">
