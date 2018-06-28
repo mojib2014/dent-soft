@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Login from "../../components/Login";
-import { Col, Row, Container } from "../../components/Grid";
+import { Col, Row, Container } from "reactstrap";
 
 
 class Main extends Component {
