@@ -1,1 +1,1 @@
-export { default } from "./dentist.js";
+export { default } from "./Dentist";

@@ -13,7 +13,7 @@ class Login extends React.Component {
     render() {
         const responseGoogle = (response) => {
             console.log(response);
-            
+
         }
 
         const responseFacebook = (response) => {
