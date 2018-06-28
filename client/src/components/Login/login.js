@@ -1,22 +1,23 @@
 import React from "react";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 const Login = () => {
     
     return(
         <div className="Login">
-            <form>
+            <Form>
                 <p>
                 Welcome Back!
                 </p>
-                <label>
+                <Label>
                     Username: 
-                </label>
-                <input type="text" name="name" placeholder="username" />
-                <input type="text" name="password" placeholder="password" />
-                <button type="submit" className="submit">Login</button>
-                <button type="submit" className="submit">Sign up</button>
+                </Label>
+                <Input type="text" name="name" placeholder="username" />
+                <Input type="text" name="password" placeholder="password" />
+                <Button type="submit" className="submit">Login</Button>
+                <Button type="submit" className="submit">Sign up</Button>
                 <login-button scope="public_profile,email" onlogin="checkLoginState();"></login-button>
-            </form>
+            </Form>
         </div>
     )
     
