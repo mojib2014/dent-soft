@@ -1,9 +1,8 @@
-import React from "react";
+import React, {component} from "react";
 
-class LoginForm extends React.Component{
+class Login extends component {
     submit(event){
         event.preventDefault();
-    
     }
     render(){
         return(
@@ -19,7 +18,7 @@ class LoginForm extends React.Component{
                     <input type="text" name="password" placeholder="password" />
                     <button type="submit" className="submit">Login</button>
                     <button type="submit" className="submit">Sign up</button>
-
+                    <login-button scope="public_profile,email" onlogin="checkLoginState();"></login-button>
                 </form>
             </div>
         )
