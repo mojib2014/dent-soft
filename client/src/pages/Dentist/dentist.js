@@ -1,7 +1,8 @@
 import React from "react";
+import "./dentist.css"
 import FindInfo from "../../components/FindInfo";
-import Nav from "../../components/Nav";
-import { Col, Row, Container, Table, Button, Form, FormGroup, Label, Input} from "reactstrap";
+import Footer from "../../components/Footer";
+import { Col, Row, Container, Table, Button, FormGroup, Form, Label, Input} from "reactstrap";
 
 class Dentist extends React.Component{
     render(){
@@ -10,10 +11,10 @@ class Dentist extends React.Component{
             <div className="dentistInfo container">
                 <Row className = "dentistR1">
                     <Col md="4" xs="4">
-                        <img />
+                        <img className="docPic" src="http://imgx.xiawu.com/xzimg/i4/i3/14932021301911074/T12qp5XyJcXXXXXXXX_!!0-item_pic.jpg" alt="William"/>
                     </Col>
                     <Col md="8" xs="8">
-                        <div>Great Dr.William is me!</div>
+                        <div>Great Dr.William is me! Wa hahahahahahahah!!!</div>
                     </Col>
                 </Row>
                 <Row className="dentistR2">
@@ -48,14 +49,28 @@ class Dentist extends React.Component{
                                 <td>date</td>
                                 <td>date</td>
                             </tr>
+                            <tr>
+                                <td>date</td>
+                                <td>date</td>   
+                                <td>date</td>
+                                <td>date</td>
+                            </tr>
+                            <tr>
+                                <td>date</td>
+                                <td>date</td>   
+                                <td>date</td>
+                                <td>date</td>
+                            </tr>
                             </tbody>
                         </Table>
                     </Col>
-                    <Col md="5" xs="5">
+                    <Col className="patientCard" md="5" xs="5">
                         <Form inline>
                             <Label for="searchPatients">Patient's Phone:</Label>
+                     
                             <Input type="text" placeholder="Phone Number" />
-                            <Button>Search</Button>
+                            <Button color="primary" size="sm">Search</Button>
+                           
                         </Form>
                         <div>
                             <FindInfo />
@@ -63,6 +78,7 @@ class Dentist extends React.Component{
                     </Col>
                 </Row>
             </div>
+                
             </div>
         )
     }
