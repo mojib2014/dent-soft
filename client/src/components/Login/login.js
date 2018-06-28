@@ -1,27 +1,54 @@
 import React from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+// import keys from "../../../../keys";
+import { Button, Form, Label, Input } from "reactstrap";
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 
-const Login = () => {
-    
-    return(
-        <div className="Login">
-            <Form>
-                <p>
-                Welcome Back!
-                </p>
-                <Label>
-                    Username: 
+class Login extends React.Component {
+
+
+    render() {
+        const responseGoogle = (response) => {
+            console.log(response);
+        }
+
+        const responseFacebook = (response) => {
+            console.log(response);
+        }
+
+        return (
+
+            <div>
+                <Form>
+                    <p>
+                        Welcome Back!
+                    </p>
+                    <Label>
+                        Username:
                 </Label>
-                <Input type="text" name="name" placeholder="username" />
-                <Input type="text" name="password" placeholder="password" />
-                <Button type="submit" className="submit">Login</Button>
-                <Button type="submit" className="submit">Sign up</Button>
-                <login-button scope="public_profile,email" onlogin="checkLoginState();"></login-button>
-            </Form>
-        </div>
-    )
-    
+                    <Input type="text" name="name" placeholder="username" />
+                    <Input type="text" name="password" placeholder="password" />
+                    <Button type="submit" className="submit">Login</Button>
+                    <Button type="submit" className="submit">Sign up</Button>
+                </Form>
+                <GoogleLogin
+                    clientId="581039946042-esa7akgitusf5atfeod11j2p07oft4ml.apps.googleusercontent.com"
+                    buttonText="Login"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                />
+                <FacebookLogin
+                    appId="1935086019882329"
+                    autoLoad={true}
+                    fields="name,email,picture"
+                    // onClick={componentClicked}
+                    callback={responseFacebook} />
+            </div >
+        );
+    }
+
 }
 
-
 export default Login;
+
+
