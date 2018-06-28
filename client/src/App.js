@@ -4,6 +4,7 @@ import Main from "./pages/Main";
 import Dentist from "./pages/Dentist";
 import Patients from "./pages/Patients";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 const App = () => (
 
@@ -16,6 +17,7 @@ const App = () => (
         <Route exact path="/patient/:id" component={Patients} />
         {/* <Route component={NoMatch} /> */}
       </Switch>
+      <Footer />
     </div>
   </Router>
 );
