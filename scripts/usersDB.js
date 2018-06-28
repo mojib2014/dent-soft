@@ -16,10 +16,13 @@ const usersSeed =
     phone: "",
     birth_date: "",
     address: "",
-    profile_image: "",
     record: "",
     note: "",
-    reservations: ""
+    reservations: "",
+    provider: "",
+    provider_id: "",
+    provider_pic: "",
+    token: ""
   }]
   
 

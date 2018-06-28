@@ -5,11 +5,14 @@ import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 
 class Login extends React.Component {
+    signup() {
 
+    }
 
     render() {
         const responseGoogle = (response) => {
             console.log(response);
+            
         }
 
         const responseFacebook = (response) => {
@@ -41,8 +44,10 @@ class Login extends React.Component {
                     appId="1935086019882329"
                     autoLoad={true}
                     fields="name,email,picture"
-                    // onClick={componentClicked}
-                    callback={responseFacebook} />
+                    callback={responseFacebook}
+                    cssClass="my-facebook-button-class"
+                    icon="fa-facebook"
+                />
             </div >
         );
     }
