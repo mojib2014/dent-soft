@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Login from "../../components/Login";
-import { Col, Row, Container,Jumbotron } from "reactstrap";
+import ContactForm from "../../components/ContactForm";
+import { Col, Row, Container } from "reactstrap";
 
 
 class Main extends Component {
@@ -8,7 +9,6 @@ class Main extends Component {
     render() {
         return (
             <Container fluid> 
-                <Jumbotron>
                     <Row>
                        <Col size="md-6">
                             <div className="intro">
@@ -21,7 +21,7 @@ class Main extends Component {
                             </div>
                        </Col> 
                     </Row>
-                </Jumbotron>
+                    <ContactForm />
             </Container>
         );
     }
