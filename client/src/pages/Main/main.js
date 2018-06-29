@@ -1,17 +1,14 @@
 import React, {Component} from "react";
 import Login from "../../components/Login";
-import { Col, Row, Container } from "reactstrap";
+import { Col, Row, Container,Jumbotron } from "reactstrap";
 
 
 class Main extends Component {
-    state = {
-        username:"",
-        password:""
-    };
 
     render() {
         return (
             <Container fluid> 
+                <Jumbotron>
                     <Row>
                        <Col size="md-6">
                             <div className="intro">
@@ -24,6 +21,7 @@ class Main extends Component {
                             </div>
                        </Col> 
                     </Row>
+                </Jumbotron>
             </Container>
         );
     }

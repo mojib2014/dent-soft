@@ -10,7 +10,8 @@ mongoose.connect(
 
 const usersSeed = 
   [{
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     phone: "",

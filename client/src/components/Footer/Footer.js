@@ -12,7 +12,7 @@ const Footer = () => {
 		        			<p>
 		        				Dr.William----Save your life!
 		        			</p>
-		        			<p><a href="#">Our Team</a></p>
+		        			<p><a >Our Team</a></p>
 	                    </div>
 		        		<div className="col-md-4 offset-md-1 footer-contact wow fadeInDown">
 		        			<h3>Contact</h3>
@@ -30,14 +30,14 @@ const Footer = () => {
 	                    	<div className="row">
 	                    		<div className="col-md-6">
 	                    			<p><a className="scroll-link" href="#top-content">Home</a></p>
-	                    			<p><a href="#">Features</a></p>
-	                    			<p><a href="#">How it works</a></p>
-	                    			<p><a href="#">Our clients</a></p>
+	                    			<p><a >Features</a></p>
+	                    			<p><a >How it works</a></p>
+	                    			<p><a >Our clients</a></p>
 	                    		</div>
 	                    		<div className="col-md-6">
-	                    			<p><a href="#">Plans &amp; pricing</a></p>
-	                    			<p><a href="#">Affiliates</a></p>
-	                    			<p><a href="#">Terms</a></p>
+	                    			<p><a >Plans &amp; pricing</a></p>
+	                    			<p><a >Affiliates</a></p>
+	                    			<p><a >Terms</a></p>
 	                    		</div>
 	                    	</div>
 	                    </div>
@@ -51,11 +51,11 @@ const Footer = () => {
 	                    	&copy; by <a href="https://google.com">William</a>
 	                    </div>
 	           			<div className="col-md-6 footer-social">
-	                    	<a href="#"><i className="fab fa-facebook-f"></i></a> 
-							<a href="#"><i className="fab fa-twitter"></i></a> 
-							<a href="#"><i className="fab fa-google-plus-g"></i></a> 
-							<a href="#"><i className="fab fa-instagram"></i></a> 
-							<a href="#"><i className="fab fa-pinterest"></i></a>
+	                    	<a ><i className="fab fa-facebook-f"></i></a> 
+							<a ><i className="fab fa-twitter"></i></a> 
+							<a ><i className="fab fa-google-plus-g"></i></a> 
+							<a ><i className="fab fa-instagram"></i></a> 
+							<a ><i className="fab fa-pinterest"></i></a>
 	                    </div>
 	           		</div>
 	        	</div>

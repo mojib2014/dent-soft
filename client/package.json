@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
     "react-facebook-login": "^4.0.1",
