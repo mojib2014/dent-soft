@@ -10,16 +10,20 @@ mongoose.connect(
 
 const usersSeed = 
   [{
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     phone: "",
     birth_date: "",
     address: "",
-    profile_image: "",
     record: "",
     note: "",
-    reservations: ""
+    reservations: "",
+    provider: "",
+    provider_id: "",
+    provider_pic: "",
+    token: ""
   }]
   
 

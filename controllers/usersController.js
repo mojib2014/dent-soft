@@ -11,7 +11,13 @@ module.exports = {
   },
   findById: function(req, res) {
     db.Users
-      .findById(req.params.id)
+      .findOne({_id: req.params.id}) 
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findByEmail: function(req, res) {
+    db.Users
+      .findByEmail(req.params.email)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

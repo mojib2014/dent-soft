@@ -4,12 +4,7 @@ import ContactForm from "../../components/ContactForm";
 import { Col, Row, Container } from "reactstrap";
 
 
-
 class Main extends Component {
-    state = {
-        username:"",
-        password:""
-    };
 
     render() {
         return (

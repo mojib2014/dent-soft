@@ -1,0 +1,20 @@
+.dentistInfo{
+    padding-top:20px;
+    margin-bottom: 100px;
+}
+
+.dentistR2{
+    margin-top: 20px;
+}
+
+.patientCard{
+        box-shadow: 2px 2px 5px 000;
+}
+
+.patientCard > Form {
+    padding-top: 10px;
+}
+
+.patientCard > Form > Input {
+    margin-left:10px;
+}
