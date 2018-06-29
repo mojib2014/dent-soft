@@ -2,14 +2,14 @@ const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
 
 router.route("/api/new-patient")
-  .get(usersController.findOne)
+  .get(usersController.findByEmail)
   .post(usersController.create);
 
 router.route("/api/patient-login/:email")
-  .get(usersController.findbyEmail)
+  .get(usersController.findByEmail)
 
-router
-  .route("/:id")
+
+router.route("/:id")
   .get(usersController.findById)
   .put(usersController.update)
   .delete(usersController.remove);
