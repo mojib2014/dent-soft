@@ -1,7 +1,8 @@
 import React from "react";
-import FindInfo from "../../components/FindInfo";
-import Nav from "../../components/Nav";
-import { Col, Row, Container, Table, Button, Form, FormGroup, Label, Input} from "reactstrap";
+// import FindInfo from "../../components/FindInfo";
+// import Nav from "../../components/Nav";
+// import { Col, Row, Container, Table, Button, Form, FormGroup, Label, Input} from "reactstrap";
+import { Col, Row, Container} from "reactstrap";
 
 class Patient extends React.Component {
 

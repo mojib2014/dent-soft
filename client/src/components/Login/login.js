@@ -1,20 +1,30 @@
 import React from "react";
 import "./Login.css";
-import Patients from "../../pages/Patients";
-import API from "../../utils/API";
-// import keys from "../../../../keys";
 import { Button, Form, Label, Input } from "reactstrap";
-import FacebookLogin from 'react-facebook-login';
-import GoogleLogin from 'react-google-login';
-import { Redirect } from "react-router-dom";
+import API from "../../utils/API";
+// import Patients from "../../pages/Patients";
+// import keys from "../../../../keys";
+// import FacebookLogin from 'react-facebook-login';
+// import GoogleLogin from 'react-google-login';
+// import { GoogleLogout, logout } from 'react-google-login';
+// import { Redirect } from "react-router-dom";
 
 
 class Login extends React.Component {
 
     state = {
-        email: "",
+        firstName: "",
+        lastName: "",
+        email: "william@gmail.com",
         password: "",
-        isSignUpClicked: false
+        phone: "",
+        birthDate: "",
+        address: "",
+        city: "",
+        state: "",
+        zipcode: "",
+        isSignUpClicked: false,
+        isLoggedIn: false
     }
 
     handleInputChange = event => {
@@ -60,15 +70,18 @@ class Login extends React.Component {
         })
     }
 
-    render() {
-        const responseGoogle = (response) => {
-            console.log(response);
-            // <Redirect exact path="/" component={Patients} />
-        }
+    googleLogin = ()=>{
+        API.googleLogin().then((result)=>{
+            console.log(result)
+        })
+    }
 
-        const responseFacebook = (response) => {
-            console.log(response);
-        }
+    logout = () => {
+        this.setState({
+            isLoggedIn: false
+        })
+    }
+    render() {
 
         return (
 
@@ -85,12 +98,12 @@ class Login extends React.Component {
                             <h6>Last Name:</h6> <Input type="text" name="lastName" className="mb-2" placeholder="Last Name" />
                             <h6>Email:</h6> <Input type="email" name="email" className="mb-2" placeholder="abc@gmail.com" />
                             <h6>Password:</h6> <Input type="password" name="password" className="mb-2" placeholder="password" />
-                            <h6>Phone:</h6> <Input type="number" name="phone" className="mb-2" placeholder="888123456" />
+                            {/* <h6>Phone:</h6> <Input type="number" name="phone" className="mb-2" placeholder="888123456" />
                             <h6>Birthdate:</h6> <Input type="date" name="birthDate" className="mb-2" placeholder="yyy-mm-dd" />
                             <h6>address:</h6> <Input type="text" name="address" className="mb-2" placeholder="ex 123 Future Way" />
                             <h6>City:</h6> <Input type="text" name="city" className="mb-2" placeholder="city" />
                             <h6>State:</h6> <Input type="text" name="state" className="mb-2" placeholder="state" />
-                            <h6>ZipCode:</h6> <Input type="number" name="zipcode" className="mb-2" placeholder="zipcode" />
+                            <h6>ZipCode:</h6> <Input type="number" name="zipcode" className="mb-2" placeholder="zipcode" /> */}
                             <Button type="submit" className="submit" onClick={this.handleLocalLogin}>Sign up</Button>
                             <a onClick={this.backToLogin}>Back To Login</a>
                         </Form>
@@ -106,24 +119,10 @@ class Login extends React.Component {
                                 <h6>Email:</h6> <Input type="text" name="email" className="mb-2" placeholder="email" />
                                 <h6>Password:</h6> <Input type="password" name="password" placeholder="password" />
                                 <Button type="submit" className="submit" onClick={this.handleLocalLogin}>Login</Button> Or
-                            <Button type="submit" className="submit" onClick={this.showSignUp}>Sign up</Button>
+                                <Button type="submit" className="submit" onClick={this.showSignUp}>Sign up</Button>
+                                <Button type="submit" className="submit" onClick={this.googleLogin}>google Login</Button>
                             </Form>
-                            <GoogleLogin
-                                clientId="581039946042-esa7akgitusf5atfeod11j2p07oft4ml.apps.googleusercontent.com"
-                                buttonText="LOGIN WITH GOOGLE"
-                                onSuccess={responseGoogle}
-                                onFailure={responseGoogle}
-                                id="googleBtn"
-                            />
-                            <FacebookLogin
-                                appId="1935086019882329"
-                                autoLoad={true}
-                                fields="name,email,picture"
-                                // onClick={componentClicked}
-                                callback={responseFacebook}
-                                icon="fa-facebook"
-                                id="fbBtn"
-                            />
+
                         </div>
                     )}
             </div>

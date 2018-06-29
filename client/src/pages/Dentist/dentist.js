@@ -1,8 +1,8 @@
 import React from "react";
 import "./dentist.css"
 import FindInfo from "../../components/FindInfo";
-import Footer from "../../components/Footer";
-import { Col, Row, Container, Table, Button, FormGroup, Form, Label, Input} from "reactstrap";
+// import Footer from "../../components/Footer";
+import { Col, Row, Table, Button, Form, Label, Input} from "reactstrap";
 
 class Dentist extends React.Component{
     render(){
