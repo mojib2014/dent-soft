@@ -1,16 +1,16 @@
 const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
-
-router.route("/api/new-patient")
-  .get(usersController.findOne)
-  .post(usersController.create);
-
-router.route("/api/patient-login/:email")
-  .get(usersController.findbyEmail)
+const passport  = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 router
-  .route("/:id")
-  .get(usersController.findById)
+  .route("/api/new-patient")
+  .get(usersController.findAll)
+  .post(usersController.create);
+
+router
+  .route("/:email")
+  .get(usersController.findByEmail)
   .put(usersController.update)
   .delete(usersController.remove);
 

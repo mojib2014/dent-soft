@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./pages/Main";
 import Dentist from "./pages/Dentist";
@@ -6,20 +6,29 @@ import Patients from "./pages/Patients";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
-const App = () => (
+class App extends Component {
+  constructor (props) {
+    super(props),
+    this.state= {
+      status: "You are logged in as: "
+    }
+  }
 
-  <Router>
-    <div>
-      <Nav />
-      <Switch>
-        <Route exact path="/" component={Main} />
-        <Route exact path="/dentist" component={Dentist} />
-        <Route exact path="/patient/:id" component={Patients} />
-        {/* <Route component={NoMatch} /> */}
-      </Switch>
-      <Footer />
-    </div>
-  </Router>
-);
+  render() {
+    return (
+      <Router>
+        <div>
+          <Nav status={this.state.status}/>
+          <Switch>
+            <Route exact path="/" component={Main} />
+            <Route exact path="/dentist" component={Dentist} />
+            <Route exact path="/patient/:id" component={Patients} />
+          </Switch>
+          <Footer />
+        </div>
+      </Router>
+    )
+  }
+};
 
 export default App;
