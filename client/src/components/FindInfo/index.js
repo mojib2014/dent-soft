@@ -1,1 +1,1 @@
-export { default } from "./Findinfo";
+export { default } from "./Findinfo"

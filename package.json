@@ -11,7 +11,10 @@
     "seed": "node scripts/adminDB.js; node scripts/noteDB.js; node scripts/recordsDB.js; node scripts/reservationDB.js; node scripts/usersDB.js",
     "install": "cd client && yarn install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "author": "",
   "license": "ISC",
@@ -21,16 +24,25 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "body-parser": "^1.17.2",
+    "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
-    "express": "^4.15.4",
+    "dropzone": "^5.4.0",
+    "express": "^4.16.3",
+    "gridfs-stream": "^1.1.1",
     "if-env": "^1.0.4",
+    "material-ui": "^0.20.1",
+    "method-override": "^2.3.10",
     "mongoose": "^5.0.17",
+    "multer": "^1.3.1",
+    "multer-gridfs-storage": "^3.0.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-dropzone": "^4.2.12",
     "react-facebook-login": "^4.0.1",
     "react-google-login": "^3.2.1",
     "react-router-dom": "^4.3.1",
-    "reactstrap": "^6.2.0"
+    "reactstrap": "^6.2.0",
+    "semantic-ui-react": "^0.81.3",
+    "superagent": "^3.8.3"
   }
 }

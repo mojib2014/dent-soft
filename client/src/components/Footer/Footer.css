@@ -11,7 +11,7 @@ h3 { font-size: 22px; font-weight: 300; color: #555; line-height: 30px; font-sty
 
 img { max-width: 100%; }
 
-.medium-paragraph { font-size: 17px; line-height: 32px; }
+.medium-paragraph { font-size: 17px; line-height: 15px; }
 
 ::-moz-selection { background: #6d9055; color: #fff; text-shadow: none; }
 ::selection { background: #6d9055; color: #fff; text-shadow: none; }
@@ -33,7 +33,7 @@ img { max-width: 100%; }
 .section-description p { margin-top: 20px; padding: 0 50px; }
 .section-container-image-bg .section-description p { opacity: 0.8; }
 
-.section-bottom-button { padding-top: 60px; }
+/* .section-bottom-button { padding-top: 60px; } */
 
 
 /***** Divider *****/

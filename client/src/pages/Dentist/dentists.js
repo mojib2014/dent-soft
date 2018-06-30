@@ -1,17 +1,27 @@
 import React from "react";
-import "./dentist.css"
+import "./dentists.css"
 import FindInfo from "../../components/FindInfo";
-import Footer from "../../components/Footer";
+import Photo from "../../components/Photo";
 import { Col, Row, Container, Table, Button, FormGroup, Form, Label, Input} from "reactstrap";
+import Upload from "../../components/Upload/Upload";
 
 class Dentist extends React.Component{
+    
+
+
+
     render(){
         return(
             <div>
             <div className="dentistInfo container">
                 <Row className = "dentistR1">
                     <Col md="4" xs="4">
-                        <img className="docPic" src="http://imgx.xiawu.com/xzimg/i4/i3/14932021301911074/T12qp5XyJcXXXXXXXX_!!0-item_pic.jpg" alt="William"/>
+                    <div className="photoDiv">
+                        {/* <Upload /> */}
+                        <Photo />
+                    </div>
+                     
+                        {/* <img className="docPic" src="http://imgx.xiawu.com/xzimg/i4/i3/14932021301911074/T12qp5XyJcXXXXXXXX_!!0-item_pic.jpg" alt="William"/> */}
                     </Col>
                     <Col md="8" xs="8">
                         <div>Great Dr.William is me! Wa hahahahahahahah!!!</div>
@@ -19,6 +29,7 @@ class Dentist extends React.Component{
                 </Row>
                 <Row className="dentistR2">
                     <Col md="7" xs="7">
+                    {/* calendar div */}
                         <Table>
                         
                             <thead>
@@ -69,9 +80,9 @@ class Dentist extends React.Component{
                             <Label for="searchPatients">Patient's Phone:</Label>
                      
                             <Input type="text" placeholder="Phone Number" />
-                            <Button color="primary" size="sm">Search</Button>
-                           
+                            <Button color="primary"  size="sm" ><i className="fas fa-search"></i></Button>
                         </Form>
+                        
                         <div>
                             <FindInfo />
                         </div>
