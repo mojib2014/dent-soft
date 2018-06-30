@@ -3,7 +3,7 @@ import "./dentists.css"
 import FindInfo from "../../components/FindInfo";
 import Photo from "../../components/Photo";
 import { Col, Row, Container, Table, Button, FormGroup, Form, Label, Input} from "reactstrap";
-import Upload from "../../components/Upload/Upload";
+
 
 class Dentist extends React.Component{
     
@@ -24,6 +24,7 @@ class Dentist extends React.Component{
                         {/* <img className="docPic" src="http://imgx.xiawu.com/xzimg/i4/i3/14932021301911074/T12qp5XyJcXXXXXXXX_!!0-item_pic.jpg" alt="William"/> */}
                     </Col>
                     <Col md="8" xs="8">
+                 
                         <div>Great Dr.William is me! Wa hahahahahahahah!!!</div>
                     </Col>
                 </Row>
