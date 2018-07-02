@@ -1,5 +1,6 @@
 import React from "react";
-import "./dentist.css"
+import "./dentist.css";
+import Nav from "../../components/Nav";
 import FindInfo from "../../components/FindInfo";
 import Photo from "../../components/Photo";
 // import Footer from "../../components/Footer";
@@ -24,11 +25,13 @@ class Dentist extends React.Component{
     render(){
         return(
             <div>
+                       
+             />
             <div className="dentistInfo container">
                 <Row className = "dentistR1">
                     <Col md="4" xs="4">
                     <Photo />
-                        {/* <img className="docPic" src="http://imgx.xiawu.com/xzimg/i4/i3/14932021301911074/T12qp5XyJcXXXXXXXX_!!0-item_pic.jpg" alt="William"/> */}
+
                     </Col>
                     <Col md="8" xs="8">
                         <div>Great Dr.William is me! Wa hahahahahahahah!!!</div>
