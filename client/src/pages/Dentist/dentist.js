@@ -1,17 +1,37 @@
 import React from "react";
-import "./dentist.css"
+import "./dentist.css";
+import Nav from "../../components/Nav";
 import FindInfo from "../../components/FindInfo";
+import Photo from "../../components/Photo";
 // import Footer from "../../components/Footer";
 import { Col, Row, Table, Button, Form, Label, Input} from "reactstrap";
 
 class Dentist extends React.Component{
+
+    constructor(props) {
+        super(props),
+            this.state = {
+                phoneNumber: "",
+            }
+    }
+
+    handlePhoneInput = (event) => {
+        const {name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    }
+
     render(){
         return(
             <div>
+                       
+             />
             <div className="dentistInfo container">
                 <Row className = "dentistR1">
                     <Col md="4" xs="4">
-                        <img className="docPic" src="http://imgx.xiawu.com/xzimg/i4/i3/14932021301911074/T12qp5XyJcXXXXXXXX_!!0-item_pic.jpg" alt="William"/>
+                    <Photo />
+
                     </Col>
                     <Col md="8" xs="8">
                         <div>Great Dr.William is me! Wa hahahahahahahah!!!</div>
@@ -68,8 +88,13 @@ class Dentist extends React.Component{
                         <Form inline>
                             <Label for="searchPatients">Patient's Phone:</Label>
                      
-                            <Input type="text" placeholder="Phone Number" />
-                            <Button color="primary" size="sm">Search</Button>
+                            <Input 
+                                value= {this.state.phoneNumber}
+                                onChange={this.handlePhoneInput}
+                                name="phoneNumber" 
+                                placeholder="Phone Number" 
+                            />
+                            <Button onClick={this.handlePhoneSearch} color="primary" size="sm">Search</Button>
                            
                         </Form>
                         <div>
