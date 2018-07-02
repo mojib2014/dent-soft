@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-// import Card from "../../components/Card"
-import { Input, FormBtn } from "../../components/Form";
+import { Link } from "react-router-dom";
+import ReactDOM from 'react-dom';
+import GoogleLogin from 'react-google-login';
+import { Col, Row, Container } from "reactstrap";
+import API from "../../utils/API";
 import Nav from "../../components/Nav";
+import { Input, FormBtn } from "../../components/Form";
+// import Card from "../../components/Card"
 // import ContactForm from "../../components/ContactForm";
 import LoginState from "../../components/Login_state"
-import { Col, Row, Container } from "reactstrap";
 
 
 class Main extends Component {
@@ -16,6 +20,7 @@ class Main extends Component {
                 loginPassword: "",
                 signUpEmail: "",
                 signUpPassword: "",
+                GoogleClientId: "",
                 status: "You are logged in as: ",
                 firstName: "",
                 lastName: "",
@@ -30,16 +35,76 @@ class Main extends Component {
             }
     }
 
+    componentDidMount() {
+        this.setState({
+            logInEmail: "",
+            loginPassword: "",
+            signUpEmail: "",
+            signUpPassword: "",
+            isSignUpClicked: false
+        })
+
+        this.getGoogleClientId();
+    }
+
+    //google auth !!!!!!!!! get element by ID!!!!!
+    getGoogleClientId = () => {
+        API.getGoogleId().then((result) => {
+            // console.log(result.data.clientId)
+
+            this.setState({
+                GoogleClientId: result.data.clientId
+            })
+
+            const responseGoogle = (response) => {
+                console.log(response);
+               
+                let googleUser = {
+                    googleId: response.googleId,
+                    googleEmail: response.profileObj.email,
+                    googleImage: response.profileObj.imageUrl,
+                    firstName: response.profileObj.givenName,
+                    lastName: response.profileObj.familyName
+                }
+                //check if google Id existed, findOne and Create use {upsert: true} in findOne and Update
+                API.newLogin(googleUser)
+                .then((result)=>{
+                    console.log(result);
+                    if (result.status === 200) {
+                        //redirect to patient page with id as params
+                        alert("new user created");
+                    } else {
+                        console.log("some thing went wrong, erro code: ", result.status)
+                    }
+                })
+
+                console.log(googleUser)
+
+            }
+            ReactDOM.render(
+                <GoogleLogin
+                  clientId={result.data.clientId}
+                  buttonText="Login With Google"
+                  onSuccess={responseGoogle}
+                  onFailure={responseGoogle}
+                />,
+                document.getElementById('googleButton')
+            );
+        })
+    }
+   
+    //end google auth
     handleLoginSubmit = (event) => {
-        event.preveentdefault();
+        event.preventDefault();
         if (this.state.email && this.state.password) {
             console.log("login form submit, add API")
             // API
         }
     }
 
+
     handleSignUpSubmit = (event) => {
-        event.preveentdefault();
+        event.preventDefault();
         if (this.state.email && this.state.password && this.state.firstName && this.state.lastName) {
             console.log("Signup form submit, add API")
             // API
@@ -77,8 +142,8 @@ class Main extends Component {
                             You are logged in as:  {this.state.logInEmail}
                         </LoginState>
                     ) : (
-                        ""
-                    )}
+                            ""
+                        )}
                 </Nav>
                 <Container fluid>
                     <Row>
@@ -122,10 +187,12 @@ class Main extends Component {
                                                 onClick={this.handleSignUpSubmit}
                                             >
                                                 Sign Up
-                                        </FormBtn>
+                                            </FormBtn>
                                             <span> OR </span>
+                                            <br></br>
                                             <a onClick={this.showLogIn}>
-                                                <h3 style={{ textDecoration: "underline" }}>back to log in</h3>                                        </a>
+                                                <span style={{ textDecoration: "underline", fontSize: 20 }}> back to log in</span>
+                                            </a>
                                         </form>
                                     ) : (
                                             <form>
@@ -147,13 +214,16 @@ class Main extends Component {
                                                     onClick={this.handleLoginSubmit}
                                                 >
                                                     Login
-                                        </FormBtn>
+                                                </FormBtn>
                                                 <span> OR </span>
+                                                <br></br>
                                                 <a onClick={this.showSignUp}>
-                                                    <h3 style={{ textDecoration: "underline" }}>Sign Up</h3>
+                                                    <span style={{ textDecoration: "underline", fontSize: 20 }}>Sign Up</span>
                                                 </a>
+                                                <div id="googleButton"></div> 
                                             </form>
-                                        )}
+                                            
+                                    )}
                                 </div>
                             </div>
                         </Col>

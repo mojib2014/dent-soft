@@ -17,6 +17,9 @@ class App extends Component {
             <Route exact path="/" component={Main} />
             <Route exact path="/dentist" component={Dentist} />
             <Route exact path="/patient/:id" component={Patients} />
+            <Route exact path="/auth/login" component={Main} />
+            {/* <Route exact path="/auth/google" component={Main} /> */}
+            <Route exact path="/auth/logout" component={Main} />
             <Route component={NoMatch} />
           </Switch>
           <Footer />
