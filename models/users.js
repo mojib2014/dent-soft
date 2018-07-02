@@ -6,19 +6,19 @@ const usersSchema = new Schema({
     lastName: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    phone: { type: Number, required: true },
-    birth_date: { type: Date, required: true },
-    address: { type: String, required: true },
-    city: { type: String, required: true },
-    state: { type: String, required: true },
-    zip_code: { type: String, required: true },
-    provider: { type: String, required: true},
-    provider_id: { type: String, required: true },
+    phone: { type: Number, required: false },
+    birth_date: { type: Date, required: false },
+    address: { type: String, required: false },
+    city: { type: String, required: false },
+    state: { type: String, required: false },
+    zip_code: { type: String, required: false },
+    provider: { type: String, required: false},
+    provider_id: { type: String, required: false },
     provider_pic: { type: String, required: false },
-    token: { type: String, required: true },
-    record: { type: String, required: true  },
-    note: { type: String, required: true },
-    reservations: { type: String, required: true }
+    token: { type: String, required: false },
+    record: { type: String, required: false  },
+    note: { type: String, required: false },
+    reservations: { type: String, required: false }
 });
 
 const User = mongoose.model("user", usersSchema);

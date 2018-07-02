@@ -2,11 +2,16 @@ import axios from "axios";
 
 export default {
 
-    saveNewPatient: (PatientData) => {
-        return axios.post("/api/new-patient", PatientData);
+    newLogin: (patientData) => {
+        return axios.post("/api/newlogin", patientData);
     },
-    localLogIn: (loginData)=> {
+    localLogIn: (loginData) => {
         return axios.get("/api/patient-login/"+loginData.email);  
+    },
+    getGoogleId: () => {
+        return axios.get("/api/googleclientid");
     }
+    
+
 
 }

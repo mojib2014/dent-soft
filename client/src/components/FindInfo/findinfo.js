@@ -1,7 +1,7 @@
 import React from "react";
 import "./Findinfo.css";
-import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button, Row, Col} from "reactstrap";
+// import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Row, Col} from "reactstrap";
+import {Row, Col} from "reactstrap";
 
 
 const FindInfo = () => {

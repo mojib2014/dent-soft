@@ -17,13 +17,16 @@ const usersSeed =
     phone: "",
     birth_date: "",
     address: "",
-    record: "",
-    note: "",
-    reservations: "",
+    city: "",
+    state: "",
+    zip_code: "",
     provider: "",
     provider_id: "",
     provider_pic: "",
-    token: ""
+    token: "",
+    record: "",
+    note: "",
+    reservations: ""
   }]
   
 

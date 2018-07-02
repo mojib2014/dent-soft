@@ -9,6 +9,13 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findOneAndUpdate: function(req,res) {
+    console.log(req.body)
+    db.google_account
+      .findOneAndUpdate({googleId: req.body.googleId}, req.body, {upsert: true})
+      .then(dbModel => {res.json(dbModel)})
+      .catch(err=>{res.status(422).json(err)});
+  },
   findById: function(req, res) {
     db.Users
       .findOne({_id: req.params.id}) 

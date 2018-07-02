@@ -1,11 +1,10 @@
 import React from "react";
+import "./Nav.css";
 import { Navbar } from "reactstrap";
 
-const Nav = () => (
+const Nav = ({children}) => (
   <Navbar className="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a className="navbar-brand" href="/">
-      Dentsoft
-    </a>
+    {children}
   </Navbar>
 );
 

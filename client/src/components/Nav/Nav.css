@@ -1,0 +1,9 @@
+.navbar-brand {
+    font-size: 40px !important;
+    font-weight: bold;
+}
+
+#loginState {
+    color: rgb(245, 240, 240);
+    font-size: 15px;
+}
