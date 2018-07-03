@@ -1,12 +1,12 @@
 import React from "react";
 // import "../../Nav.css";
-import { Col, Form, FormGroup, Input, InputGroup, InputGroupAddon, Button } from "reactstrap";
+import { Col, Input, InputGroup, InputGroupAddon, Button } from "reactstrap";
 
 const Profile = (props) => {
     return (
         props.editing ? 
             <Col md="7" className="InfoBoxRight"> 
-            <h2>Profile Information</h2> <Button color='primary' onClick={props.edit}>Confirm</Button>
+            <h2>Profile Information</h2> <Button color='primary' onClick={() => props.edit()}>Confirm</Button>
             <InputGroup>
                 <InputGroupAddon addonType='prepend'>First Name</InputGroupAddon>
                 <Input type='text' onChange={props.change} name='firstName' value={props.firstName}>First Name: </Input> 
@@ -19,7 +19,7 @@ const Profile = (props) => {
             </InputGroup>
             <InputGroup>
             <InputGroupAddon addonType='prepend'>Birthday</InputGroupAddon>
-            <Input onChange={props.change} name='birthday' value={props.birthday}>Birthday: </Input>
+            <Input onChange={props.change} name='birthday' type='date' value={props.birthday}>Birthday: </Input>
             </InputGroup>
             <InputGroup>
             <InputGroupAddon addonType='prepend'>Phone</InputGroupAddon>
@@ -36,7 +36,7 @@ const Profile = (props) => {
             <li>Phone: {props.phone}</li>
             </ul>
             </Col>
-    )
+        )
 }
 
 export default Profile;

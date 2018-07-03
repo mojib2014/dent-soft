@@ -1,36 +1,27 @@
 import React from "react";
-import API from "../../utils/API";
-// import FindInfo from "../../components/FindInfo";
-// import Nav from "../../components/Nav";
-// import { Col, Row, Container, Table, Button, Form, FormGroup, Label, Input} from "reactstrap";
-import FindInfo from "../../components/FindInfo";
-import { Col, Row, Container, Table, Button, Form, FormGroup, Label, Input} from "reactstrap";
+import { Col, Row, Container} from "reactstrap";
 import "./patients.css";
-import Profile from "../../components/Profile"
+import Profile from "../../components/Profile";
+import UsersController from "../../../../controllers/usersController";
 
 class Patient extends React.Component {
     state = {
         firstName: "Marlon",
         lastName: "Jovez",
         email: "marlonjovez@gmail.com",
-        birthday: "April 17, 1995",
-        phone: "510-725-1062",
+        birthday: "1995-04-17",
+        phone: "",
         editing: false
-    }
-
-    componentDidMount(){
-        
     }
 
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
-        });
+        })
     };
 
     editProfile = () => {
-       
         (this.state.editing) ? this.setState({editing: false}) : this.setState({editing: true});
     }
 
@@ -43,13 +34,24 @@ class Patient extends React.Component {
         //get user id from session storage and lookup user info in db
     }
 
+    // loadUser() {
+    //     UsersController.findById({_id: '5b3bded263fc7e1e4d7acb4d'}).then((response) => {
+    //         this.setState({
+    //             firstName: response.body.firstName,
+    //             lastName: response.body.lastName,
+    //             email: response.body.email,
+    //             birthday: response.body.birth_date.toDateString()
+    //         })
+    //     })
+    // }
+
     render(){
         return(
             <Container fluid>
                 <Row className="profile">
                     <Col md="4" className="InfoBoxLeft"> 
                     <h2>Marlon Jovez</h2>
-                    <img src="https://plus.google.com/_/focus/photos/public/AIbEiAIAAABDCPHDwdPiseeqRSILdmNhcmRfcGhvdG8qKDVmMzA0NzY5NzgwYzlhNmRlMWQ2OTU4MTdkMTdhMmMyOWZkZGY4MDIwAfxasVgm4AGxpvb4O_L-r52SqRtd?sz=200"/>
+                    <img alt='Marlon 12th grade' src="https://plus.google.com/_/focus/photos/public/AIbEiAIAAABDCPHDwdPiseeqRSILdmNhcmRfcGhvdG8qKDVmMzA0NzY5NzgwYzlhNmRlMWQ2OTU4MTdkMTdhMmMyOWZkZGY4MDIwAfxasVgm4AGxpvb4O_L-r52SqRtd?sz=200"/>
                     </Col>
                     <Profile firstName={this.state.firstName}
                              lastName={this.state.lastName}
