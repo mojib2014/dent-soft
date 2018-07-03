@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const usersSchema = new Schema({
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-    email: { type: String, required: true },
+    firstName: { type: String, required: true},
+    lastName: {type: String, required: true},
+    email: {type: String, match: [/.+@.+\..+/, "Please enter a valid e-mail address"]},
     password: { type: String, required: true },
     phone: { type: Number, required: false },
     birth_date: { type: Date, required: false },
@@ -19,6 +19,7 @@ const usersSchema = new Schema({
     record: { type: String, required: false  },
     note: { type: String, required: false },
     reservations: { type: String, required: false }
+
 });
 
 const User = mongoose.model("user", usersSchema);
