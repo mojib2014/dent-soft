@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropzone from 'react-dropzone';
+// import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import './Photo.css';
 
@@ -26,8 +26,8 @@ class Photo extends React.Component {
 
   handleImageUpload(file) {
     let upload = request.post(CLOUDINARY_UPLOAD_URL)
-                     .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-                     .field('file', file);
+      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+      .field('file', file);
 
     upload.end((err, response) => {
       if (err) {
@@ -51,11 +51,11 @@ class Photo extends React.Component {
             multiple={false}
             accept="image/*">
             <div>
-          {this.state.uploadedFileCloudinaryUrl === '' ? null :
-          <div>
-            <img src={this.state.uploadedFileCloudinaryUrl} />
-          </div>}
-        </div>
+              {this.state.uploadedFileCloudinaryUrl === '' ? null :
+                <div>
+                  <img src={this.state.uploadedFileCloudinaryUrl} />
+                </div>}
+            </div>
           </Dropzone>
         </div>
 
