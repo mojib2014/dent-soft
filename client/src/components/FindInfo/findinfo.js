@@ -10,7 +10,7 @@ const FindInfo = () => {
         <div className="container">
           <Row>
             <Col className="pic-col" md="4" sx="4">
-                <img className="pic" top width="100%" src="http://www.vstou.com/upload/image/479/201612/1482323427118703.jpg" alt="Card image cap" />
+                <img className="pic" top width="100%" src="http://www.vstou.com/upload/image/479/201612/1482323427118703.jpg" alt="Card Cap" />
             </Col>
             <Col md="8" sx="8">
                 <p>Name:</p>

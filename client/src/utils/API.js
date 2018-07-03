@@ -11,7 +11,12 @@ export default {
     getGoogleId: () => {
         return axios.get("/api/googleclientid");
     }
-    
-
+    // ,
+    // setCookie: (userId) => {
+    //     return axios.post("/api/cookie", userId);
+    // },
+    // getCookie: () => {
+    //     return axios.get("/api/cookie");
+    // }
 
 }

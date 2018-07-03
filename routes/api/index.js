@@ -10,6 +10,10 @@ const usersRoutes = require("./users");
 
 router.use("/newlogin", usersRoutes);
 
+// const cookieRoutes = require("./cookie");
+
+// router.use("/cookie", cookieRoutes);
+
 // Admin routes
 const adminRoutes = require("./admin")
 
