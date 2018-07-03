@@ -2,6 +2,6 @@ const router = require("express").Router();
 const googleAuthController = require("../../controllers/googleAuthController");
 
 router.route("/")
-  .get(googleAuthController.googleId)
+  .get(googleAuthController.googleId);
 
 module.exports = router;

@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
+// var cookieSession = require('cookie-session')
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
@@ -14,6 +15,14 @@ if (process.env.NODE_ENV === "production") {
 }
 // Add routes, both API and view
 app.use(routes);
+
+//setup cookie session
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: ["idontthinkyoucanguessthis"],
+//   // Cookie Options
+//   maxAge: 24 * 60 * 60 * 1000 // 24 hours
+// }))
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dent_soft");
