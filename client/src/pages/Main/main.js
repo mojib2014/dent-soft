@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import ReactDOM from 'react-dom';
 import GoogleLogin from 'react-google-login';
 import { Col, Row, Container } from "reactstrap";
+import "./Main.css";
 import API from "../../utils/API";
 import Nav from "../../components/Nav";
 import { Input, FormBtn } from "../../components/Form";
@@ -51,7 +52,6 @@ class Main extends Component {
     getGoogleClientId = () => {
         API.getGoogleId().then((result) => {
             // console.log(result.data.clientId)
-
             this.setState({
                 GoogleClientId: result.data.clientId
             })
@@ -72,9 +72,27 @@ class Main extends Component {
                     console.log(result);
                     if (result.status === 200) {
                         //redirect to patient page with id as params
-                        alert("new user created");
+                        // alert("new user created");
+                        this.setState({
+                            isLoggedIn: true
+                        });
+                        console.log(this.state.isLoggedIn)
+
+                        //save userID to session storage
+                        sessionStorage.setItem("loggedInId", result.data._id)
+                        sessionStorage.setItem("loggedInWith", "google")
+
+                        //write _id in to cookieSession
+                        // let idObj = {
+                        //     userId: result.data._id
+                        // }
+                        // API.setCookie(idObj)
+                        //    .then((result) => {
+                        //        console.log("cookie fb",result)
+                        //    })
                     } else {
                         console.log("some thing went wrong, erro code: ", result.status)
+                        document.getElementById("failLoginNotice").innerHTML = `some thing went wrong, erro code: ${result.status}`;
                     }
                 })
 
@@ -84,7 +102,7 @@ class Main extends Component {
             ReactDOM.render(
                 <GoogleLogin
                   clientId={result.data.clientId}
-                  buttonText="Login With Google"
+                  buttonText="Login With Google +"
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
                 />,
@@ -92,7 +110,7 @@ class Main extends Component {
             );
         })
     }
-   
+
     //end google auth
     handleLoginSubmit = (event) => {
         event.preventDefault();
@@ -105,9 +123,10 @@ class Main extends Component {
 
     handleSignUpSubmit = (event) => {
         event.preventDefault();
-        if (this.state.email && this.state.password && this.state.firstName && this.state.lastName) {
+
+        if (this.state.signUpEmail && this.state.signUpPassword && this.state.firstName && this.state.lastName) {
             console.log("Signup form submit, add API")
-            // API
+            //API
         }
     }
 
@@ -131,8 +150,13 @@ class Main extends Component {
     }
 
     render() {
+
+        {if (this.state.isLoggedIn) {
+            return <Redirect to='/patient'  />
+        }}
+
         return (
-            <div>
+            <div id="homePage">
                 <Nav>
                     <a className="navbar-brand" href="/">
                         Dentsoft
@@ -145,15 +169,15 @@ class Main extends Component {
                             ""
                         )}
                 </Nav>
-                <Container fluid>
+                <Container fluid style={{height: 700}}>
                     <Row>
-                        <Col size="md-6">
+                        <Col >
                             <div className="intro">
                                 <p>Great William is Watching You!</p>
 																<a href="https://ahmadsahil2000.youcanbook.me/" data-ycbm-modal="true"><img src="https://youcanbook.me/resources/pics/ycbm-button.png" style={{borderStyle: "none"}}/></a>
                             </div>
                         </Col>
-                        <Col size="md-6">
+                        <Col style={{paddingLeft: 300, paddingTop: 100}}>
                             <div className="card mb-5 mt-5" style={{ width: "18rem" }}>
                                 <div className="card-body">
                                     {this.state.isSignUpClicked ? (
@@ -196,33 +220,34 @@ class Main extends Component {
                                             </a>
                                         </form>
                                     ) : (
-                                            <form>
-                                                <h2>Log In Here </h2>
-                                                <Input
-                                                    value={this.state.logInEmail}
-                                                    onChange={this.handleInputChange}
-                                                    name="logInEmail"
-                                                    placeholder="Email (required)"
-                                                />
-                                                <Input
-                                                    value={this.state.loginPassword}
-                                                    onChange={this.handleInputChange}
-                                                    name="loginPassword"
-                                                    placeholder="Password (required)"
-                                                />
-                                                <FormBtn
-                                                    disabled={!(this.state.logInEmail && this.state.loginPassword)}
-                                                    onClick={this.handleLoginSubmit}
-                                                >
-                                                    Login
-                                                </FormBtn>
-                                                <span> OR </span>
-                                                <br></br>
-                                                <a onClick={this.showSignUp}>
-                                                    <span style={{ textDecoration: "underline", fontSize: 20 }}>Sign Up</span>
-                                                </a>
-                                                <div id="googleButton"></div> 
-                                            </form>
+                                        <form>
+                                            <h2>Log In Here </h2>
+                                            <Input
+                                                value={this.state.logInEmail}
+                                                onChange={this.handleInputChange}
+                                                name="logInEmail"
+                                                placeholder="Email (required)"
+                                            />
+                                            <Input
+                                                value={this.state.loginPassword}
+                                                onChange={this.handleInputChange}
+                                                name="loginPassword"
+                                                placeholder="Password (required)"
+                                            />
+                                            <FormBtn
+                                                disabled={!(this.state.logInEmail && this.state.loginPassword)}
+                                                onClick={this.handleLoginSubmit}
+                                            >
+                                                Login
+                                            </FormBtn>
+                                            <span> OR </span>
+                                            <br></br>
+                                            <a onClick={this.showSignUp}>
+                                                <span style={{ textDecoration: "underline", fontSize: 20 }}>Sign Up</span>
+                                            </a>
+                                            <div id="failLoginNotice"></div>
+                                            <div id="googleButton"></div> 
+                                        </form>
                                             
                                     )}
                                 </div>
