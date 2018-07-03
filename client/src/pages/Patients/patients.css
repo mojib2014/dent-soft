@@ -1,0 +1,18 @@
+.InfoBoxLeft {
+    background-color: lightblue;
+    width: 300px;
+    height: 300px;
+    float: none;
+    margin: 1rem 1rem 1rem auto;
+}
+.InfoBoxRight {
+    background-color: lightblue;
+    width: 300px;
+    height: 300px;
+    float: none;
+    margin: 1rem auto 1rem 1rem;
+}
+
+h2 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
