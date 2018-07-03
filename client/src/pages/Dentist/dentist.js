@@ -25,8 +25,6 @@ class Dentist extends React.Component{
     render(){
         return(
             <div>
-                       
-             />
             <div className="dentistInfo container">
                 <Row className = "dentistR1">
                     <Col md="4" xs="4">
