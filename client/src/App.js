@@ -6,7 +6,6 @@ import Dentist from "./pages/Dentist";
 import Patients from "./pages/Patients";
 import Footer from "./components/Footer";
 
-
 class App extends Component {
 
   render() {
