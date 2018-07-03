@@ -17,9 +17,9 @@ module.exports = {
   },
   findOneAndUpdateLocal: function (req, res) {
     db.Users
-      .findByIdAndUpdate({email: req.body.email}, req.body, {upsert: true})
+    .findOneAndUpdate({email: req.body.email}, req.body, {upsert: true})
       .then(dbModel => {res.json(dbModel)})
-      .catch(err=>{res.status(422).json(err)});
+      .catch(err=>{console.log(err); res.status(422).json(err)});
   },
   findById: function(req, res) {
     db.Users

@@ -1,5 +1,4 @@
 import React from "react";
-// import "../../Nav.css";
 import { Col, Input, InputGroup, InputGroupAddon, Button } from "reactstrap";
 
 const Profile = (props) => {

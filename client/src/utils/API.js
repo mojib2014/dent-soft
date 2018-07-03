@@ -12,6 +12,7 @@ export default {
         return axios.get("/api/googleclientid");
     },
     createAccount: (newUser)=> {
+        console.log(newUser)
         return axios.post("/api/user/signup", newUser);
     },
     setCookie: (userId) => {

@@ -5,11 +5,7 @@ import GoogleLogin from 'react-google-login';
 import { Col, Row, Container } from "reactstrap";
 import "./Main.css";
 import API from "../../utils/API";
-import Nav from "../../components/Nav";
 import { Input, FormBtn } from "../../components/Form";
-// import Card from "../../components/Card"
-// import ContactForm from "../../components/ContactForm";
-import LoginState from "../../components/Login_state"
 
 
 class Main extends Component {
@@ -22,17 +18,11 @@ class Main extends Component {
                 signUpEmail: "",
                 signUpPassword: "",
                 GoogleClientId: "",
-                status: "You are logged in as: ",
                 firstName: "",
                 lastName: "",
-                phone: "",
-                birthDate: "",
-                address: "",
-                city: "",
-                state: "",
-                zipcode: "",
                 isSignUpClicked: false,
-                isLoggedIn: false
+                redirect: false,
+                loggedInWith: ""
             }
     }
 
@@ -74,13 +64,12 @@ class Main extends Component {
                             //redirect to patient page with id as params
                             // alert("new user created");
                             this.setState({
-                                isLoggedIn: true
+                                redirect: true,
+                                loggedInWith: "google"
                             });
-                            console.log(this.state.isLoggedIn)
-
-                            //save userID to session storage
-                            sessionStorage.setItem("loggedInId", result.data._id)
-                            sessionStorage.setItem("loggedInWith", "google")
+                            console.log(this.state.redirect)
+                            this.props.login(result.data.googleEmail, result.data._id, this.state.loggedInWith)
+                      
 
                             // write _id in to cookieSession
                             // let idObj = {
@@ -148,7 +137,7 @@ class Main extends Component {
                 email: this.state.signUpEmail,
                 password: this.state.signUpPassword
             }
-
+            
             API.createAccount(newPatient)
             .then((result)=>{
                 console.log(result);
@@ -175,24 +164,13 @@ class Main extends Component {
 
     render() {
 
-        if (this.state.isLoggedIn) {
+        if (this.state.redirect) {
             return <Redirect to='/patient' />
         }
 
         return (
             <div id="homePage">
-                <Nav>
-                    <a className="navbar-brand" href="/">
-                        Dentsoft
-                    </a>
-                    {(this.state.logInEmail && this.state.isLoggedIn) ? (
-                        <LoginState>
-                            You are logged in as:  {this.state.logInEmail}
-                        </LoginState>
-                    ) : (
-                            ""
-                        )}
-                </Nav>
+                
                 <Container fluid style={{ height: 700 }}>
                     <Row>
                         <Col >

@@ -1,6 +1,5 @@
 import React from "react";
 import "./dentist.css";
-import Nav from "../../components/Nav";
 import FindInfo from "../../components/FindInfo";
 import Photo from "../../components/Photo";
 // import Footer from "../../components/Footer";
