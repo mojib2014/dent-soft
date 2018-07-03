@@ -26,11 +26,6 @@ class Inputbox extends React.Component  {
         });
     }
 
-    
-
-
-
-
     render(){
         return (
           

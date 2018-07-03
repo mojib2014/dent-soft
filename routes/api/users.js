@@ -3,17 +3,22 @@ const usersController = require("../../controllers/usersController");
 
 
 router
-  .route("/")
+  .route("/google")
   .get(usersController.findAll)
-  .post(usersController.findOneAndUpdate);
+  .post(usersController.findOneAndUpdateGoogle);
+
+router
+  .route("/signup")
+  .get(usersController.findAll)
+  .post(usersController.findOneAndUpdateLocal);
 
 router
   .route("/:email")
   .get(usersController.findByEmail)
 
-router.route("/:id")
-  .get(usersController.findById)
-  .put(usersController.update)
-  .delete(usersController.remove);
+// router.route("/:id")
+//   .get(usersController.findById)
+//   .put(usersController.update)
+//   .delete(usersController.remove);
 
 module.exports = router;

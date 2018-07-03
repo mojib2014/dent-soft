@@ -9,10 +9,15 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findOneAndUpdate: function(req,res) {
-    console.log(req.body)
+  findOneAndUpdateGoogle: function(req,res) {
     db.google_account
       .findOneAndUpdate({googleId: req.body.googleId}, req.body, {upsert: true})
+      .then(dbModel => {res.json(dbModel)})
+      .catch(err=>{res.status(422).json(err)});
+  },
+  findOneAndUpdateLocal: function (req, res) {
+    db.Users
+      .findByIdAndUpdate({email: req.body.email}, req.body, {upsert: true})
       .then(dbModel => {res.json(dbModel)})
       .catch(err=>{res.status(422).json(err)});
   },
@@ -24,15 +29,9 @@ module.exports = {
   },
   findByEmail: function(req, res) {
     db.Users
-      .findByEmail(req.params.email)
+      .findOne({email: req.params.email})  
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  },
-  findByPhone: function(req, res) {
-    db.Users
-    .findOne({phone: req.params.phone})
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
     db.Users

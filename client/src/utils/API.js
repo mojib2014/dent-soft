@@ -10,7 +10,11 @@ export default {
     },
     getGoogleId: () => {
         return axios.get("/api/googleclientid");
-    }
+    },
+
+    searchByEmail: (email) => {
+        return axios.get("/api/user/" + email);
+    } 
     // ,
     // setCookie: (userId) => {
     //     return axios.post("/api/cookie", userId);
