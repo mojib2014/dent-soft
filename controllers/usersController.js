@@ -28,6 +28,12 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findByPhone: function(req, res) {
+    db.Users
+    .findOne({phone: req.params.phone})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
   create: function(req, res) {
     db.Users
       .create(req.body)

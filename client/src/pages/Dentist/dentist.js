@@ -4,6 +4,7 @@ import Nav from "../../components/Nav";
 import FindInfo from "../../components/FindInfo";
 import Photo from "../../components/Photo";
 // import Footer from "../../components/Footer";
+import {BrowserRouter as Router } from "react-router-dom";
 import { Col, Row, Table, Button, Form, Label, Input} from "reactstrap";
 
 class Dentist extends React.Component{
@@ -11,7 +12,9 @@ class Dentist extends React.Component{
     constructor(props) {
         super(props),
             this.state = {
-                phoneNumber: "",
+                phoneNumber: "5103592953",
+                record: "mojib",
+                note: "mojib",
             }
     }
 
@@ -21,7 +24,10 @@ class Dentist extends React.Component{
             [name]: value
         });
     }
-
+    handlePhoneSearch = (event) => {
+        event.preventDefault();
+        // Router.get(.findById)
+    }
     render(){
         return(
             <div>
@@ -36,56 +42,13 @@ class Dentist extends React.Component{
                     </Col>
                 </Row>
                 <Row className="dentistR2">
-                    <Col md="7" xs="7">
-                        <Table>
-                        
-                            <thead>
-                            <tr>
-                                <th>date</th>
-                                <th>date</th>
-                                <th>date</th>
-                                <th>date</th>
-                                <th>date</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>date</td>
-                                <td>date</td>   
-                                <td>date</td>
-                                <td>date</td>
-                            </tr>
-                            <tr>
-                                <td>date</td>
-                                <td>date</td>   
-                                <td>date</td>
-                                <td>date</td>
-                            </tr>
-                            <tr>
-                                <td>date</td>
-                                <td>date</td>   
-                                <td>date</td>
-                                <td>date</td>
-                            </tr>
-                            <tr>
-                                <td>date</td>
-                                <td>date</td>   
-                                <td>date</td>
-                                <td>date</td>
-                            </tr>
-                            <tr>
-                                <td>date</td>
-                                <td>date</td>   
-                                <td>date</td>
-                                <td>date</td>
-                            </tr>
-                            </tbody>
-                        </Table>
-                    </Col>
-                    <Col className="patientCard" md="5" xs="5">
+                    
+                    <Col className="patientCard" md="12" xs="12">
+                    <a href="https://ahmadsahil2000.youcanbook.me/" target="_blank"><img src="https://youcanbook.me/resources/pics/ycbm-button.png" style={{'border-style':"none"}}/></a>
+                    <a href="https://app.youcanbook.me/#/bookings" target="_blank" style={{"padding-left":"40px"}}>View Bookings</a>
+                    <a href="https://app.youcanbook.me/#/editProfile?id=155f5567-7bcb-47cb-be8a-c27793655fae&section=availability" target="_blank">Admin</a>
                         <Form inline>
                             <Label for="searchPatients">Patient's Phone:</Label>
-                     
                             <Input 
                                 value= {this.state.phoneNumber}
                                 onChange={this.handlePhoneInput}
