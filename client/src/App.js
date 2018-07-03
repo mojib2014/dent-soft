@@ -8,12 +8,25 @@ import Footer from "./components/Footer";
 
 class App extends Component {
 
+  state={
+    demo: "demo"
+  }
+
+  changeStateFromMain=(print)=>{
+    this.setState({
+      demo: "state changed by login and it can be passed to patients page!"
+    })
+
+    console.log(print, this.state.demo)
+  }
+
   render() {
+    console.log(this.state.demo)
     return (
       <Router>
         <div>
           <Switch>
-            <Route exact path="/" component={Main} />
+            <Route exact path="/" component={()=>(<Main changeState={this.changeStateFromMain}/>)} />
             <Route exact path="/dentist" component={Dentist} />
             <Route exact path="/patient" component={Patients} />
             <Route exact path="/auth/login" component={Main} />

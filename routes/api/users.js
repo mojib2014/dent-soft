@@ -3,9 +3,14 @@ const usersController = require("../../controllers/usersController");
 
 
 router
-  .route("/")
+  .route("/google")
   .get(usersController.findAll)
-  .post(usersController.findOneAndUpdate);
+  .post(usersController.findOneAndUpdateGoogle);
+
+router
+  .route("/signup")
+  .get(usersController.findAll)
+  .post(usersController.findOneAndUpdateLocal);
 
 router
   .route("/:email")
