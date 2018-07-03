@@ -2,7 +2,6 @@ import React from "react";
 import { Col, Row, Container} from "reactstrap";
 import "./patients.css";
 import Profile from "../../components/Profile";
-import UsersController from "../../../../controllers/usersController";
 
 class Patient extends React.Component {
     state = {
@@ -46,6 +45,7 @@ class Patient extends React.Component {
     // }
 
     render(){
+        console.log(this.props)
         return(
             <Container fluid>
                 <Row className="profile">
