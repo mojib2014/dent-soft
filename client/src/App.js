@@ -5,6 +5,7 @@ import NoMatch from "./pages/NoMatch";
 import Dentist from "./pages/Dentist";
 import Patients from "./pages/Patients";
 import Footer from "./components/Footer";
+import Nav from "./components/Nav";
 
 class App extends Component {
 
@@ -23,8 +24,9 @@ class App extends Component {
   render() {
     console.log(this.state.demo)
     return (
+      <div>
+      <Nav >Dental Connect</Nav>
       <Router>
-        <div>
           <Switch>
             <Route exact path="/" component={()=>(<Main changeState={this.changeStateFromMain}/>)} />
             <Route exact path="/dentist" component={Dentist} />
@@ -33,9 +35,9 @@ class App extends Component {
             <Route exact path="/auth/logout" component={Main} />
             <Route component={NoMatch} />
           </Switch>
-          <Footer />
-        </div>
       </Router>
+      <Footer />
+      </div>
     )
   }
 };
