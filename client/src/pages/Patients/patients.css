@@ -16,3 +16,18 @@
 h2 {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    font-size: 18pt;
+    text-align: left;
+    margin-top: 1rem;
+}
+
+button{
+    float: right;
+    font-size: 20pt;
+}

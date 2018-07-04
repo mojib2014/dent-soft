@@ -14,7 +14,7 @@ router
 
 router
   .route("/:email")
-  .get(usersController.findByEmail)
+  .get(usersController.findByEmail);
 
 // router.route("/:id")
 //   .get(usersController.findById)

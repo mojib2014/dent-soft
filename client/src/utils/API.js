@@ -14,7 +14,12 @@ export default {
 
     searchByEmail: (email) => {
         return axios.get("/api/user/" + email);
-    } 
+    },
+    
+    searchById: (id) => {
+        return axios.get("/api/user/" + id );
+    }
+
     // ,
     // setCookie: (userId) => {
     //     return axios.post("/api/cookie", userId);
