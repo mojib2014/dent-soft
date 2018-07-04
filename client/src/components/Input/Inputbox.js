@@ -1,5 +1,6 @@
 import React from 'react';
 import {InputGroup, InputGroupAddon, Input, Button} from 'reactstrap';
+import API from "../../utils/API";
 // import PropTypes from 'prop-types';
 // import "./Inputbox.css";
 // import InputAdornment from '@material-ui/core/InputAdornment';
@@ -26,10 +27,21 @@ class Inputbox extends React.Component  {
         });
     }
 
-    
-
-
-
+    handleSearchById = (event) => {
+        event.preventDefault();
+        
+        let id = this.state.id
+        // console.log(id)
+        API.searchById(id)
+        .then((result)=>{
+            // console.log(result.data)
+            this.setState({
+                record: result.data.record,
+                note: result.data.note
+            })
+        })
+        .catch(err=> console.log(err));
+    }
 
     render(){
         return (
@@ -40,17 +52,17 @@ class Inputbox extends React.Component  {
             <Input 
                 name = "record"
                 value= {this.state.record}
-                onChange={this.handleInfoInput} />
-            <InputGroupAddon addonType="prepend"><Button className="recordBtn" size="sm">Add Record</Button></InputGroupAddon>
+                onChange={this.handleRecordInput} />
+            <InputGroupAddon addonType="prepend"><Button onClick={this.handleSearchById} className="recordBtn" size="sm">Add Record</Button></InputGroupAddon>
           </InputGroup>
 
           <InputGroup>
             <Input 
                 name = "note"
                 value= {this.state.note}
-                onChange={this.handleInfoInput}
+                onChange={this.handleRecordInput}
             />
-            <InputGroupAddon addonType="prepend"><Button className="noteBtn" size="sm">Add Note</Button></InputGroupAddon>
+            <InputGroupAddon addonType="prepend"><Button onClick={this.handleSearchById} className="noteBtn" size="sm">Add Note</Button></InputGroupAddon>
           </InputGroup>
         
             

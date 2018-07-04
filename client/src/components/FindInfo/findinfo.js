@@ -7,26 +7,26 @@ import { Button } from 'semantic-ui-react';
 
 
 
-const FindInfo = () => {
+const FindInfo = (props) => {
     
-    return (
+    return(
         <div className="container">
           <Row>
-            <Col className="pic-col" md="4" sx="4">
-                <img className="pic" top width="100%" src="http://www.vstou.com/upload/image/479/201612/1482323427118703.jpg" alt="Card Cap" />
+            <Col className="pic-col">
+                {/* <img className="pic"  width="100%" src="http://www.vstou.com/upload/image/479/201612/1482323427118703.jpg" alt="Card Cap" /> */}
             </Col>
-            <Col md="8" sx="8">
+            <Col>
                 <div className="basicInfo">
-                    <p>Name:</p>
-                    <p>Phone:</p>
-                    <p>Email:</p>  
+                    <p>Name: {props.userName}</p>
+                    <p>Phone: {props.userPhone}</p>
+                    <p>Email: {props.userEmail}</p>  
                 </div>
             </Col>
           </Row>
           <Row>
             <div className="editInfo">
-                <div className="recordInfo"><h3>Record:</h3></div>
-                <div className="noteInfo"><h3>Note:</h3></div>
+                <div className="recordInfo"><h3>Record: {props.userRecord}</h3></div>
+                <div className="noteInfo"><h3>Note: {props.userNote}</h3></div>
             </div>
           </Row>
           <Row>
@@ -40,7 +40,7 @@ const FindInfo = () => {
           </Row>
               
         </div>
-      );
+    )
 }
 
 export default FindInfo;

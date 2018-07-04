@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
 
     newLogin: (patientData) => {
-        return axios.post("/api/user/google", patientData);
+        return axios.post("/api/newlogin", patientData);
     },
     localLogIn: (loginData) => {
         return axios.get("/api/patient-login/"+loginData.email);  
@@ -11,12 +11,21 @@ export default {
     getGoogleId: () => {
         return axios.get("/api/googleclientid");
     },
-    createAccount: (newUser)=> {
-        console.log(newUser)
-        return axios.post("/api/user/signup", newUser);
+
+    searchByEmail: (email) => {
+        return axios.get("/api/user/" + email);
     },
-    setCookie: (userId) => {
-        return axios.post("/api/cookie", userId);
+    
+    searchById: (id) => {
+        return axios.get("/api/user/" + id );
     }
+
+    // ,
+    // setCookie: (userId) => {
+    //     return axios.post("/api/cookie", userId);
+    // },
+    // getCookie: () => {
+    //     return axios.get("/api/cookie");
+    // }
 
 }
