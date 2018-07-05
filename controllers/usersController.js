@@ -27,16 +27,19 @@ module.exports = {
   },
   findByEmail: function (req, res) {
     db.Users
-      .findOne({email: req.body.email})
+      .findOne({email: req.params.email})  
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findByEmailLocalLogin: function(req, res) {
+    db.Users
+    .findOne({email: req.body.email})
       .then(
         dbModel => {
           //hash compare use sync otherwise res in unsync compare is true or false cant sent to front end
-        
           let auth = bcrypt.compareSync(req.body.password, dbModel.password); 
-      
           // console.log("cb",auth)
           res.json({message: auth , _id: dbModel._id})
-
         })
       .catch(err => res.json(err));
   },

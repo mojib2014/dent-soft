@@ -7,7 +7,7 @@ import API from "../../utils/API";
 import { Input, FormBtn } from "../../components/Form";
 
 
-//to do: 1. log out  2. identify dentist and redirect to dentist page
+//to do: 1. log out  2. identify dentist and redirect to dentist page 3.make input disapear after submit
 
 class Main extends Component {
 

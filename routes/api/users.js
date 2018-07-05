@@ -14,15 +14,15 @@ router
 
 router
   .route("/locallogin")
-  .post(usersController.findByEmail);
+  .post(usersController.findByEmailLocalLogin);
 
 router
   .route("/:email")
   .get(usersController.findByEmail);
 
-router.route("/:id")
-  .get(usersController.findById)
-  .put(usersController.update)
-  .delete(usersController.remove);
+// router.route("/:id")
+//   .get(usersController.findById)
+//   .put(usersController.update)
+//   .delete(usersController.remove);
 
 module.exports = router;
