@@ -6,50 +6,87 @@ import Dentist from "./pages/Dentist";
 import Patients from "./pages/Patients";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
-import LoginState from "../src/components/Login_state"
+import LoginState from "./components/Login_state";
 
 class App extends Component {
 
   state = {
     demo: "demo",
-    isLoggedin: false,
-    loggedInEmail: "",
     loggedInId: "",
-    loggedInWith: ""
+    loggedInWith: "",
   }
 
-  changeLoginStatus = (email, id, loggedInWith) => {
+  // Cookie
+  createCookie = (name, value, days) => {
+    if (days) {
+      let date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      var expires = "; expires=" + date.toGMTString();
+    }
+    else expires = "";
+
+    document.cookie = name + "=" + value + expires + "; path=/";
+  }
+
+  readCookie = a => {
+    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+  }
+
+  eraseCookie = (name) => {
+    this.createCookie(name, "", -1);
+  }
+
+  checkLogIn = (loggedInId) => {
+    console.log("APP", loggedInId)
+    if (!loggedInId === "") {
+      this.setState({
+        loggedInId: loggedInId
+      })
+    } else {
+      this.setState({
+        loggedInId: ""
+      })
+    }
+  }
+
+  //******************log out */
+  logOut = () => {
+    this.eraseCookie("loggedInId")
     this.setState({
-      // demo: "state changed by login and it can be passed to patients page!"
-      isLoggedin: true,
-      loggedInEmail: email,
-      loggedInId: id,
-      loggedInWith: loggedInWith
+      loggedInId: ""
     })
+  }
+  //##################end logout
+
+  redirect = () => {
+    if (this.state.loggedInId) {
+      window.location.href = "/";
+    }
   }
 
   render() {
-    // console.log(this.state.loggedInEmail)
+    console.log(this.state.loggedInId)
     return (
       <div>
         <Nav>
           <a className="navbar-brand" href="/">
             Dentsoft
                     </a>
-          {(this.state.loggedInEmail && this.state.isLoggedIn) ? (
-            <LoginState>
-              You are logged in as:  {this.state.loggedInEmail}
-            </LoginState>
+          {(this.state.loggedInId === "") ? (
+            "hi"
           ) : (
-              ""
+              <LoginState>
+                Welcome Back
+                    </LoginState>
             )}
         </Nav>
         <Router>
           <Switch>
-            <Route exact path="/" component={() => (<Main login={this.changeLoginStatus} />)} />
-            <Route exact path="/dentist" component={Dentist} />
-            <Route exact path="/patient" component={()=>(<Patients loginId={this.state.loggedInId} loginEmail={this.state.loggedInEmail} loginWith={this.state.loggedInWith}/>)} />
-            <Route exact path="/auth/login" component={Main} />
+            <Route exact path="/" component={() => (<Main createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut} />)} />
+            <Route exact path="/dentist" component={() => (<Dentist createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut} />)} />
+            <Route exact path="/patient" component={() => (<Patients createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut} />)} />
+            {/* <Route exact path="/auth/login" component={Main} /> */}
             <Route exact path="/auth/logout" component={Main} />
             <Route component={NoMatch} />
           </Switch>
