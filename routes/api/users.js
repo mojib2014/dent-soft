@@ -10,11 +10,15 @@ router
 router
   .route("/signup")
   .get(usersController.findAll)
-  .post(usersController.findOneAndUpdateLocal);
+  .post(usersController.create);
+
+router
+  .route("/locallogin")
+  .post(usersController.findByEmail);
 
 router
   .route("/:email")
-  .get(usersController.findByEmail)
+  .get(usersController.findByEmail);
 
 router.route("/:id")
   .get(usersController.findById)

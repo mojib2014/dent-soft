@@ -2,9 +2,6 @@ import React from "react";
 import "./Findinfo.css";
 import { Row, Col} from "reactstrap";
 import Inputbox from "../Input/Inputbox";
-import { Button } from 'semantic-ui-react';
-
-
 
 
 const FindInfo = () => {

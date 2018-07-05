@@ -53,7 +53,7 @@ class Photo extends React.Component {
             <div>
               {this.state.uploadedFileCloudinaryUrl === '' ? null :
                 <div>
-                  <img src={this.state.uploadedFileCloudinaryUrl} />
+                  <img src={this.state.uploadedFileCloudinaryUrl} alt="coming soon"/>
                 </div>}
             </div>
           </Dropzone>

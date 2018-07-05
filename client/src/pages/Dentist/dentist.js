@@ -7,13 +7,16 @@ import { Col, Row, Table, Button, Form, Label, Input} from "reactstrap";
 
 class Dentist extends React.Component{
 
-    constructor(props) {
-        super(props),
-            this.state = {
-                phoneNumber: "",
-            }
+    state = {
+        phoneNumber: "",
     }
 
+    componentDidMount() {
+        let cookieId = this.props.readCookie("loggedinId")
+        console.log("user logged in", cookieId);
+    }
+
+    
     handlePhoneInput = (event) => {
         const {name, value } = event.target;
         this.setState({

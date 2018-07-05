@@ -1,43 +1,60 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import "./Main.css";
 import ReactDOM from 'react-dom';
 import GoogleLogin from 'react-google-login';
 import { Col, Row, Container } from "reactstrap";
-import "./Main.css";
 import API from "../../utils/API";
 import { Input, FormBtn } from "../../components/Form";
 
 
+//to do: 1. log out  2. identify dentist and redirect to dentist page
+
 class Main extends Component {
 
     constructor(props) {
-        super(props),
-            this.state = {
-                logInEmail: "",
-                loginPassword: "",
-                signUpEmail: "",
-                signUpPassword: "",
-                GoogleClientId: "",
-                firstName: "",
-                lastName: "",
-                isSignUpClicked: false,
-                redirect: false,
-                loggedInWith: ""
-            }
+        super(props)
+
+        this.state = {
+            logInEmail: "",
+            logInPassword: "",
+            signUpEmail: "",
+            signUpPassword: "",
+            GoogleClientId: "",
+            firstName: "",
+            lastName: "",
+            loggedInId: "",
+            notice: "",
+            isSignUpClicked: false,
+        }
     }
 
     componentDidMount() {
         this.setState({
             logInEmail: "",
-            loginPassword: "",
+            logInPassword: "",
             signUpEmail: "",
             signUpPassword: "",
             isSignUpClicked: false
         })
-
+        
+        let cookieId = this.props.readCookie("loggedinId")
+        console.log("user logged in", cookieId);
+        
         this.getGoogleClientId();
     }
 
+    checkLogIn = (loggedInId) => {
+        console.log("APP", loggedInId)
+        if (!loggedInId === "") {
+            this.setState({
+                loggedInId: loggedInId
+            })
+        } else {
+            this.setState({
+                loggedInId: ""
+            })
+        }
+    }
     //****************google auth !!!!!!!!! get element by ID!!!!!
     getGoogleClientId = () => {
         API.getGoogleId().then((result) => {
@@ -61,29 +78,15 @@ class Main extends Component {
                     .then((result) => {
                         console.log(result);
                         if (result.status === 200) {
-                            //redirect to patient page with id as params
-                            // alert("new user created");
-                            this.setState({
-                                redirect: true,
-                                loggedInWith: "google"
-                            });
-                            console.log(this.state.redirect)
-                            this.props.login(result.data.googleEmail, result.data._id, this.state.loggedInWith)
-                      
-
-                            // write _id in to cookieSession
-                            // let idObj = {
-                            //     userId: result.data._id
-                            // }
-                            // API.setCookie(idObj)
-                            //     .then((result) => {
-                            //         console.log("cookie fb", result)
-                            //     })
+                            //set cookie
+                            this.props.createCookie("loggedinId", result.data._id, 1)
+                            //redirect to patient page 
+                            window.location.href = "/patient";
                         } else {
                             console.log("some thing went wrong, erro code: ", result.status)
                             document.getElementById("failLoginNotice").innerHTML = `some thing went wrong, erro code: ${result.status}`;
                         }
-                    }).catch(err=>{console.log(err)})
+                    }).catch(err => { console.log(err) })
 
                 console.log(googleUser)
 
@@ -108,51 +111,6 @@ class Main extends Component {
         })
     }
 
-    handleLocalLoginSubmit = (event) => {
-        event.preventDefault();
-        if (this.state.email && this.state.password) {
-            console.log("login form submit, add API")
-            // API
-        }
-    }
-
-    //###################end local login
-
-    //*******************sign up
-    showSignUp = () => {
-        this.setState({
-            isSignUpClicked: true
-        })
-    }
-
-    handleSignUpSubmit = (event) => {
-        event.preventDefault();
-
-        if (this.state.signUpEmail && this.state.signUpPassword && this.state.firstName && this.state.lastName) {
-            console.log("Signup form submit, add API")
-
-            let newPatient={
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                email: this.state.signUpEmail,
-                password: this.state.signUpPassword
-            }
-            
-            API.createAccount(newPatient)
-            .then((result)=>{
-                console.log(result);
-            }).catch(err=>console.log(err))
-        }
-    }
-
-    //##################end sign up
-
-    //******************log out */
-    logOut = ()=>{
-
-    }
-    //##################end logout
-
     //*******************form  */
     handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -160,23 +118,108 @@ class Main extends Component {
             [name]: value
         });
     }
-    //###################
+
+    //*******************sign up
+    showSignUp = () => {
+        this.setState({
+            isSignUpClicked: true
+        })
+
+    }
+
+    handleSignUpSubmit = (event) => {
+        event.preventDefault();
+
+        if (this.state.signUpEmail && this.state.signUpPassword && this.state.firstName && this.state.lastName) {
+            if (this.state.signUpEmail ) {
+
+            }
+            let newPatient = {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                email: this.state.signUpEmail,
+                password: this.state.signUpPassword
+            }
+
+            API.createAccount(newPatient)
+                .then((result) => {
+                    console.log(result);
+                    //sign up err handling
+                    if (result.data._id) {
+                        // alert("new user created, redirect to login")
+                        this.setState({
+                            logInEmail: this.state.signUpEmail,
+                            logInPassword: this.state.signUpPassword,
+                        })
+                        // console.log(this.state.logInEmail, this.state.logInPassword)
+                        this.handleLocalLoginSubmit(event);
+                    } else if (result.data.name === "ValidationError") {
+                        //if email is not in email format
+                        // alert(result.data.message)
+                        this.setState({notice: result.data.message})
+                    } else if (result.data.message === "Email Already Existed!") {
+                        // alert(result.data.message)
+                        this.setState({notice: result.data.message})
+                    } else {
+                        // alert("something went wrong, please refresh and try again")
+                        this.setState({notice: "something went wrong, please refresh and try again"})
+                    }
+                }).catch(err => console.log(err))
+        } else {
+            // alert("Entry Can't Be Empty");
+            this.setState({notice: "Entry Can't Be Empty"})
+        }
+    }
+
+    //##################end sign up
+
+    //****************** login  */
+    handleLocalLoginSubmit = (event) => {
+        event.preventDefault();
+        if (this.state.logInEmail && this.state.logInPassword) {
+            let loginInfo = {
+                email: this.state.logInEmail,
+                password: this.state.logInPassword
+            }
+            API.localLogIn(loginInfo)
+                .then(
+                    (result) => {
+                        console.log("front",result)
+                        let isMatch = result.data.message;
+                        
+                        if (isMatch) {
+                            //log out other account if existed -- cookie
+                            this.props.logOut();
+                            //set cookie to keep log in
+                            this.props.createCookie("loggedinId", result.data._id, 1)
+                            // after set cookie, redirect to patients page
+                            window.location.href = "/patient";
+                        } else {
+                            // alert ("Log in failed, email or password do not match record")
+                            this.setState({notice: "Log in failed... Please verify credentials"})
+                        }
+                    }
+                )
+                .catch(err => console.log(err))
+        } else {
+            // alert("Entry Can't Be Empty");
+            this.setState({notice: "Entry Can't Be Empty"})
+        }
+    }
+
+    //###################end log in
+
 
     render() {
 
-        if (this.state.redirect) {
-            return <Redirect to='/patient' />
-        }
-
         return (
             <div id="homePage">
-                
                 <Container fluid style={{ height: 700 }}>
                     <Row>
                         <Col >
                             <div className="intro">
                                 <p>Great William is Watching You!</p>
-                                <span onClick={()=>this.props.changeState("this is clicked")}> click me for demo</span>
+                                <span onClick={() => this.props.changeState("this is clicked")}> click me for demo</span>
                             </div>
                         </Col>
                         <Col style={{ paddingLeft: 300, paddingTop: 100 }}>
@@ -209,6 +252,7 @@ class Main extends Component {
                                                 name="signUpPassword"
                                                 placeholder="Password (required)"
                                             />
+                                            <div className="text-danger">{this.state.notice}</div>
                                             <FormBtn
                                                 disabled={!(this.state.signUpEmail && this.state.signUpPassword && this.state.firstName && this.state.lastName)}
                                                 onClick={this.handleSignUpSubmit}
@@ -218,12 +262,12 @@ class Main extends Component {
                                             <span> OR </span>
                                             <br></br>
                                             <a onClick={this.showLogIn}>
-                                                <span 
-                                                    style={{ textDecoration: "underline", fontSize: 20 }} 
+                                                <span
+                                                    style={{ textDecoration: "underline", fontSize: 20 }}
                                                     // to show google login 
                                                     onClick={this.getGoogleClientId}
-                                                > 
-                                                back to log in
+                                                >
+                                                    back to log in
                                                 </span>
                                             </a>
                                         </form>
@@ -237,13 +281,14 @@ class Main extends Component {
                                                     placeholder="Email (required)"
                                                 />
                                                 <Input
-                                                    value={this.state.loginPassword}
+                                                    value={this.state.logInPassword}
                                                     onChange={this.handleInputChange}
-                                                    name="loginPassword"
+                                                    name="logInPassword"
                                                     placeholder="Password (required)"
                                                 />
+                                                <div className="text-danger">{this.state.notice}</div>
                                                 <FormBtn
-                                                    disabled={!(this.state.logInEmail && this.state.loginPassword)}
+                                                    disabled={!(this.state.logInEmail && this.state.logInPassword)}
                                                     onClick={this.handleLocalLoginSubmit}
                                                 >
                                                     Login
