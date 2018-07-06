@@ -33,8 +33,9 @@ class Photo extends React.Component {
       if (err) {
         console.error(err);
       }
-
+      
       if (response.body.secure_url !== '') {
+        console.log(response.body.secure_url);
         this.setState({
           uploadedFileCloudinaryUrl: response.body.secure_url
         });
@@ -53,7 +54,7 @@ class Photo extends React.Component {
             <div>
               {this.state.uploadedFileCloudinaryUrl === '' ? null :
                 <div>
-                  <img src={this.state.uploadedFileCloudinaryUrl} />
+                  <img src={this.state.uploadedFileCloudinaryUrl} alt="coming soon"/>
                 </div>}
             </div>
           </Dropzone>

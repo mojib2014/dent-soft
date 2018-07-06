@@ -6,12 +6,14 @@ export default {
         return axios.post("/api/newlogin", patientData);
     },
     localLogIn: (loginData) => {
-        return axios.get("/api/patient-login/"+loginData.email);  
+        return axios.post("/api/user/locallogin", loginData);  
     },
     getGoogleId: () => {
         return axios.get("/api/googleclientid");
     },
-
+    createAccount: (newUser)=> {
+        return axios.post("/api/user/signup", newUser);
+    },
     searchByEmail: (email) => {
         return axios.get("/api/user/" + email);
     },

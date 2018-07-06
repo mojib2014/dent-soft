@@ -12,13 +12,11 @@ import API from "../../utils/API";
 
 class Inputbox extends React.Component  {
   
-  constructor(props) {
-    super(props),
-        this.state = {
-            record: "",
-            note:"",
-        }
+    state = {
+        record: "",
+        note:"",
     }
+    
 
     handleInfoInput = (event) => {
         const {name, value } = event.target;
@@ -71,9 +69,5 @@ class Inputbox extends React.Component  {
       }
 
 }
-
-{/* Inputbox.propTypes = {
-  classes: PropTypes.object.isRequired,
-}; */}
 
 export default Inputbox;
