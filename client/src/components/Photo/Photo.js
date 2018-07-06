@@ -2,6 +2,7 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import './Photo.css';
+import API from "../../utils/API";
 
 const CLOUDINARY_UPLOAD_PRESET = 'j0thsnot';
 const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/putincake/image/upload";
@@ -12,8 +13,22 @@ class Photo extends React.Component {
 
     this.state = {
       uploadedFile: null,
-      uploadedFileCloudinaryUrl: ''
+      uploadedFileCloudinaryUrl: '',
+      loginId:''
     };
+  }
+
+  componentDidMount() {
+    let cookieId = this.readCookie("loggedinId")
+    this.setState({
+        loginId: cookieId
+    })
+    
+  }
+
+  readCookie = a => {
+    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
   }
 
   onImageDrop(files) {
@@ -25,22 +40,32 @@ class Photo extends React.Component {
   }
 
   handleImageUpload(file) {
-    let upload = request.post(CLOUDINARY_UPLOAD_URL)
-      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-      .field('file', file);
+      let upload = request.post(CLOUDINARY_UPLOAD_URL)
+        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+        .field('file', file);
 
-    upload.end((err, response) => {
-      if (err) {
-        console.error(err);
-      }
-      
-      if (response.body.secure_url !== '') {
-        console.log(response.body.secure_url);
-        this.setState({
-          uploadedFileCloudinaryUrl: response.body.secure_url
-        });
-      }
-    });
+      upload.end((err, response) => {
+        if (err) {
+          console.error(err);
+        }
+        
+          if (response.body.secure_url !== '') {
+            console.log(response.body.secure_url);
+            this.setState({
+              uploadedFileCloudinaryUrl: response.body.secure_url
+            });
+
+
+            
+            let newPhoto = {id: this.state.loginId, url: this.state.uploadedFileCloudinaryUrl}
+            API.createPhoto(newPhoto)
+            .then((result) => {
+              console.log(result);
+
+            })
+              
+          }
+        })
   }
 
   render() {

@@ -10,7 +10,7 @@ const FindInfo = (props) => {
         <div className="container">
           <Row>
             <Col className="pic-col">
-                {/* <img className="pic"  width="100%" src="http://www.vstou.com/upload/image/479/201612/1482323427118703.jpg" alt="Card Cap" /> */}
+                <img src={props.userImage} />
             </Col>
             <Col>
                 <div className="basicInfo">

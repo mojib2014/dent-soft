@@ -68,6 +68,14 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  updatePhoto: function (req, res) {
+    console.log("this is =", req)
+    db.Users
+      .findOneAndUpdate({ _id: req.body.id }, { $set: { imageUrl: req.body.url }})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  
   remove: function (req, res) {
     db.Users
       .findById({ _id: req.params.id })
