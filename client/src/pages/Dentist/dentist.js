@@ -13,20 +13,24 @@ class Dentist extends React.Component{
         super(props);
         this.onDayClick = this.onDayClick.bind(this);
         this.state = {
-          selectedDate: new Date()
+            selectedDate: new Date(),
+            name: "",
+            phone: "",
+            email: "",
+            record: "",
+            note: "",
+            loggedInId: "",
+            loggedinType: "",
         };
       }
-    state = {
-        name: "",
-        phone: "",
-        email: "",
-        record: "",
-        note: ""
-    }
 
     componentDidMount() {
         let cookieId = this.props.readCookie("loggedinId")
-        console.log("user logged in", cookieId);
+        let type = this.props.readCookie("loggedinType")
+        this.setState({
+            loggedInId: cookieId,
+            loggedinType: type
+        })
     }
     
     handleEmailInput = (event) => {

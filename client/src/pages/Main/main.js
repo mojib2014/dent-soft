@@ -78,6 +78,7 @@ class Main extends Component {
                         if (result.status === 200 && result.data !== "") {
                             //set cookie if user is in our database data is not null
                             this.props.createCookie("loggedinId", result.data._id, 1)
+                            this.props.createCookie("loggedinType", "google", 1)
                             //redirect to patient page or admin page depend on user type
                             if (result.data.userType === "admin") {
                                 window.location.href = "/dentist";
@@ -208,6 +209,7 @@ class Main extends Component {
                             this.props.logOut();
                             //set cookie to keep log in
                             this.props.createCookie("loggedinId", result.data._id, 1)
+                            this.props.createCookie("loggedinType", "local", 1)
                             // after set cookie, redirect to patients page or admin page depend on user type
                             if (result.data.userType === "admin") {
                                 window.location.href = "/dentist";

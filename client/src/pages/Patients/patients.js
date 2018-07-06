@@ -12,14 +12,17 @@ class Patient extends React.Component {
         birthday: "1995-04-17",
         phone: "",
         loggedInId: "",
+        loggedinType: "",
         editing: false
     }
 
     componentDidMount() {
         let cookieId = this.props.readCookie("loggedinId")
+        let type = this.props.readCookie("loggedinType")
 
         this.setState({
-        loggedInId: cookieId
+            loggedInId: cookieId,
+            loggedinType: type
         })
     }
 

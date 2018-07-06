@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import Main from "./pages/Main";
 import NoMatch from "./pages/NoMatch";
 import Dentist from "./pages/Dentist";
@@ -17,12 +17,14 @@ class App extends Component {
 
   componentDidMount() {
     let cookieId = this.readCookie("loggedinId")
+    let type = this.readCookie("loggedinType")
     
     if (cookieId === "") {
       this.createCookie("loggedinId", "logged out", 1)
       window.location.href = "/";
     } else {
-      console.log("mount", cookieId)
+      console.log("login id", cookieId)
+      console.log("type", type)
       this.setState({
       loggedInId: cookieId
       })
@@ -102,8 +104,12 @@ class App extends Component {
           )}
         </Nav>
         <Router>
-        
           <Switch>
+            {/* {this.state.loggedInId==="logged out" || this.state.loggedInId==="" ? (
+              <Redirect to 
+            ):(
+
+            )} */}
             <Route exact path="/" component={() => (<Main createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
             <Route exact path="/dentist" component={() => (<Dentist createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut} />)} />
             <Route exact path="/patient" component={() => (<Patients createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut} />)} />
