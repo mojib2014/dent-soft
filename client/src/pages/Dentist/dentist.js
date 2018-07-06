@@ -24,9 +24,10 @@ class Dentist extends React.Component{
         };
       }
 
-    componentDidMount() {
+    componentWillMount() {
         let cookieId = this.props.readCookie("loggedinId")
         let type = this.props.readCookie("loggedinType")
+       
         this.setState({
             loggedInId: cookieId,
             loggedinType: type
@@ -57,6 +58,7 @@ class Dentist extends React.Component{
         .catch(err=> console.log(err));
     }
     render(){
+        
         const { selectedDate } = this.state;
         return(
             <div>
