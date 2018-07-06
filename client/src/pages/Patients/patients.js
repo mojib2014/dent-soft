@@ -13,25 +13,18 @@ class Patient extends React.Component {
         birthday: "1995-04-17",
         phone: "",
         loggedInId: "",
+        loggedinType: "",
         editing: false
     }
 
     componentDidMount() {
         let cookieId = this.props.readCookie("loggedinId")
-        console.log("user logged in", cookieId);
-        this.checkLogIn(cookieId)
-    }
+        let type = this.props.readCookie("loggedinType")
 
-    checkLogIn = (loggedInId) => {
-        if (!loggedInId === "") {
-            this.setState({
-                loggedInId: loggedInId
-            })
-        } else {
-            this.setState({
-                loggedInId: ""
-            })
-        }
+        this.setState({
+            loggedInId: cookieId,
+            loggedinType: type
+        })
     }
 
     handleInputChange = event => {
@@ -57,7 +50,9 @@ class Patient extends React.Component {
     // }
 
     render() {
-        console.log(this.props)
+        if (this.state.loggedInId === "logged out") {
+            window.location.href="/"
+        }
         return (
             <Container fluid>
                 <Row className="profile">

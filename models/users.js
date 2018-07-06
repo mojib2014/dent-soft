@@ -2,10 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const usersSchema = new Schema({
+    userType: {type: String, required: false},
     firstName: { type: String, required: true},
     lastName: {type: String, required: true},
     email: {type: String, match: [/.+@.+\..+/, "Please enter a valid e-mail address"]},
     password: { type: String, required: true },
+    profileImage: { type: String, required: false },
     phone: { type: Number, required: false },
     birth_date: { type: Date, required: false },
     imageUrl:{ type: String, required: false },

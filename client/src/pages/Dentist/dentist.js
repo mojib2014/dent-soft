@@ -31,7 +31,7 @@ class Dentist extends React.Component{
     }
 
     getDentistInfo = (id) => {
-
+        
         // use id to find dentist's information including image
     }
     
@@ -124,3 +124,5 @@ class Dentist extends React.Component{
 }
 
 export default Dentist;
+
+
