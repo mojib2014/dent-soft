@@ -6,8 +6,7 @@ import { Col, Row, Container } from "reactstrap";
 import API from "../../utils/API";
 import { Input, FormBtn } from "../../components/Form";
 
-
-//to do: 1. log out 2. first time google log in 2. identify dentist and redirect to dentist page 3.make input disapear after submit
+//to do: 1.better redirect 2. first time google log in 2. if logged in as patient, should be able to go to route /dentist
 
 class Main extends Component {
 
@@ -37,9 +36,6 @@ class Main extends Component {
             isSignUpClicked: false
         })
 
-        let cookieId = this.props.readCookie("loggedinId")
-        console.log("user logged in", cookieId);
-
         this.getGoogleClientId();
     }
 
@@ -57,6 +53,7 @@ class Main extends Component {
     }
     //****************google auth !!!!!!!!! get element by ID!!!!!
     getGoogleClientId = () => {
+        // this is to get client id from keys.js
         API.getGoogleId().then((result) => {
             // console.log(result.data.clientId)
             this.setState({
@@ -77,22 +74,26 @@ class Main extends Component {
                 //check if google Id existed, findOne and Create use {upsert: true} in findOne and Update
                 API.googleLogin(googleUser)
                     .then((result) => {
-                        console.log(result);
-                        if (result.status === 200) {
+                        console.log(result.data);
+                        if (result.status === 200 && result.data !== "") {
                             //set cookie if user is in our database data is not null
                             this.props.createCookie("loggedinId", result.data._id, 1)
-                            //redirect to patient page 
-                            window.location.href = "/patient";
+                            //redirect to patient page or admin page depend on user type
+                            if (result.data.userType === "admin") {
+                                window.location.href = "/dentist";
+                            } else {
+                                window.location.href = "/patient";
+                            }
                         }
-                        // else if (result.status === 200 && result.data) {
-                        //     // first time google login get mongo _id and write into cookie
-                        //     console.log("first time")
-                        //     API.googleLogin(googleUser).then((result)=>{
-                        //         this.props.createCookie("loggedinId", result.data._id, 1)
-                        //         window.location.href = "/patient";
-                        //     })
+                        else if (result.data === "") {
+                            // first time google login get mongo _id and write into cookie
+                            console.log("first time")
+                            // API.googleLogin(googleUser).then((result)=>{
+                            //     this.props.createCookie("loggedinId", result.data._id, 1)
+                            //     window.location.href = "/patient";
+                            // })
 
-                        // } 
+                        } 
                         else {
                             console.log("some thing went wrong, erro code: ", result.status)
                             document.getElementById("failLoginNotice").innerHTML = `some thing went wrong, erro code: ${result.status}`;
@@ -152,7 +153,8 @@ class Main extends Component {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
                 email: this.state.signUpEmail,
-                password: this.state.signUpPassword
+                password: this.state.signUpPassword,
+                // userType: "admin"
             }
 
             API.createAccount(newPatient)
@@ -206,8 +208,12 @@ class Main extends Component {
                             this.props.logOut();
                             //set cookie to keep log in
                             this.props.createCookie("loggedinId", result.data._id, 1)
-                            // after set cookie, redirect to patients page
-                            window.location.href = "/patient";
+                            // after set cookie, redirect to patients page or admin page depend on user type
+                            if (result.data.userType === "admin") {
+                                window.location.href = "/dentist";
+                            } else {
+                                window.location.href = "/patient";
+                            }
                         } else {
                             // alert ("Log in failed, email or password do not match record")
                             this.setState({ notice: "Log in failed... Please verify credentials" })

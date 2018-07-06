@@ -17,20 +17,10 @@ class Patient extends React.Component {
 
     componentDidMount() {
         let cookieId = this.props.readCookie("loggedinId")
-        console.log("user logged in", cookieId);
-        this.checkLogIn(cookieId)
-    }
 
-    checkLogIn = (loggedInId) => {
-        if (!loggedInId === "") {
-            this.setState({
-                loggedInId: loggedInId
-            })
-        } else {
-            this.setState({
-                loggedInId: ""
-            })
-        }
+        this.setState({
+        loggedInId: cookieId
+        })
     }
 
     handleInputChange = event => {
@@ -56,7 +46,9 @@ class Patient extends React.Component {
     // }
 
     render() {
-        console.log(this.props)
+        if (this.state.loggedInId === "logged out") {
+            window.location.href="/"
+        }
         return (
             <Container fluid>
                 <Row className="profile">
