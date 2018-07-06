@@ -3,6 +3,7 @@ import { Col, Row, Container } from "reactstrap";
 import "./patients.css";
 import Profile from "../../components/Profile";
 import Photo from "../../components/Photo/Photo";
+import API from "../../utils/API";
 
 
 class Patient extends React.Component {
@@ -14,16 +15,27 @@ class Patient extends React.Component {
         phone: "",
         loggedInId: "",
         loggedinType: "",
+        imageLink: "",
         editing: false
     }
 
     componentDidMount() {
         let cookieId = this.props.readCookie("loggedinId")
         let type = this.props.readCookie("loggedinType")
+        console.log(cookieId);
+        this.getUser(cookieId);
 
         this.setState({
             loggedInId: cookieId,
             loggedinType: type
+        })
+    }
+
+    getUser(id) {
+        API.searchById(id).then((results) => {
+            console.log(results)
+        }).catch(err => {
+            console.log(err)
         })
     }
 

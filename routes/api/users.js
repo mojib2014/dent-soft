@@ -23,9 +23,11 @@ router
 router
   .route("/photo")
   .post(usersController.updatePhoto);
-// router.route("/:id")
-//   .get(usersController.findById)
-//   .put(usersController.update)
-//   .delete(usersController.remove);
+
+router
+  .route("/:id")
+  .get(usersController.findById)
+  .put(usersController.update)
+  .delete(usersController.remove);
 
 module.exports = router;

@@ -29,8 +29,11 @@ module.exports = {
   },
   findById: function (req, res) {
     db.Users
-      .findOne({ _id: req.params.id })
-      .then(dbModel => res.json(dbModel))
+      .findOne({_id: ObjectId("5b3fc6a5a3146b01541f390c")})
+      .then(dbModel => {
+        console.log("anything")
+        res.json(dbModel)
+      })
       .catch(err => res.status(422).json(err));
   },
   findByEmail: function (req, res) {
