@@ -20,7 +20,7 @@ const usersSchema = new Schema({
     token: { type: String, required: false },
     record: { type: String, required: false  },
     note: { type: String, required: false },
-    reservations: { type: String, required: false }
+    reservations: [{ type: String, required: false }]
 
 });
 
