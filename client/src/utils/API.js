@@ -2,8 +2,8 @@ import axios from "axios";
 
 export default {
 
-    newLogin: (patientData) => {
-        return axios.post("/api/newlogin", patientData);
+    googleLogin: (patientData) => {
+        return axios.post("/api/user/google", patientData);
     },
     localLogIn: (loginData) => {
         return axios.post("/api/user/locallogin", loginData);  
