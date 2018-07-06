@@ -17,7 +17,7 @@ module.exports = {
     db.google_account
       .findOneAndUpdate({ googleId: req.body.googleId }, req.body, { upsert: true })
       .then(dbModel => { res.json(dbModel) })
-      .catch(err => { res.status(422).json(err) });
+      .catch(err => { res.json(err) });
   },
   findById: function (req, res) {
     db.Users
