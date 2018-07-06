@@ -13,7 +13,7 @@ module.exports = {
   },
   findOneAndUpdateGoogle: function (req, res) {
 
-    db.google_account.findOne({ email: req.body.email })
+    db.google_account.findOne({ email: req.body.googleEmail })
     .then((result) => {
       console.log("presignup", result)
       if (!result) {
@@ -23,7 +23,7 @@ module.exports = {
               //return err for err handling
               .catch(err => res.json(err));
       } else {
-        res.json({message: "Email Already Existed!"})
+        res.json(result)
       }
     }).catch(err => res.json(err));
   },
