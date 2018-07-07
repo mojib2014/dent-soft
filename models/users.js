@@ -10,6 +10,7 @@ const usersSchema = new Schema({
     profileImage: { type: String, required: false },
     phone: { type: Number, required: false },
     birth_date: { type: Date, required: false },
+    imageUrl:{ type: String, required: false },
     address: { type: String, required: false },
     city: { type: String, required: false },
     state: { type: String, required: false },

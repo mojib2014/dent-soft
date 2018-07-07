@@ -20,8 +20,11 @@ export default {
     
     searchById: (id) => {
         return axios.get("/api/user/" + id );
+    },
+ 
+    createPhoto: (data) => {
+        return axios.post("/api/user/photo",  data);
     }
-
     // ,
     // setCookie: (userId) => {
     //     return axios.post("/api/cookie", userId);

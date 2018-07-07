@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Row, Container } from "reactstrap";
 import "./patients.css";
 import Profile from "../../components/Profile";
+import Photo from "../../components/Photo/Photo";
 
 
 class Patient extends React.Component {
@@ -54,8 +55,7 @@ class Patient extends React.Component {
             <Container fluid>
                 <Row className="profile">
                     <Col md="4" className="InfoBoxLeft">
-                        <h2>Marlon Jovez</h2>
-                        <img alt='Marlon 12th grade' src="https://plus.google.com/_/focus/photos/public/AIbEiAIAAABDCPHDwdPiseeqRSILdmNhcmRfcGhvdG8qKDVmMzA0NzY5NzgwYzlhNmRlMWQ2OTU4MTdkMTdhMmMyOWZkZGY4MDIwAfxasVgm4AGxpvb4O_L-r52SqRtd?sz=200" />
+                        <Photo />
                     </Col>
                     <Profile firstName={this.state.firstName}
                         lastName={this.state.lastName}

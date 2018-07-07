@@ -20,6 +20,9 @@ router
   .route("/:email")
   .get(usersController.findByEmail);
 
+router
+  .route("/photo")
+  .post(usersController.updatePhoto);
 // router.route("/:id")
 //   .get(usersController.findById)
 //   .put(usersController.update)

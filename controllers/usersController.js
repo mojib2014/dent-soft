@@ -12,8 +12,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findOneAndUpdateGoogle: function (req, res) {
-
-    db.google_account.findOne({ email: req.body.googleEmail })
+    console.log(req.body.googleEmail)
+    db.google_account.findOne({ googleEmail: req.body.googleEmail })
     .then((result) => {
       console.log("presignup", result)
       if (!result) {
@@ -77,6 +77,14 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  updatePhoto: function (req, res) {
+    console.log("this is =", req)
+    db.Users
+      .findOneAndUpdate({ _id: req.body.id }, { $set: { imageUrl: req.body.url }})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  
   remove: function (req, res) {
     db.Users
       .findById({ _id: req.params.id })
