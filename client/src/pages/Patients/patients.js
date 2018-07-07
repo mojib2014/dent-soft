@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Row, Container } from "reactstrap";
+import API from "../../utils/API";
 import "./patients.css";
 import Profile from "../../components/Profile";
 import Photo from "../../components/Photo/Photo";
@@ -25,7 +26,17 @@ class Patient extends React.Component {
             loggedInId: cookieId,
             loggedinType: type
         })
+
+        this.showImage(cookieId);
     }
+
+    showImage = (id) => {
+        API.searchById()
+         .then((result) => {
+             console.log(result)
+         })
+    }
+
 
     handleInputChange = event => {
         const { name, value } = event.target;
