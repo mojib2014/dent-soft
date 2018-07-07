@@ -14,7 +14,8 @@ class Photo extends React.Component {
     this.state = {
       uploadedFile: null,
       uploadedFileCloudinaryUrl: '',
-      loginId:''
+      loginId:'',
+      imageLink: ''
     };
   }
 
@@ -60,7 +61,7 @@ class Photo extends React.Component {
             let newPhoto = {id: this.state.loginId, url: this.state.uploadedFileCloudinaryUrl}
             API.createPhoto(newPhoto)
             .then((result) => {
-              console.log(result);
+              this.setState({imageLink: result});
 
             })
               
