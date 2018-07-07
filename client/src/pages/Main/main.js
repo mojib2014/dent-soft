@@ -79,11 +79,7 @@ class Main extends Component {
                             //set cookie if user is in our database data is not null
                             this.props.createCookie("loggedinId", result.data._id, 1)
                             //redirect to patient page or admin page depend on user type
-                            if (result.data.userType === "admin") {
-                                window.location.href = "/dentist";
-                            } else {
-                                window.location.href = "/patient";
-                            }
+                            this.redirect(result.data.userType);
                         }
                         else if (result.data === "") {
                             // first time google login get mongo _id and write into cookie
@@ -119,6 +115,17 @@ class Main extends Component {
     }
     //#################end google auth
 
+    //******************* redirect */
+    redirect =(type) => {
+        if (type === "admin") {
+            this.props.createCookie("userType", type, 1)
+            window.location.href = "/dentist";
+        } else {
+            this.props.createCookie("userType", "patient", 1)
+            window.location.href = "/patient";
+        }
+    }
+    //#################end redirect
     //****************local login
     showLogIn = () => {
         this.setState({
@@ -200,7 +207,7 @@ class Main extends Component {
             API.localLogIn(loginInfo)
                 .then(
                     (result) => {
-                        console.log("front", result)
+                        // console.log("front", result)
                         let isMatch = result.data.message;
 
                         if (isMatch) {
@@ -209,11 +216,7 @@ class Main extends Component {
                             //set cookie to keep log in
                             this.props.createCookie("loggedinId", result.data._id, 1)
                             // after set cookie, redirect to patients page or admin page depend on user type
-                            if (result.data.userType === "admin") {
-                                window.location.href = "/dentist";
-                            } else {
-                                window.location.href = "/patient";
-                            }
+                            this.redirect(result.data.userType);
                         } else {
                             // alert ("Log in failed, email or password do not match record")
                             this.setState({ notice: "Log in failed... Please verify credentials" })
@@ -252,7 +255,7 @@ class Main extends Component {
                                                 value={this.state.firstName}
                                                 onChange={this.handleInputChange}
                                                 name="firstName"
-                                                placeholder="Fist Name (required)"
+                                                placeholder="First Name (required)"
                                             />
                                             <Input
                                                 value={this.state.lastName}

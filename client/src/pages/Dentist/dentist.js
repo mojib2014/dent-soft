@@ -52,8 +52,14 @@ class Dentist extends React.Component {
         //API post to reservation table
     }
 
-    componentDidMount() {
+    componentWillMount() {
         let cookieId = this.props.readCookie("loggedinId")
+        let type = this.props.readCookie("loggedinType")
+       
+        this.setState({
+            loggedInId: cookieId,
+            loggedinType: type
+        })
         console.log("user logged in", cookieId);
     }
 
@@ -80,8 +86,9 @@ class Dentist extends React.Component {
             })
             .catch(err => console.log(err));
     }
-    render() {
-        return (
+    render(){
+        
+        return(
             <div>
                 <div className="dentistInfo container">
                     <Row className="dentistR1">

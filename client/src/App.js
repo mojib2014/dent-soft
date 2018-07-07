@@ -16,18 +16,24 @@ class App extends Component {
     demo: "demo",
     loggedInId: "",
     loggedInWith: "",
+    userType: "",
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let cookieId = this.readCookie("loggedinId")
+    let type = this.readCookie("loggedinType")
+    let userType = this.readCookie("userType")
     
     if (cookieId === "") {
       this.createCookie("loggedinId", "logged out", 1)
       window.location.href = "/";
     } else {
-      console.log("mount", cookieId)
+      console.log("login id", cookieId)
+      console.log("type", type) //google or local
+      console.log("userType", userType)//admin or patient
       this.setState({
-      loggedInId: cookieId
+        loggedInId: cookieId,
+        userType: userType
       })
     }
   }
@@ -83,6 +89,11 @@ class App extends Component {
   }
 
   render() {
+    if (this.state.loggedInId === "loggedOut") {
+      return (
+       window.location.href="/"
+      )
+    } 
     return (
       <div>
         <Nav>
@@ -105,14 +116,28 @@ class App extends Component {
           )}
         </Nav>
         <Router>
-        
-          <Switch>
-            <Route exact path="/" component={() => (<Main createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
-            <Route exact path="/dentist" component={() => (<Dentist createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut} />)} />
-            <Route exact path="/patient" component={() => (<Patients createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut} />)} />
-            <Route exact path="/auth/logout" component={Main} />
-            <Route component={NoMatch} />
-          </Switch>
+            {(this.state.loggedInId==='logged out') ? (
+              <Switch>
+                <Route exact path="/" component={() => (<Main createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
+                <Redirect from="/:anything" to="/" />
+              </Switch>
+            ) : ( 
+              this.state.userType === "patient" ? (
+                <Switch>
+                  <Route exact path="/" component={() => (<Main createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
+                  <Route exact path="/patient" component={() => (<Patients createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut} />)} />
+                  <Route exact path="/auth/logout" component={Main} />
+                  <Route component={NoMatch} />
+                </Switch>
+              ):(
+                <Switch>
+                  <Route exact path="/" component={() => (<Main createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
+                  <Route exact path="/dentist" component={() => (<Dentist createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut} />)} />
+                  <Route exact path="/auth/logout" component={Main} />
+                  <Route component={NoMatch} />
+                </Switch>
+              )
+            )}
         </Router>
         <Footer />
       </div>
