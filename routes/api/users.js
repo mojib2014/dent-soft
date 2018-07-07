@@ -25,9 +25,11 @@ router
   .post(usersController.updatePhoto);
 
 router
-  .route("/:id")
-  .get(usersController.findById)
-  .put(usersController.update)
-  .delete(usersController.remove);
+  .route("/get/:id")
+  .get(usersController.findById);
+
+router
+  .route("/post/:id")
+  .post(usersController.update);
 
 module.exports = router;

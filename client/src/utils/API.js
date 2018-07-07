@@ -19,10 +19,11 @@ export default {
     },
     
     searchById: (id) => {
-        return axios.get("/api/user/" + id ).then(response =>{
-            // res.json(response);
-            console.log(response);
-        })
+        return axios.get("/api/user/get/" + id )
+    },
+
+    updateById: (id, object) => {
+        return axios.post("/api/user/post/" + id, object);
     }
 
     // ,
