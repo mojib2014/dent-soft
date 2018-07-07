@@ -6,6 +6,9 @@ import Dentist from "./pages/Dentist";
 import Patients from "./pages/Patients";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
+import '../src/less/input-moment.less';
+import moment from 'moment';
+import packageJson from '../package.json';
 
 class App extends Component {
 

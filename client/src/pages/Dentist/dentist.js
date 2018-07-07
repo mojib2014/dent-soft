@@ -5,50 +5,46 @@ import Photo from "../../components/Photo";
 // import Footer from "../../components/Footer";
 import { Col, Row, Button, Form, Label, Input, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import API from "../../utils/API";
-import Calendar from "../../components/Calendar";
-
-
-
-
-const style = {
-    position: "relative",
-    margin: "50px auto"
-}
-
+import '../../less/input-moment.less';
+import '../../components/Calendar/app.less';
+import moment from 'moment';
+import InputMoment from '/Users/mojibmohammad/Desktop/dent-soft/client/src/components/Calendar/input-moment.js';
+import packageJson from '../../../package.json';
 class Dentist extends React.Component {
 
     state = {
         name: "",
         phone: "",
-        email: "",
+        email: "",  
         record: "",
         note: "",
         selectedDate: "",
         startingHour: "",
-        loggedinId:""
+        loggedinId: ""
     }
+
+    state = {
+        m: moment()
+    };
+
+    handleChange = m => {
+        this.setState({ m });
+    };
+
+    handleSave = () => {
+        console.log('saved', this.state.m.format('llll'));
+    };
 
     componentWillMount() {
         let cookieId = this.props.readCookie("loggedinId")
 
         this.setState({
-        loggedInId: cookieId
+            loggedInId: cookieId
         })
-    }
-
-    onDayClick = (e, day, month, year) => {
-        // alert("you have chosen day " + year + "-" + month + "-" + day );
-        let fullDate = year + "-" + month + "-" + day;
-        let startingHour = "";
-        this.setState({
-            selectedDate: year + "-" + month + "-" + day,
-            startingHour: startingHour
-        })
-        this.sendReservation(fullDate, startingHour);
     }
 
     sendReservation = (date, hour) => {
-        let reservationInfo={
+        let reservationInfo = {
             user_id: this.state.loggedinId,
             date: date,
             start_time: hour
@@ -85,7 +81,6 @@ class Dentist extends React.Component {
             .catch(err => console.log(err));
     }
     render() {
-        console.log("in render", this.state.selectedDate)
         return (
             <div>
                 <div className="dentistInfo container">
@@ -103,21 +98,22 @@ class Dentist extends React.Component {
                             <a href="https://ahmadsahil2000.youcanbook.me/" target="_blank" rel="noopener noreferrer"><img src="https://youcanbook.me/resources/pics/ycbm-button.png" alt="https://youcanbook.me/resources/pics/ycbm-button.png" style={{ 'borderStyle': "none" }} /></a>
                             <a href="https://app.youcanbook.me/#/bookings" target="_blank" rel="noopener noreferrer" style={{ "paddingLeft": "40px" }}>View Bookings</a>
                             <a href="https://app.youcanbook.me/#/editProfile?id=155f5567-7bcb-47cb-be8a-c27793655fae&section=availability" target="_blank" rel="noopener noreferrer" style={{ "paddingLeft": "20px" }}>Admin</a>
-                            <div className="App">
-                                <Calendar style={style} width="302px"
-                                    onDayClick={(e, day, month, year) => this.onDayClick(e, day, month, year)}
-                                />
-                                <UncontrolledDropdown>
-                                    <DropdownToggle caret>
-                                        Dropdown
-                                    </DropdownToggle>
-                                    <DropdownMenu>
-                                        <DropdownItem id="9">09:00 - 10:00</DropdownItem>
-                                        <DropdownItem >Action</DropdownItem>
-                                        <DropdownItem>Another Action</DropdownItem>
-                                        <DropdownItem>Another Action</DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
+                            <div className="app">
+                                {/* <h1>
+                                    {packageJson.name}: {packageJson.version}
+                                </h1>
+                                <h2>{packageJson.description}</h2> */}
+                                <form>
+                                    <div className="input">
+                                        <input type="text" value={this.state.m.format('llll')} readOnly />
+                                    </div>
+                                    <InputMoment
+                                        moment={this.state.m}
+                                        onChange={this.handleChange}
+                                        minStep={5}
+                                        onSave={this.handleSave}
+                                    />
+                                </form>
                             </div>
                             <Form inline>
                                 <Label for="searchPatients">Patient's Email:</Label>
