@@ -80,11 +80,7 @@ class Main extends Component {
                             this.props.createCookie("loggedinId", result.data._id, 1)
                             this.props.createCookie("loggedinType", "google", 1)
                             //redirect to patient page or admin page depend on user type
-                            if (result.data.userType === "admin") {
-                                window.location.href = "/dentist";
-                            } else {
-                                window.location.href = "/patient";
-                            }
+                            this.redirect(result.data.userType);
                         }
                         else if (result.data === "") {
                             // first time google login get mongo _id and write into cookie
@@ -120,6 +116,17 @@ class Main extends Component {
     }
     //#################end google auth
 
+    //******************* redirect */
+    redirect =(type) => {
+        if (type === "admin") {
+            this.props.createCookie("userType", type, 1)
+            window.location.href = "/dentist";
+        } else {
+            this.props.createCookie("userType", "patient", 1)
+            window.location.href = "/patient";
+        }
+    }
+    //#################end redirect
     //****************local login
     showLogIn = () => {
         this.setState({
@@ -147,9 +154,7 @@ class Main extends Component {
         event.preventDefault();
 
         if (this.state.signUpEmail && this.state.signUpPassword && this.state.firstName && this.state.lastName) {
-            if (this.state.signUpEmail) {
-
-            }
+            
             let newPatient = {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
@@ -165,11 +170,12 @@ class Main extends Component {
                     if (result.data._id) {
                         // alert("new user created, redirect to login")
                         this.setState({
-                            logInEmail: this.state.signUpEmail,
+                            logInEmail: this.state.signUpEmail.toLowerCase(),
                             logInPassword: this.state.signUpPassword,
                         })
                         // console.log(this.state.logInEmail, this.state.logInPassword)
                         this.handleLocalLoginSubmit(event);
+                        
                     } else if (result.data.name === "ValidationError") {
                         //if email is not in email format
                         // alert(result.data.message)
@@ -195,13 +201,13 @@ class Main extends Component {
         event.preventDefault();
         if (this.state.logInEmail && this.state.logInPassword) {
             let loginInfo = {
-                email: this.state.logInEmail,
+                email: this.state.logInEmail.toLowerCase(),
                 password: this.state.logInPassword
             }
             API.localLogIn(loginInfo)
                 .then(
                     (result) => {
-                        console.log("front", result)
+                        // console.log("front", result)
                         let isMatch = result.data.message;
 
                         if (isMatch) {
@@ -211,11 +217,7 @@ class Main extends Component {
                             this.props.createCookie("loggedinId", result.data._id, 1)
                             this.props.createCookie("loggedinType", "local", 1)
                             // after set cookie, redirect to patients page or admin page depend on user type
-                            if (result.data.userType === "admin") {
-                                window.location.href = "/dentist";
-                            } else {
-                                window.location.href = "/patient";
-                            }
+                            this.redirect(result.data.userType);
                         } else {
                             // alert ("Log in failed, email or password do not match record")
                             this.setState({ notice: "Log in failed... Please verify credentials" })
@@ -254,7 +256,7 @@ class Main extends Component {
                                                 value={this.state.firstName}
                                                 onChange={this.handleInputChange}
                                                 name="firstName"
-                                                placeholder="Fist Name (required)"
+                                                placeholder="First Name (required)"
                                             />
                                             <Input
                                                 value={this.state.lastName}
