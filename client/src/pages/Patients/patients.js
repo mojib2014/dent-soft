@@ -61,9 +61,7 @@ class Patient extends React.Component {
     // }
 
     render() {
-        if (this.state.loggedInId === "logged out") {
-            window.location.href="/"
-        }
+    
         return (
             <Container fluid>
                 <Row className="profile">
