@@ -29,8 +29,10 @@ module.exports = {
   },
   findById: function (req, res) {
     db.Users
-      .findOne({ _id: req.params.id })
-      .then(dbModel => res.json(dbModel))
+      .findOne({_id: req.params.id})
+      .then(dbModel => {
+        res.json(dbModel)
+      })
       .catch(err => res.status(422).json(err));
   },
   findByEmail: function (req, res) {
@@ -78,7 +80,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   updatePhoto: function (req, res) {
-    console.log("this is =", req)
+    // console.log("this is =", req)
     db.Users
       .findOneAndUpdate({ _id: req.body.id }, { $set: { imageUrl: req.body.url }})
       .then(dbModel => res.json(dbModel))

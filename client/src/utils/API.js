@@ -19,8 +19,10 @@ export default {
     },
     
     searchById: (id) => {
-        return axios.get("/api/user/" + id );
+        // console.log("api", id)
+        return axios.get("/api/user/get/" + id );
     },
+<<<<<<< HEAD
  
     createPhoto: (data) => {
         return axios.post("/api/user/photo",  data);
@@ -28,7 +30,13 @@ export default {
 
     createRecord: (record) => {
         return axios.post("api/records/record", record);
+=======
+
+    updateById: (id, object) => {
+        return axios.post("/api/user/post/" + id, object);
+>>>>>>> 97199fa0d9d721222df81370e00ed524576d1f70
     }
+
     // ,
     // setCookie: (userId) => {
     //     return axios.post("/api/cookie", userId);
