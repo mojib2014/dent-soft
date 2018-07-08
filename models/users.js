@@ -20,8 +20,8 @@ const usersSchema = new Schema({
     provider_id: { type: String, required: false },
     provider_pic: { type: String, required: false },
     token: { type: String, required: false },
-    record: { type: String, required: false  },
-    note: { type: String, required: false },
+    record: { type: String, required: false, ref: 'Record' },
+    note: { type: String, required: false, ref: 'Note' },
     reservations: { type: String, required: false }
 
 });

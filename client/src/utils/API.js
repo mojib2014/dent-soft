@@ -24,6 +24,10 @@ export default {
  
     createPhoto: (data) => {
         return axios.post("/api/user/photo",  data);
+    },
+
+    createRecord: (record) => {
+        return axios.post("api/records/record", record);
     }
     // ,
     // setCookie: (userId) => {
