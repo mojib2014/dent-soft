@@ -3,29 +3,28 @@ import "./dentist.css";
 import FindInfo from "../../components/FindInfo";
 import Photo from "../../components/Photo";
 // import Footer from "../../components/Footer";
-import { Col, Row, Button, Form, Label, Input, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import { Col, Row, Button, Form, Label, Input } from "reactstrap";
 import API from "../../utils/API";
-import '../../less/input-moment.less';
-import '../../components/Calendar/app.less';
-import moment from 'moment';
-import InputMoment from '/Users/mojibmohammad/Desktop/dent-soft/client/src/components/Calendar/input-moment.js';
+import InputMoment from '../../components/Input-Moment';
 import packageJson from '../../../package.json';
+import '../../../src/less/input-moment.less';
+import './app.less';
+import moment from 'moment';
+
 class Dentist extends React.Component {
 
     state = {
         name: "",
         phone: "",
-        email: "",  
+        email: "",
         record: "",
         note: "",
         selectedDate: "",
         startingHour: "",
-        loggedinId: ""
+        loggedinId: "",
+        m: moment()
     }
 
-    state = {
-        m: moment()
-    };
 
     handleChange = m => {
         this.setState({ m });
@@ -55,7 +54,7 @@ class Dentist extends React.Component {
     componentWillMount() {
         let cookieId = this.props.readCookie("loggedinId")
         let type = this.props.readCookie("loggedinType")
-       
+
         this.setState({
             loggedInId: cookieId,
             loggedinType: type
@@ -86,9 +85,9 @@ class Dentist extends React.Component {
             })
             .catch(err => console.log(err));
     }
-    render(){
-        
-        return(
+    render() {
+
+        return (
             <div>
                 <div className="dentistInfo container">
                     <Row className="dentistR1">
@@ -106,10 +105,10 @@ class Dentist extends React.Component {
                             <a href="https://app.youcanbook.me/#/bookings" target="_blank" rel="noopener noreferrer" style={{ "paddingLeft": "40px" }}>View Bookings</a>
                             <a href="https://app.youcanbook.me/#/editProfile?id=155f5567-7bcb-47cb-be8a-c27793655fae&section=availability" target="_blank" rel="noopener noreferrer" style={{ "paddingLeft": "20px" }}>Admin</a>
                             <div className="app">
-                                {/* <h1>
+                                <h1>
                                     {packageJson.name}: {packageJson.version}
                                 </h1>
-                                <h2>{packageJson.description}</h2> */}
+                                <h2>{packageJson.description}</h2>
                                 <form>
                                     <div className="input">
                                         <input type="text" value={this.state.m.format('llll')} readOnly />

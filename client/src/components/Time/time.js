@@ -1,8 +1,9 @@
 import cx from 'classnames';
 import React, { Component } from 'react';
 import InputSlider from 'react-input-slider';
+import "../../less/time.less";
 
-export default class extends Component {
+export default class Time extends Component {
   changeHours = pos => {
     const m = this.props.moment;
     m.hours(pos.x);

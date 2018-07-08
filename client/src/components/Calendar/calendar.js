@@ -1,7 +1,9 @@
+import moment from 'moment';
 import React, { Component } from 'react';
 import cx from 'classnames';
 import range from 'lodash/range';
 import chunk from 'lodash/chunk';
+import "../../less/calendar.less";
 
 const Day = ({ i, w, d, className, ...props }) => {
   const prevMonth = w === 0 && i > 7;
