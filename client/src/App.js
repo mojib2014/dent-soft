@@ -98,13 +98,14 @@ class App extends Component {
             Dentsoft
           </a>
           {(this.state.loggedInId === "logged out") ? (
-            "hi"
+            "Hello"
           ) : (
             <div>
-              <p>
+              <h3 id="status">
                 Welcome Back
-              </p>
+              </h3>
               <button 
+                className="btn btn-dark p-2 logOut"
                 onClick={this.logOut}
               >
               logout
