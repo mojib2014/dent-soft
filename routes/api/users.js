@@ -28,5 +28,13 @@ router.route("/get/:id")
   .get(usersController.findById)
   .put(usersController.update)
   .delete(usersController.remove);
+  
+router
+  .route("/get/:id")
+  .get(usersController.findById);
+
+router
+  .route("/post/:id")
+  .post(usersController.update);
 
 module.exports = router;

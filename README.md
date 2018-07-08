@@ -1,2 +1,2 @@
 # Dental-Connect
-initialize
+Still under development, full feature coing soon

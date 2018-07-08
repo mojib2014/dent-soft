@@ -19,13 +19,14 @@ export default {
     },
     
     searchById: (id) => {
-        console.log("api", id)
+        // console.log("api", id)
         return axios.get("/api/user/get/" + id );
     },
- 
-    createPhoto: (data) => {
-        return axios.post("/api/user/photo",  data);
+
+    updateById: (id, object) => {
+        return axios.post("/api/user/post/" + id, object);
     }
+
     // ,
     // setCookie: (userId) => {
     //     return axios.post("/api/cookie", userId);

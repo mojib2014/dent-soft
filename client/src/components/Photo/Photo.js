@@ -15,7 +15,8 @@ class Photo extends React.Component {
       uploadedFile: null,
       uploadedFileCloudinaryUrl: '',
       loginId:'',
-      notice: "Profile Image"
+      notice: "Profile Image",
+      callBackImageLink: ''
     };
   }
 
@@ -71,6 +72,8 @@ class Photo extends React.Component {
                   notice: "image upload failed, please try again with an image with smaller file size.."
                 })
               }
+              this.setState({callBackImageLink: result});
+
             })
           }
         })
