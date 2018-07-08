@@ -26,6 +26,9 @@ export default {
     },
     addNote: (noteInfo) => {
         return axios.post("/api/note/", noteInfo);
+    },
+    createPhoto: (photo)=>{
+        return axios.post("/api/user/photo", photo)
     }
 
     // ,

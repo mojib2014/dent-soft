@@ -248,7 +248,6 @@ class Dentist extends React.Component {
                                     placeholder="chicken@chicken.com"
                                 />
                                 <Button onClick={this.handleEmailSearch} color="primary" size="sm">Search</Button>
-
                             </Form>
                             <div>
                                 <FindInfo
@@ -278,12 +277,8 @@ class Dentist extends React.Component {
                         </Col>
                     </Row>
                 </div>
-
             </div>
         )
     }
 }
-
 export default Dentist;
-
-

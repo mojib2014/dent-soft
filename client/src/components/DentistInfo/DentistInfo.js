@@ -43,5 +43,4 @@ const DentistInfo = (props) => {
             </Col>
         )
 }
-
 export default DentistInfo;

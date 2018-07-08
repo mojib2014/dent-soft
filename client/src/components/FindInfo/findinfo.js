@@ -9,7 +9,6 @@ class FindInfo extends React.Component {
     }
 
     render() {
-        console.log("info", this.state.note)
         return (
             <div className="container">
                 <Row>
