@@ -20,9 +20,9 @@ const usersSchema = new Schema({
     provider_id: { type: String, required: false },
     provider_pic: { type: String, required: false },
     token: { type: String, required: false },
-    record: { type: String, required: false  },
-    note: { type: String, required: false },
-    reservations: { type: String, required: false }
+    record: [{ type: String, required: false, ref: "Records"}],
+    note: [{ type: Schema.Types.ObjectId, required: false, ref: "Note" }],
+    reservations: [{ type: String, required: false, ref: "Reservation"}]
 
 });
 

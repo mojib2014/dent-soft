@@ -82,15 +82,6 @@ class Main extends Component {
                             //redirect to patient page or admin page depend on user type
                             this.redirect(result.data.userType);
                         }
-                        else if (result.data === "") {
-                            // first time google login get mongo _id and write into cookie
-                            console.log("first time")
-                            // API.googleLogin(googleUser).then((result)=>{
-                            //     this.props.createCookie("loggedinId", result.data._id, 1)
-                            //     window.location.href = "/patient";
-                            // })
-
-                        } 
                         else {
                             console.log("some thing went wrong, erro code: ", result.status)
                             document.getElementById("failLoginNotice").innerHTML = `some thing went wrong, erro code: ${result.status}`;
@@ -160,7 +151,7 @@ class Main extends Component {
                 lastName: this.state.lastName,
                 email: this.state.signUpEmail,
                 password: this.state.signUpPassword,
-                // userType: "admin"
+                userType: "patient"
             }
 
             API.createAccount(newPatient)
@@ -179,7 +170,7 @@ class Main extends Component {
                     } else if (result.data.name === "ValidationError") {
                         //if email is not in email format
                         // alert(result.data.message)
-                        this.setState({ notice: result.data.message })
+                        this.setState({ notice: result.data.message})
                     } else if (result.data.message === "Email Already Existed!") {
                         // alert(result.data.message)
                         this.setState({ notice: result.data.message })
