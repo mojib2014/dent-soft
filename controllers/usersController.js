@@ -37,7 +37,8 @@ module.exports = {
   },
   findByEmail: function (req, res) {
     db.Users
-      .findOne({email: req.params.email})  
+      .findOne({email: req.params.email})
+      .populate("note")  
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -81,7 +82,7 @@ module.exports = {
   },
 
   updatePhoto: function (req, res) {
-    // console.log("this is =", req)
+    console.log("this is =", req.body)
     db.Users
       .findOneAndUpdate({ _id: req.body.id }, { $set: { imageUrl: req.body.url }})
       .then(dbModel => res.json(dbModel))

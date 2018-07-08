@@ -17,16 +17,18 @@ export default {
     searchByEmail: (email) => {
         return axios.get("/api/user/" + email);
     },
-    
     searchById: (id) => {
-        return axios.get("/api/user/" + id );
         // console.log("api", id)
         return axios.get("/api/user/get/" + id );
     },
-
     updateById: (id, object) => {
         return axios.post("/api/user/post/" + id, object);
-
+    },
+    addNote: (noteInfo) => {
+        return axios.post("/api/note/", noteInfo);
+    },
+    createPhoto: (photo)=>{
+        return axios.post("/api/user/photo", photo)
     }
 
     // ,

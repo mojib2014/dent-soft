@@ -2,6 +2,7 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import './Photo.css';
+import API from "../../utils/API";
 
 const CLOUDINARY_UPLOAD_PRESET = 'j0thsnot';
 const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/putincake/image/upload";
@@ -12,10 +13,6 @@ class Photo extends React.Component {
 
     this.state = {
       uploadedFile: null,
-
-      uploadedFileCloudinaryUrl: ''
-    };
-  }
       uploadedFileCloudinaryUrl: '',
       loginId:'',
       notice: "Profile Image",
@@ -34,6 +31,7 @@ class Photo extends React.Component {
     var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
     return b ? b.pop() : '';
   }
+
   onImageDrop(files) {
     this.setState({
       uploadedFile: files[0],
@@ -44,21 +42,6 @@ class Photo extends React.Component {
   }
 
   handleImageUpload(file) {
-    let upload = request.post(CLOUDINARY_UPLOAD_URL)
-      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-      .field('file', file);
-
-    upload.end((err, response) => {
-      if (err) {
-        console.error(err);
-      }
-
-      if (response.body.secure_url !== '') {
-        this.setState({
-          uploadedFileCloudinaryUrl: response.body.secure_url
-        });
-      }
-    });
       let upload = request.post(CLOUDINARY_UPLOAD_URL)
         .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
         .field('file', file);
@@ -94,7 +77,6 @@ class Photo extends React.Component {
             })
           }
         })
-
   }
 
   render() {
@@ -108,12 +90,12 @@ class Photo extends React.Component {
             <div>
               {this.state.uploadedFileCloudinaryUrl === '' ? (
                 <div>
-                  <img src={this.props.DimageUrl} alt="click me to add profile image"/>
+                  <img src={this.props.DimageUrl} alt="click me to add"/>
                   <div>{this.state.notice}</div>
                 </div>
               ) :
                 <div>
-                  <img src={this.state.uploadedFileCloudinaryUrl} alt="click me to add profile image"/>
+                  <img src={this.state.uploadedFileCloudinaryUrl} alt="click me to add"/>
                   <div>{this.state.notice}</div>
                 </div>}
             </div>
