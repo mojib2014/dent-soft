@@ -1,8 +1,8 @@
 import React from 'react';
 import {InputGroup, InputGroupAddon, Input, Button} from 'reactstrap';
 import API from "../../utils/API";
-// import PropTypes from 'prop-types';
 // import "./Inputbox.css";
+// import PropTypes from 'prop-types';
 // import InputAdornment from '@material-ui/core/InputAdornment';
 // import Button from '@material-ui/core/Button';
 // import TextField from '@material-ui/core/TextField';
