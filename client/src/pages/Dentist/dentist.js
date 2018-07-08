@@ -2,7 +2,7 @@ import React from "react";
 import "./dentist.css";
 import DentistInfo from "../../components/DentistInfo";
 import Photo from "../../components/Photo";
-import { Col, Row, Button, Form, Label, Input } from "reactstrap";
+import { Col, Row, Form, Label, Input } from "reactstrap";
 import { FormBtn } from "../../components/Form";
 import FindInfo from "../../components/FindInfo";
 
@@ -15,6 +15,7 @@ class Dentist extends React.Component {
         name: "",
         phone: "",
         email: "",
+        Pemail: "",
         signUpEmail: "",
         signUpPassword: "",
         image: "",
@@ -23,7 +24,7 @@ class Dentist extends React.Component {
         lastName: "",
         DimageUrl: "",
         notice: "",
-        note: "",
+        note: [],
         newNote: "",
         DfirstName: "",
         DlastName: "",
@@ -46,21 +47,21 @@ class Dentist extends React.Component {
 
     getDentistInfo = (id) => {
         API.searchById(id)
-        .then(result=>{
-            console.log("load dentist info", result)
-            this.setState({
-                DfirstName: result.data.firstName,
-                DlastName: result.data.lastName,
-                Demail: result.data.email,
-                Dphone: result.data.phone,
-                Dbirthday: result.data.birth_date,
-                DimageUrl: result.data.imageUrl
+            .then(result => {
+                console.log("load dentist info", result)
+                this.setState({
+                    DfirstName: result.data.firstName,
+                    DlastName: result.data.lastName,
+                    Demail: result.data.email,
+                    Dphone: result.data.phone,
+                    Dbirthday: result.data.birth_date,
+                    DimageUrl: result.data.imageUrl
+                })
             })
-        })
-        .catch(err=>{
-            console.log(err);
-            // alert("something went wrong, please refresh page")
-        })
+            .catch(err => {
+                console.log(err);
+                // alert("something went wrong, please refresh page")
+            })
         // use id to find dentist's information including image
     }
 
@@ -79,27 +80,31 @@ class Dentist extends React.Component {
     handleEmailSearch = (event) => {
         event.preventDefault();
 
+        this.emailSearch();
+    }
+
+    emailSearch = () => {
         let email = this.state.email
         API.searchByEmail(email)
             .then((result) => {
                 console.log(result.data.note)
-                //rewrite note 
-                let noteArr=[];
-                for(let i=0; i<result.data.note.length; i++) {
-                    noteArr.push(result.data.note[i].note);
-                }
                 this.setState({
                     name: result.data.lastName + result.data.firstName,
                     phone: result.data.phone,
-                    email: result.data.email,
+                    Pemail: result.data.email,
                     record: result.data.record,
-                    note: noteArr,
+                    note: result.data.note,
                     image: result.data.imageUrl,
                     patientId: result.data._id
                 })
 
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err)
+                this.setState({
+                    name: "Email does not match, please search another email or add patient"
+                })
+            });
     }
 
     //*********************Admin Signup!
@@ -107,7 +112,7 @@ class Dentist extends React.Component {
         event.preventDefault();
 
         if (this.state.signUpEmail && this.state.signUpPassword && this.state.firstName && this.state.lastName) {
-         
+
             let newPatient = {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
@@ -122,12 +127,12 @@ class Dentist extends React.Component {
                     //sign up err handling
                     if (result.data._id) {
                         // alert("new user created")
-                        this.setState({ notice: `New Administator: ${result.data.email} Added` })
                         this.setState({
                             firstName: "",
                             lastName: "",
                             signUpEmail: "",
                             signUpPassword: "",
+                            notice: `New Administator: ${result.data.email} Added`
                         })
                         // console.log(this.state.logInEmail, this.state.logInPassword)
                     } else if (result.data.name === "ValidationError") {
@@ -152,36 +157,40 @@ class Dentist extends React.Component {
 
     //*************** add note */
     handleAddNote = () => {
-        if (this.state.patientId && this.state.note) {
+        if (this.state.patientId && this.state.newNote) {
             //API post note
-            let noteInfo={
+            // console.log(this.state.newNote)
+            //to write new note into db
+            let noteInfo = {
                 id: this.state.patientId,
-                note: this.state.note
+                note: this.state.newNote
             }
             API.addNote(noteInfo)
-            .then((result)=>{
+            .then((result) => {
                 //if note empty then alert note cannot be empty
                 console.log(result)
+                //to show new note after added 
+                this.emailSearch();
+
                 if (result.data) {
-                    alert (`Note Added for ${result.data.firstName} ${result.data.lastName}`)
+                    alert(`Note Added for ${result.data.firstName} ${result.data.lastName}`)
                 }
-            })
-            .catch(err=>console.log(err));
+                })
+                .catch(err => console.log(err));
         } else {
-            alert("please search for a patient berfore posting a note") 
+            alert("please search for a patient berfore posting a note")
         }
     }
     //############### end add note
 
     render() {
-        // console.log("noteArr", this.state.note)
-
+        console.log(this.state.note)
         return (
             <div>
                 <div className="dentistInfo container">
                     <Row className="dentistR1">
                         <Col md="3" xs="3">
-                            <Photo DimageUrl={this.state.DimageUrl}/>
+                            <Photo DimageUrl={this.state.DimageUrl} />
                         </Col>
 
                         <DentistInfo
@@ -231,7 +240,7 @@ class Dentist extends React.Component {
                             >
                                 Add New Admin
                             </FormBtn>
-                            </Col>
+                        </Col>
                     </Row>
                     <Row className="dentistR2">
 
@@ -247,17 +256,35 @@ class Dentist extends React.Component {
                                     name="email"
                                     placeholder="chicken@chicken.com"
                                 />
-                                <Button onClick={this.handleEmailSearch} color="primary" size="sm">Search</Button>
+                                <FormBtn 
+                                    disabled={!this.state.email}
+                                    onClick={this.handleEmailSearch} 
+                                    color="primary" 
+                                    size="sm"
+                                > Search
+                                </FormBtn>
                             </Form>
                             <div>
                                 <FindInfo
                                     userName={this.state.name}
                                     userPhone={this.state.phone}
-                                    userEmail={this.state.email}
+                                    userEmail={this.state.Pemail}
                                     userRecord={this.state.record}
                                     userNote={this.state.note}
                                     userImage={this.state.image}
                                 />
+                            </div>
+                            <hr></hr>
+                            <div className="noteInfo mb-3">
+                                <div>
+                                    <h3>Note:</h3>
+                                    <br></br>
+                                    <div className="note shadow text-left">
+                                        {this.state.note.map((item, i)=>{
+                                            return <h6 key={i} id={item._id}>{i+1}. {item.note}</h6>
+                                        })}
+                                    </div>
+                                </div>
                             </div>
                             <hr></hr>
                             <div>
@@ -268,7 +295,7 @@ class Dentist extends React.Component {
                                     placeholder="Doctors' Note"
                                 />
                                 <FormBtn
-                                    disabled={!this.state.note}
+                                    disabled={!this.state.newNote}
                                     onClick={this.handleAddNote}
                                 >
                                     Add Note

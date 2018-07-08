@@ -3,38 +3,29 @@ import "./Findinfo.css";
 import { Row, Col } from "reactstrap";
 
 class FindInfo extends React.Component {
-    state = {
-        note: this.props.userNote
-        // note: ["1", "2", "3"]
-    }
 
     render() {
         return (
             <div className="container">
                 <Row>
                     <Col className="pic-col">
-                        <img src={this.props.userImage} alt="User" />
+                        {this.props.userImage ? (
+                            <img src={this.props.userImage} style={{height: 200, width: 200}} alt="User" />
+                        ) : (
+                            <h5>No progile image Available</h5>
+                        )}
                     </Col>
                     <Col>
                         <div className="basicInfo">
-                            <p>Name: {this.props.userName}</p>
-                            <p>Phone: {this.props.userPhone}</p>
-                            <p>Email: {this.props.userEmail}</p>
+                            <h4 className="text-left">Name: {this.props.userName}</h4>
+                            <h4 className="text-left">Phone: {this.props.userPhone}</h4>
+                            <h4 className="text-left">Email: {this.props.userEmail}</h4>
                         </div>
                     </Col>
                 </Row>
                 <Row>
                     <div className="editInfo">
                         <div className="recordInfo"><h3>Record: {this.props.userRecord}</h3></div>
-                        <div className="noteInfo">
-                            <h3>Note:
-                            <div className="note">
-                                {/* {this.state.note.map(function(item, i){
-                                return <p key={i}>{item}</p>
-                                })} */}
-                            </div>
-                            </h3>
-                        </div>
                     </div>
                 </Row>
 
