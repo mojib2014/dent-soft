@@ -23,7 +23,7 @@ module.exports = {
               //return err for err handling
               .catch(err => res.json(err));
       } else {
-        res.json(result)
+        res.json({message: "Email Already Existed!"})
       }
     }).catch(err => res.json(err));
   },
@@ -37,7 +37,8 @@ module.exports = {
   },
   findByEmail: function (req, res) {
     db.Users
-      .findOne({email: req.params.email})  
+      .findOne({email: req.params.email})
+      .populate("note")  
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -79,8 +80,9 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+
   updatePhoto: function (req, res) {
-    // console.log("this is =", req)
+    console.log("this is =", req.body)
     db.Users
       .findOneAndUpdate({ _id: req.body.id }, { $set: { imageUrl: req.body.url }})
       .then(dbModel => res.json(dbModel))

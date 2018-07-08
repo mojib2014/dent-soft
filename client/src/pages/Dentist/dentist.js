@@ -1,31 +1,31 @@
 import React from "react";
 import "./dentist.css";
-import FindInfo from "../../components/FindInfo";
 import DentistInfo from "../../components/DentistInfo";
 import Photo from "../../components/Photo";
 import { Col, Row, Button, Form, Label, Input } from "reactstrap";
 import { FormBtn } from "../../components/Form";
+import FindInfo from "../../components/FindInfo";
 
 import API from "../../utils/API";
 
 class Dentist extends React.Component {
 
     state = {
-        patientId:"",
+        patientId: "",
         name: "",
         phone: "",
         email: "",
-        Pemail: "",
+        // Pemail: "",
         signUpEmail: "",
         signUpPassword: "",
         image: "",
         record: "",
-        addRecord: "",
         firstName: "",
         lastName: "",
         DimageUrl: "",
         notice: "",
         note: "",
+        newNote: "",
         DfirstName: "",
         DlastName: "",
         Demail: "",
@@ -40,7 +40,7 @@ class Dentist extends React.Component {
 
         this.setState({
             loggedInId: cookieId,
-            loggedinType: type
+            loggedinType: type,
         })
         this.getDentistInfo(cookieId)
     }
@@ -65,7 +65,7 @@ class Dentist extends React.Component {
         // use id to find dentist's information including image
     }
 
-    handleInfoInput = (event) => {
+    handleInputChange = (event) => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -83,16 +83,22 @@ class Dentist extends React.Component {
         let email = this.state.email
         API.searchByEmail(email)
             .then((result) => {
-                console.log(result.data)
+                console.log(result.data.note)
+                //rewrite note 
+                let noteArr=[];
+                for(let i=0; i<result.data.note.length; i++) {
+                    noteArr.push(result.data.note[i].note);
+                }
                 this.setState({
                     name: result.data.lastName + result.data.firstName,
                     phone: result.data.phone,
-                    Pemail: result.data.email,
+                    email: result.data.email,
                     record: result.data.record,
-                    note: result.data.note, //改 newnote
+                    note: noteArr,
                     image: result.data.imageUrl,
                     patientId: result.data._id
                 })
+
             })
             .catch(err => console.log(err));
     }
@@ -145,7 +151,31 @@ class Dentist extends React.Component {
 
     //##################end New Admin sign up
 
+    //*************** add note */
+    handleAddNote = () => {
+        if (this.state.patientId && this.state.note) {
+            //API post note
+            let noteInfo={
+                id: this.state.patientId,
+                note: this.state.note
+            }
+            API.addNote(noteInfo)
+            .then((result)=>{
+                //if note empty then alert note cannot be empty
+                console.log(result)
+                if (result.data) {
+                    alert (`Note Added for ${result.data.firstName} ${result.data.lastName}`)
+                }
+            })
+            .catch(err=>console.log(err));
+        } else {
+            alert("please search for a patient berfore posting a note") 
+        }
+    }
+    //############### end add note
+
     render() {
+        // console.log("noteArr", this.state.note)
 
         return (
             <div>
@@ -172,26 +202,26 @@ class Dentist extends React.Component {
                             <h2>Add New Administator Here</h2>
                             <Input
                                 value={this.state.firstName}
-                                onChange={this.handleEmailInput}
+                                onChange={this.handleInputChange}
                                 name="firstName"
                                 placeholder="First Name (required)"
                             />
                             <Input
                                 value={this.state.lastName}
-                                onChange={this.handleEmailInput}
+                                onChange={this.handleInputChange}
                                 name="lastName"
                                 placeholder="Last Name (required)"
                             />
                             <Input
                                 value={this.state.signUpEmail}
-                                onChange={this.handleEmailInput}
+                                onChange={this.handleInputChange}
                                 name="signUpEmail"
                                 placeholder="Email (required)"
                             />
                             <Input
                                 type="password"
                                 value={this.state.signUpPassword}
-                                onChange={this.handleEmailInput}
+                                onChange={this.handleInputChange}
                                 name="signUpPassword"
                                 placeholder="Password (required)"
                             />
@@ -200,7 +230,7 @@ class Dentist extends React.Component {
                                 disabled={!(this.state.signUpEmail && this.state.signUpPassword && this.state.firstName && this.state.lastName)}
                                 onClick={this.handleSignUpSubmit}
                             >
-                                Sign Up
+                                Add New Admin
                             </FormBtn>
                             </Col>
                     </Row>
@@ -214,32 +244,36 @@ class Dentist extends React.Component {
                                 <Label for="searchPatients">Patient's Email:</Label>
                                 <Input
                                     value={this.state.email}
-                                    onChange={this.handleInfoInput}
+                                    onChange={this.handleInputChange}
                                     name="email"
                                     placeholder="chicken@chicken.com"
                                 />
                                 <Button onClick={this.handleEmailSearch} color="primary" size="sm">Search</Button>
-
                             </Form>
                             <div>
                                 <FindInfo
                                     userName={this.state.name}
                                     userPhone={this.state.phone}
-                                    userEmail={this.state.Pemail}
+                                    userEmail={this.state.email}
                                     userRecord={this.state.record}
                                     userNote={this.state.note}
                                     userImage={this.state.image}
                                 />
                             </div>
+                            <hr></hr>
                             <div>
-                            <Input 
-                                name = "addRecord"
-                                value= {this.state.addRecord}
-                                onChange={this.handleInfoInput}
-                            />
-                            <Button>
-                                Add Record
-                            </Button>
+                                <Input
+                                    value={this.state.newNote}
+                                    onChange={this.handleInputChange}
+                                    name="newNote"
+                                    placeholder="Doctors' Note"
+                                />
+                                <FormBtn
+                                    disabled={!this.state.note}
+                                    onClick={this.handleAddNote}
+                                >
+                                    Add Note
+                                </FormBtn>
                             </div>
                         </Col>
                     </Row>
@@ -248,7 +282,4 @@ class Dentist extends React.Component {
         )
     }
 }
-
 export default Dentist;
-
-

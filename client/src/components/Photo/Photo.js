@@ -90,12 +90,12 @@ class Photo extends React.Component {
             <div>
               {this.state.uploadedFileCloudinaryUrl === '' ? (
                 <div>
-                  <img src={this.props.DimageUrl} alt="click me to add profile image"/>
+                  <img src={this.props.DimageUrl} alt="click me to add"/>
                   <div>{this.state.notice}</div>
                 </div>
               ) :
                 <div>
-                  <img src={this.state.uploadedFileCloudinaryUrl} alt="click me to add profile image"/>
+                  <img src={this.state.uploadedFileCloudinaryUrl} alt="click me to add"/>
                   <div>{this.state.notice}</div>
                 </div>}
             </div>

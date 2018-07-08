@@ -7,11 +7,11 @@ const usersSchema = new Schema({
     lastName: {type: String, required: true},
     email: {type: String, match: [/.+@.+\..+/, "Please enter a valid e-mail address"]},
     password: { type: String, required: true },
+    imageUrl: {type: String, required: false},
     userType: {type: String, required: true},
     profileImage: { type: String, required: false },
     phone: { type: Number, required: false },
     birth_date: { type: Date, required: false },
-    imageUrl:{ type: String, required: false },
     address: { type: String, required: false },
     city: { type: String, required: false },
     state: { type: String, required: false },
@@ -20,17 +20,11 @@ const usersSchema = new Schema({
     provider_id: { type: String, required: false },
     provider_pic: { type: String, required: false },
     token: { type: String, required: false },
-    record: [{ type: String, required: false, ref: 'Records' }],
-    note: [{ type: String, required: false, ref: 'Note' }],
-    reservations: [{ type: String, required: false }]
+    record: [{ type: String, required: false, ref: "Records"}],
+    note: [{ type: Schema.Types.ObjectId, required: false, ref: "Note" }],
+    reservations: [{ type: String, required: false, ref: "Reservation"}]
 
 });
-
-usersSchema.statics = {
-   findRecordByRecordid: (RecordId, res) => {
-       return
-   }
-};
 
 const User = mongoose.model("user", usersSchema);
 
