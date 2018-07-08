@@ -43,14 +43,12 @@ class Inputbox extends React.Component  {
 
     }
 
-    handleAddRecord = () => {
-        let newRecord = {id: this.state.loginId, record: this.state.value}
-        API.createRecord(newRecord)
-        .then((result) => {
-            console.log(result);
-        })
-    }
     
+
+
+
+    
+
     // handleSearchById = (event) => {
     //     event.preventDefault();
         
@@ -77,7 +75,14 @@ class Inputbox extends React.Component  {
                 name = "record"
                 value= {this.state.record}
                 onChange={this.handleInfoInput} />
+            
             <InputGroupAddon addonType="prepend"><Button onClick={this.handleAddRecord} className="recordBtn" size="sm">Add Record</Button></InputGroupAddon>
+            
+            
+            <a href="#" id="upload_widget_opener" >Upload multiple images</a>
+
+
+
           </InputGroup>
 
           <InputGroup>

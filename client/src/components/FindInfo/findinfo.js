@@ -27,13 +27,13 @@ const FindInfo = (props) => {
             </div>
           </Row>
           <Row>
-            <div className="addInfo">
+            {/* <div className="addInfo">
                 <div>
                     <Inputbox />
                    
                 </div>
                 <div></div>
-            </div>
+            </div> */}
           </Row>
               
         </div>

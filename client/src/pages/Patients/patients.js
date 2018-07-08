@@ -4,7 +4,6 @@ import API from "../../utils/API";
 import "./patients.css";
 import Profile from "../../components/Profile";
 import Photo from "../../components/Photo/Photo";
-import API from "../../utils/API";
 
 
 class Patient extends React.Component {

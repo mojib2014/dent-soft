@@ -160,7 +160,7 @@ class Main extends Component {
                 lastName: this.state.lastName,
                 email: this.state.signUpEmail,
                 password: this.state.signUpPassword,
-                // userType: "admin"
+                userType: "patient"
             }
 
             API.createAccount(newPatient)

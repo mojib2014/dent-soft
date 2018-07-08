@@ -11,13 +11,16 @@ import API from "../../utils/API";
 class Dentist extends React.Component {
 
     state = {
+        patientId:"",
         name: "",
         phone: "",
         email: "",
+        Pemail: "",
         signUpEmail: "",
         signUpPassword: "",
         image: "",
         record: "",
+        addRecord: "",
         firstName: "",
         lastName: "",
         DimageUrl: "",
@@ -62,7 +65,7 @@ class Dentist extends React.Component {
         // use id to find dentist's information including image
     }
 
-    handleEmailInput = (event) => {
+    handleInfoInput = (event) => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -84,10 +87,11 @@ class Dentist extends React.Component {
                 this.setState({
                     name: result.data.lastName + result.data.firstName,
                     phone: result.data.phone,
-                    email: result.data.email,
+                    Pemail: result.data.email,
                     record: result.data.record,
-                    note: result.data.note,
-                    image: result.data.imageUrl
+                    note: result.data.note, //改 newnote
+                    image: result.data.imageUrl,
+                    patientId: result.data._id
                 })
             })
             .catch(err => console.log(err));
@@ -210,7 +214,7 @@ class Dentist extends React.Component {
                                 <Label for="searchPatients">Patient's Email:</Label>
                                 <Input
                                     value={this.state.email}
-                                    onChange={this.handleEmailInput}
+                                    onChange={this.handleInfoInput}
                                     name="email"
                                     placeholder="chicken@chicken.com"
                                 />
@@ -221,16 +225,25 @@ class Dentist extends React.Component {
                                 <FindInfo
                                     userName={this.state.name}
                                     userPhone={this.state.phone}
-                                    userEmail={this.state.email}
+                                    userEmail={this.state.Pemail}
                                     userRecord={this.state.record}
                                     userNote={this.state.note}
                                     userImage={this.state.image}
                                 />
                             </div>
+                            <div>
+                            <Input 
+                                name = "addRecord"
+                                value= {this.state.addRecord}
+                                onChange={this.handleInfoInput}
+                            />
+                            <Button>
+                                Add Record
+                            </Button>
+                            </div>
                         </Col>
                     </Row>
                 </div>
-
             </div>
         )
     }
