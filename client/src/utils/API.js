@@ -26,16 +26,18 @@ export default {
         return axios.post("/api/user/photo",  data);
     },
 
-    createRecord: (record) => {
-        return axios.post("api/records/record", record);
-    },
-
+   
     updateById: (id, object) => {
         return axios.post("/api/user/post/" + id, object);
     },
     addNote: (noteInfo) => {
         return axios.post("/api/note/", noteInfo);
     },
+
+    addRecord:(recordInfo) => {
+        return axios.post("/api/records/", recordInfo);
+    },
+
     createPhoto: (photo)=>{
         return axios.post("/api/user/photo", photo)
     }

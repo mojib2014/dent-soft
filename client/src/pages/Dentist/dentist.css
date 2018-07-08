@@ -18,3 +18,8 @@
 .patientCard > Form > Input {
     margin-left:10px;
 }
+
+.note{
+    height: 200px;
+    overflow: scroll;
+}
