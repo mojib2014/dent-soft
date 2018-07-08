@@ -235,7 +235,6 @@ class Main extends Component {
 
 
     render() {
-
         return (
             <div id="homePage">
                 <Container fluid style={{ height: 700 }}>

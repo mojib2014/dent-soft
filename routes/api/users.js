@@ -24,6 +24,11 @@ router
   .route("/photo")
   .post(usersController.updatePhoto);
 
+router.route("/get/:id")
+  .get(usersController.findById)
+  .put(usersController.update)
+  .delete(usersController.remove);
+  
 router
   .route("/get/:id")
   .get(usersController.findById);

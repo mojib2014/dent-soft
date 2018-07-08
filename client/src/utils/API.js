@@ -19,7 +19,8 @@ export default {
     },
     
     searchById: (id) => {
-        return axios.get("/api/user/get/" + id )
+        // console.log("api", id)
+        return axios.get("/api/user/get/" + id );
     },
 
     updateById: (id, object) => {

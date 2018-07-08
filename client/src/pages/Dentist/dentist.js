@@ -20,13 +20,14 @@ class Dentist extends React.Component {
         record: "",
         firstName: "",
         lastName: "",
+        DimageUrl: "",
         notice: "",
         note: "",
-        DfirstName: "Gao",
-        DlastName: "Chunjing",
-        Demail: "williamNo1@gmail.com",
-        Dbirthday: "1995-04-17",
-        Dphone: "510-888-8888",
+        DfirstName: "",
+        DlastName: "",
+        Demail: "",
+        Dbirthday: "",
+        Dphone: "",
         editing: false
     }
 
@@ -38,12 +39,26 @@ class Dentist extends React.Component {
             loggedInId: cookieId,
             loggedinType: type
         })
-        console.log("user logged in", cookieId);
         this.getDentistInfo(cookieId)
     }
 
     getDentistInfo = (id) => {
-
+        API.searchById(id)
+        .then(result=>{
+            console.log("load dentist info", result)
+            this.setState({
+                DfirstName: result.data.firstName,
+                DlastName: result.data.lastName,
+                Demail: result.data.email,
+                Dphone: result.data.phone,
+                Dbirthday: result.data.birth_date,
+                DimageUrl: result.data.imageUrl
+            })
+        })
+        .catch(err=>{
+            console.log(err);
+            // alert("something went wrong, please refresh page")
+        })
         // use id to find dentist's information including image
     }
 
@@ -133,8 +148,7 @@ class Dentist extends React.Component {
                 <div className="dentistInfo container">
                     <Row className="dentistR1">
                         <Col md="3" xs="3">
-                            <Photo />
-
+                            <Photo DimageUrl={this.state.DimageUrl}/>
                         </Col>
 
                         <DentistInfo
