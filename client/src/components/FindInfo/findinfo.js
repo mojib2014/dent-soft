@@ -17,9 +17,9 @@ class FindInfo extends React.Component {
                     </Col>
                     <Col>
                         <div className="basicInfo">
-                            <h4 className="text-left">Name: {this.props.userName}</h4>
-                            <h4 className="text-left">Phone: {this.props.userPhone}</h4>
-                            <h4 className="text-left">Email: {this.props.userEmail}</h4>
+                            <h4 className="text-left">Name: <strong>{this.props.userName}</strong></h4>
+                            <h4 className="text-left">Phone: <strong>{this.props.userPhone}</strong></h4>
+                            <h4 className="text-left">Email: <strong>{this.props.userEmail}</strong></h4>
                         </div>
                     </Col>
                 </Row>

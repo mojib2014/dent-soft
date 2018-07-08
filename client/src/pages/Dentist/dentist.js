@@ -104,7 +104,9 @@ class Dentist extends React.Component {
             .catch(err => {
                 console.log(err)
                 this.setState({
-                    name: "Email does not match, please search another email or add patient"
+                    name: "Email does not match, please search another email or add patient",
+                    phone: "",
+                    Pemail: ""
                 })
             });
     }
