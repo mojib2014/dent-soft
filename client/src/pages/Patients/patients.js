@@ -2,24 +2,44 @@ import React from "react";
 import { Col, Row, Container } from "reactstrap";
 import "./patients.css";
 import Profile from "../../components/Profile";
-
+import Photo from "../../components/Photo/Photo";
+import API from "../../utils/API";
 
 class Patient extends React.Component {
     state = {
-        firstName: "Marlon",
-        lastName: "Jovez",
-        email: "marlonjovez@gmail.com",
-        birthday: "1995-04-17",
+        firstName: "",
+        lastName: "",
+        email: "",
+        birthday: "",
         phone: "",
         loggedInId: "",
+        loggedinType: "",
+        imageLink: "",
         editing: false
     }
 
     componentDidMount() {
         let cookieId = this.props.readCookie("loggedinId")
 
+        this.getUser(cookieId);
+
         this.setState({
         loggedInId: cookieId
+        })
+    }
+
+    getUser(id) {
+        API.searchById(id).then((results) => {
+            this.setState({
+                firstName: results.data.firstName,
+                lastName: results.data.lastName,
+                email: results.data.email,
+                birthday: (results.data.birthday ? results.data.birthday : this.state.birthday),
+                phone: (results.data.phone ? results.data.phone : this.state.phone),
+                imageLink: (results.data.imageUrl ? results.data.imageUrl : this.state.imageUrl)
+            })
+        }).catch(err => {
+            console.log(err)
         })
     }
 
@@ -31,7 +51,19 @@ class Patient extends React.Component {
     };
 
     editProfile = () => {
-        (this.state.editing) ? this.setState({ editing: false }) : this.setState({ editing: true });
+        (this.state.editing) ? 
+            API.updateById(this.state.loggedInId, {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                email: this.state.email,
+                birthday: this.state.birthday,
+                phone: this.state.phone,
+                imageUrl: this.state.imageLink         
+            }).then(results => {
+                console.log(results);
+                this.setState({ editing: false })
+            })
+          : this.setState({ editing: true });
     }
 
     // loadUser() {

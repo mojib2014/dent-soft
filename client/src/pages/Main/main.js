@@ -153,9 +153,7 @@ class Main extends Component {
         event.preventDefault();
 
         if (this.state.signUpEmail && this.state.signUpPassword && this.state.firstName && this.state.lastName) {
-            if (this.state.signUpEmail) {
-
-            }
+            
             let newPatient = {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
@@ -171,11 +169,12 @@ class Main extends Component {
                     if (result.data._id) {
                         // alert("new user created, redirect to login")
                         this.setState({
-                            logInEmail: this.state.signUpEmail,
+                            logInEmail: this.state.signUpEmail.toLowerCase(),
                             logInPassword: this.state.signUpPassword,
                         })
                         // console.log(this.state.logInEmail, this.state.logInPassword)
                         this.handleLocalLoginSubmit(event);
+                        
                     } else if (result.data.name === "ValidationError") {
                         //if email is not in email format
                         // alert(result.data.message)
@@ -201,7 +200,7 @@ class Main extends Component {
         event.preventDefault();
         if (this.state.logInEmail && this.state.logInPassword) {
             let loginInfo = {
-                email: this.state.logInEmail,
+                email: this.state.logInEmail.toLowerCase(),
                 password: this.state.logInPassword
             }
             API.localLogIn(loginInfo)
@@ -234,7 +233,6 @@ class Main extends Component {
 
 
     render() {
-
         return (
             <div id="homePage">
                 <Container fluid style={{ height: 700 }}>

@@ -12,13 +12,32 @@ class Photo extends React.Component {
 
     this.state = {
       uploadedFile: null,
+
       uploadedFileCloudinaryUrl: ''
     };
   }
+      uploadedFileCloudinaryUrl: '',
+      loginId:'',
+      notice: "Profile Image",
+      callBackImageLink: ''
+    };
+  }
 
+  componentDidMount() {
+    let cookieId = this.readCookie("loggedinId")
+    this.setState({
+        loginId: cookieId,
+    })
+  }
+
+  readCookie = a => {
+    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+  }
   onImageDrop(files) {
     this.setState({
-      uploadedFile: files[0]
+      uploadedFile: files[0],
+      notice: "Uploading... process might take a minute"
     });
 
     this.handleImageUpload(files[0]);
@@ -40,6 +59,42 @@ class Photo extends React.Component {
         });
       }
     });
+      let upload = request.post(CLOUDINARY_UPLOAD_URL)
+        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+        .field('file', file);
+
+      upload.end((err, response) => {
+        if (err) {
+          console.error(err);
+        }
+        
+          if (response.body.secure_url !== '') {
+           
+            this.setState({
+              uploadedFileCloudinaryUrl: response.body.secure_url,
+            });
+            
+            let newPhoto = {
+              id: this.state.loginId, url: this.state.uploadedFileCloudinaryUrl
+            }
+            API.createPhoto(newPhoto)
+            .then((result) => {
+              console.log(result);
+              if (result.data) {
+                this.setState({
+                  notice: "image upload success"
+                })
+              } else {
+                this.setState({
+                  notice: "image upload failed, please try again with an image with smaller file size.."
+                })
+              }
+              this.setState({callBackImageLink: result});
+
+            })
+          }
+        })
+
   }
 
   render() {
@@ -51,9 +106,15 @@ class Photo extends React.Component {
             multiple={false}
             accept="image/*">
             <div>
-              {this.state.uploadedFileCloudinaryUrl === '' ? null :
+              {this.state.uploadedFileCloudinaryUrl === '' ? (
                 <div>
-                  <img src={this.state.uploadedFileCloudinaryUrl} alt="coming soon"/>
+                  <img src={this.props.DimageUrl} alt="click me to add profile image"/>
+                  <div>{this.state.notice}</div>
+                </div>
+              ) :
+                <div>
+                  <img src={this.state.uploadedFileCloudinaryUrl} alt="click me to add profile image"/>
+                  <div>{this.state.notice}</div>
                 </div>}
             </div>
           </Dropzone>
