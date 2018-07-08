@@ -33,7 +33,9 @@ class Dentist extends React.Component {
         Demail: "",
         Dbirthday: "",
         Dphone: "",
-        editing: false
+        editing: false,
+        editNote: false,
+        noteClass: "input-group-text"
     }
 
     componentWillMount() {
@@ -203,6 +205,18 @@ class Dentist extends React.Component {
     }
     //###############delete note
 
+    //***************edit Note */
+    editNote= (id, note) => {
+        console.log(id)
+        //open another page to edit note API
+    
+    }
+    changeNoteContent = () => {
+        //API update note
+        console.log('clicked')
+    }
+
+    //###############end edit note
     render() {
         return (
             <div>
@@ -305,12 +319,19 @@ class Dentist extends React.Component {
                                     <div className="note shadow text-left">
                                         {this.state.note.map((item, i)=>{
                                             return (
-                                            <h6 key={i} id={item._id}>
-                                                {i+1}. {item.note} 
-                                                <DelBtn 
-                                                    onClick={()=>{this.deleteNote(item._id)}}
-                                                />
-                                            </h6>
+                                            
+                                                <h5 
+                                                    key={i} 
+                                                    id={item._id}
+                                                    // onDoubleClick={()=>{this.editNote(item._id, item.note)}}
+                                                >
+                                                    <DelBtn 
+                                                            onClick={()=>{this.deleteNote(item._id)}}
+                                                    />
+                                                    {i+1}. 
+                                                    {item.note}
+                                                </h5>
+                                                
                                             )
                                         })}
                                     </div>
