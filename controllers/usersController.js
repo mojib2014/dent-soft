@@ -78,7 +78,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   updatePhoto: function (req, res) {
-    console.log("this is =", req)
+    // console.log("this is =", req)
     db.Users
       .findOneAndUpdate({ _id: req.body.id }, { $set: { imageUrl: req.body.url }})
       .then(dbModel => res.json(dbModel))
