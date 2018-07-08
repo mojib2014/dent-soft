@@ -1,12 +1,17 @@
 import React from "react";
 import "./dentist.css";
 import FindInfo from "../../components/FindInfo";
-import DentistInfo from "../../components/DentistInfo";
 import Photo from "../../components/Photo";
+// import Footer from "../../components/Footer";
 import { Col, Row, Button, Form, Label, Input } from "reactstrap";
 import { FormBtn } from "../../components/Form";
-
 import API from "../../utils/API";
+import DatePicker from "../../components/DatePicker";
+// import InputMoment from '../../components/Input-Moment';
+// import packageJson from '../../../package.json';
+// import '../../../src/less/input-moment.less';
+// import './app.less';
+// import moment from 'moment';
 
 class Dentist extends React.Component {
 
@@ -23,12 +28,51 @@ class Dentist extends React.Component {
         DimageUrl: "",
         notice: "",
         note: "",
+        selectedDate: "",
+        startingHour: "",
+        loggedinId: "",
+        // m: moment()
+    }
+
+    constructor(props) {
+        super(props);
+        this.onDayClick = this.onDayClick.bind(this);
+        this.state = {
+            selectedDate: new Date()
+        };
+    }
+
+    // handleChange = m => {
+    //     this.setState({ m });
+    // };
+
+    // handleSave = () => {
+    //     console.log('saved', this.state.m.format('llll'));
+    // };
+
+    componentWillMount() {
+        let cookieId = this.props.readCookie("loggedinId")
+
+        this.setState({
+            loggedInId: cookieId
+        })
+    }
+
+    sendReservation = (date, hour) => {
+        let reservationInfo = {
+            user_id: this.state.loggedinId,
+            date: date,
+            start_time: hour
+        }
+        //API post to reservation table
+
         DfirstName: "",
         DlastName: "",
         Demail: "",
         Dbirthday: "",
         Dphone: "",
         editing: false
+
     }
 
     componentWillMount() {
@@ -39,6 +83,11 @@ class Dentist extends React.Component {
             loggedInId: cookieId,
             loggedinType: type
         })
+
+        console.log("user logged in", cookieId);
+    }
+
+
         this.getDentistInfo(cookieId)
     }
 
@@ -68,12 +117,6 @@ class Dentist extends React.Component {
             [name]: value
         });
     }
-
-    editProfile = () => {
-        (this.state.editing) ? this.setState({ editing: false }) : this.setState({ editing: true });
-    }
-
-
     handleEmailSearch = (event) => {
         event.preventDefault();
 
@@ -82,6 +125,17 @@ class Dentist extends React.Component {
             .then((result) => {
                 console.log(result.data)
                 this.setState({
+
+                    name: result.data.name,
+                    phone: result.data.phone,
+                    email: result.data.email,
+                    record: result.data.record,
+                    note: result.data.note
+                })
+            })
+            .catch(err => console.log(err));
+    }
+
                     name: result.data.lastName + result.data.firstName,
                     phone: result.data.phone,
                     email: result.data.email,
@@ -141,12 +195,24 @@ class Dentist extends React.Component {
 
     //##################end New Admin sign up
 
+
     render() {
 
         return (
             <div>
                 <div className="dentistInfo container">
                     <Row className="dentistR1">
+
+                        <Col md="4" xs="4">
+                            <Photo />
+
+                        </Col>
+                        <Col md="8" xs="8">
+                            <div>Great Dr.William is me! Wa hahahahahahahah!!!</div>
+                        </Col>
+                    </Row>
+                    <Row className="dentistR2">
+
                         <Col md="3" xs="3">
                             <Photo DimageUrl={this.state.DimageUrl}/>
                         </Col>
@@ -202,10 +268,35 @@ class Dentist extends React.Component {
                     </Row>
                     <Row className="dentistR2">
 
+
                         <Col className="patientCard" md="12" xs="12">
                             <a href="https://ahmadsahil2000.youcanbook.me/" target="_blank" rel="noopener noreferrer"><img src="https://youcanbook.me/resources/pics/ycbm-button.png" alt="https://youcanbook.me/resources/pics/ycbm-button.png" style={{ 'borderStyle': "none" }} /></a>
                             <a href="https://app.youcanbook.me/#/bookings" target="_blank" rel="noopener noreferrer" style={{ "paddingLeft": "40px" }}>View Bookings</a>
                             <a href="https://app.youcanbook.me/#/editProfile?id=155f5567-7bcb-47cb-be8a-c27793655fae&section=availability" target="_blank" rel="noopener noreferrer" style={{ "paddingLeft": "20px" }}>Admin</a>
+
+                            {/* <div className="app">
+                                <h1>
+                                    {packageJson.name}: {packageJson.version}
+                                </h1>
+                                <h2>{packageJson.description}</h2>
+                                <form>
+                                    <div className="input">
+                                        <input type="text" value={this.state.m.format('llll')} readOnly />
+                                    </div>
+                                    <InputMoment
+                                        moment={this.state.m}
+                                        onChange={this.handleChange}
+                                        minStep={5}
+                                        onSave={this.handleSave}
+                                    />
+                                </form>
+                            </div> */}
+                            <div className="App">
+                                <div className="MainContent">
+                                    <DatePicker fullDate={"selectedDate"} onDayClick={this.onDayClick} />
+                                </div>
+                            </div>
+
                             <Form inline>
                                 <Label for="searchPatients">Patient's Email:</Label>
                                 <Input
@@ -224,8 +315,9 @@ class Dentist extends React.Component {
                                     userEmail={this.state.email}
                                     userRecord={this.state.record}
                                     userNote={this.state.note}
+
                                     userImage={this.state.image}
-                                />
+              />
                             </div>
                         </Col>
                     </Row>
@@ -234,8 +326,18 @@ class Dentist extends React.Component {
             </div>
         )
     }
+
+    onDayClick(newDay) {
+        const { selectedDate } = this.state;
+    
+        this.setState({
+          selectedDate: new Date(
+            selectedDate.getFullYear(),
+            selectedDate.getMonth(),
+            newDay
+            ),
+        });
+    }
 }
 
 export default Dentist;
-
-

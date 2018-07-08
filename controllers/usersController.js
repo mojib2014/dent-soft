@@ -23,7 +23,7 @@ module.exports = {
               //return err for err handling
               .catch(err => res.json(err));
       } else {
-        res.json(result)
+        res.json({message: "Email Already Existed!"})
       }
     }).catch(err => res.json(err));
   },
@@ -79,6 +79,7 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+
   updatePhoto: function (req, res) {
     // console.log("this is =", req)
     db.Users

@@ -11,7 +11,6 @@ const usersSchema = new Schema({
     profileImage: { type: String, required: false },
     phone: { type: Number, required: false },
     birth_date: { type: Date, required: false },
-    imageUrl:{ type: String, required: false },
     address: { type: String, required: false },
     city: { type: String, required: false },
     state: { type: String, required: false },
@@ -22,7 +21,7 @@ const usersSchema = new Schema({
     token: { type: String, required: false },
     record: { type: String, required: false  },
     note: { type: String, required: false },
-    reservations: { type: String, required: false }
+    reservations: [{ type: String, required: false }]
 
 });
 

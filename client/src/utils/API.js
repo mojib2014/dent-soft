@@ -19,12 +19,14 @@ export default {
     },
     
     searchById: (id) => {
+        return axios.get("/api/user/" + id );
         // console.log("api", id)
         return axios.get("/api/user/get/" + id );
     },
 
     updateById: (id, object) => {
         return axios.post("/api/user/post/" + id, object);
+
     }
 
     // ,

@@ -5,7 +5,6 @@ import Profile from "../../components/Profile";
 import Photo from "../../components/Photo/Photo";
 import API from "../../utils/API";
 
-
 class Patient extends React.Component {
     state = {
         firstName: "",
@@ -21,13 +20,11 @@ class Patient extends React.Component {
 
     componentDidMount() {
         let cookieId = this.props.readCookie("loggedinId")
-        let type = this.props.readCookie("loggedinType")
 
         this.getUser(cookieId);
 
         this.setState({
-            loggedInId: cookieId,
-            loggedinType: type
+        loggedInId: cookieId
         })
     }
 
@@ -86,7 +83,8 @@ class Patient extends React.Component {
             <Container fluid>
                 <Row className="profile">
                     <Col md="4" className="InfoBoxLeft">
-                        <Photo />
+                        <h2>Marlon Jovez</h2>
+                        <img alt='Marlon 12th grade' src="https://plus.google.com/_/focus/photos/public/AIbEiAIAAABDCPHDwdPiseeqRSILdmNhcmRfcGhvdG8qKDVmMzA0NzY5NzgwYzlhNmRlMWQ2OTU4MTdkMTdhMmMyOWZkZGY4MDIwAfxasVgm4AGxpvb4O_L-r52SqRtd?sz=200" />
                     </Col>
                     <Profile firstName={this.state.firstName}
                         lastName={this.state.lastName}
