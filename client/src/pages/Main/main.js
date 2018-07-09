@@ -205,8 +205,8 @@ class Main extends Component {
                             //log out other account if existed -- cookie
                             this.props.logOut();
                             //set cookie to keep log in
-                            this.props.createCookie("loggedinId", result.data._id, 1);
-                            this.props.createCookie("loggedinType", "local", 1);
+                            this.props.createCookie("loggedinId", result.data._id, 1)
+                            this.props.createCookie("loggedinType", "local", 1)
                             // after set cookie, redirect to patients page or admin page depend on user type
                             this.redirect(result.data.userType);
                         } else {
