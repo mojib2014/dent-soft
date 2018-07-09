@@ -60,7 +60,7 @@ class Dentist extends React.Component {
                     DlastName: result.data.lastName,
                     Demail: result.data.email,
                     Dphone: result.data.phone,
-                    Dbirthday: result.data.birth_date,
+                    Dbirthday: (result.data.birth_date ? result.data.birth_date.split("T")[0] : this.state.birthday),
                     DimageUrl: result.data.imageUrl
                 })
             })
@@ -79,7 +79,18 @@ class Dentist extends React.Component {
     }
 
     editProfile = () => {
-        (this.state.editing) ? this.setState({ editing: false }) : this.setState({ editing: true });
+        (this.state.editing) ? 
+            API.updateById(this.state.loggedInId, {
+                firstName: this.state.DfirstName,
+                    lastName: this.state.DlastName,
+                    email: this.state.Demail,
+                    phone: this.state.Dphone,
+                    birth_date: this.state.Dbirthday,
+                    imageUrl: this.state.DimageUrl      
+            }).then(results => {
+                this.setState({ editing: false })
+            }) 
+         : this.setState({ editing: true });
     }
 
 

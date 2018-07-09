@@ -23,17 +23,18 @@ class Patient extends React.Component {
         let cookieId = this.props.readCookie("loggedinId")
         let type = this.props.readCookie("loggedinType")
 
-        this.getUser(cookieId);
+        this.getUser(cookieId, type);
 
         this.setState({
             loggedinId: cookieId,
             loggedinType: type
         })
 
+        
     }
 
-    getUser(id) {
-        if(this.state.loggedinType === "local"){
+    getUser(id, type) {
+        if(type === "local"){
             API.searchById(id).then((results) => {
                 console.log(results)
                 this.setState({
