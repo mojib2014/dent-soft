@@ -23,11 +23,6 @@ class FindInfo extends React.Component {
                         </div>
                     </Col>
                 </Row>
-                <Row>
-                    <div className="editInfo">
-                        <div className="recordInfo"><h3>Record: {this.props.userRecord}</h3></div>
-                    </div>
-                </Row>
 
             </div>
         )

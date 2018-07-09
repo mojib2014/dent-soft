@@ -10,7 +10,7 @@ mongoose.connect(
 
 const recordsSeed = 
   [{
-    record: ""
+    record: "william is good"
   }];
   
 
