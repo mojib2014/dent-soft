@@ -42,13 +42,14 @@ class Patient extends React.Component {
 
     getUser(id) {
         API.searchById(id).then((results) => {
+            console.log(results)
             this.setState({
                 firstName: results.data.firstName,
                 lastName: results.data.lastName,
                 email: results.data.email,
                 birthday: (results.data.birthday ? results.data.birthday : this.state.birthday),
                 phone: (results.data.phone ? results.data.phone : this.state.phone),
-                imageLink: (results.data.imageUrl ? results.data.imageUrl : this.state.imageUrl)
+                imageLink: results.data.imageUrl
             })
         }).catch(err => {
             console.log(err)
@@ -95,7 +96,7 @@ class Patient extends React.Component {
             <Container fluid>
                 <Row className="profile">
                     <Col md="4" className="InfoBoxLeft">
-                        <Photo />
+                        <Photo DimageUrl={this.state.imageLink}/>
                     </Col>
                     <Profile firstName={this.state.firstName}
                         lastName={this.state.lastName}

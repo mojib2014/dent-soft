@@ -13,7 +13,7 @@ class Photo extends React.Component {
 
     this.state = {
       uploadedFile: null,
-      uploadedFileCloudinaryUrl: '',
+      uploadedFileCloudinaryUrl: "",
       loginId:'',
       notice: "Profile Image",
       callBackImageLink: ''

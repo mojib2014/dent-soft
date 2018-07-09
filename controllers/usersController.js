@@ -28,6 +28,7 @@ module.exports = {
     }).catch(err => res.json(err));
   },
   findById: function (req, res) {
+    console.log(req.params.id)
     db.Users
       .findOne({_id: req.params.id})
       .then(dbModel => {

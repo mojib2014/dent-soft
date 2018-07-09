@@ -4,7 +4,8 @@ import request from 'superagent';
 import ReactOnRails from 'react-on-rails';
 import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
 
-//<script src="//widget.cloudinary.com/global/all.js"></script>  
+const CLOUDINARY_UPLOAD_PRESET = 'j0thsnot';
+const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/putincake/File/upload";
 
 
 export default class UploadButtonCloudinary extends React.Component {
@@ -34,6 +35,30 @@ export default class UploadButtonCloudinary extends React.Component {
     if(error) {
       return;
     }
+  onFileDrop(files) {
+    this.setState({
+      uploadedFile: files[0]
+    });
+
+    this.handleFileUpload(files[0]);
+  }
+
+  handleFileUpload(file) {
+    let upload = request.post(CLOUDINARY_UPLOAD_URL)
+      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+      .field('file', file);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== '') {
+        this.setState({
+          uploadedFileCloudinaryUrl: response.body.secure_url
+        });
+      }
+    });
   }
 
   render() {
@@ -53,6 +78,30 @@ export default class UploadButtonCloudinary extends React.Component {
 
 
     );
+      <form>
+        <div className="FileUpload">
+          <Dropzone
+            onDrop={this.onFileDrop.bind(this)}
+            multiple={false}
+            accept="File/*">
+            <div>
+              {this.state.uploadedFileCloudinaryUrl === '' ? null :
+                <div>
+                  <img src={this.state.uploadedFileCloudinaryUrl} />
+                </div>}
+            </div>
+          </Dropzone>
+        </div>
+
+        {/* <div>
+          {this.state.uploadedFileCloudinaryUrl === '' ? null :
+          <div>
+            <p>{this.state.uploadedFile.name}</p>
+            <img src={this.state.uploadedFileCloudinaryUrl} />
+          </div>}
+        </div> */}
+      </form>
+    )
   }
 }
 

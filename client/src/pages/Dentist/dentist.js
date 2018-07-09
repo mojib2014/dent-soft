@@ -2,12 +2,12 @@ import React from "react";
 import "./dentist.css";
 import DentistInfo from "../../components/DentistInfo";
 import Photo from "../../components/Photo";
-import { Col, Row, Form, Label, Input } from "reactstrap";
+import { Col, Row, Form, Label, Input, InputGroup, InputGroupAddon } from "reactstrap";
 import { FormBtn } from "../../components/Form";
 import FindInfo from "../../components/FindInfo";
 import DelBtn from "../../components/DelBtn";
-
-
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 import API from "../../utils/API";
 
 class Dentist extends React.Component {
@@ -36,8 +36,8 @@ class Dentist extends React.Component {
         Dbirthday: "",
         Dphone: "",
         editing: false,
-        editNote: false,
-        noteClass: "input-group-text"
+        reservationDate: "",
+        reservationTime: "" 
     }
 
     componentWillMount() {
@@ -203,20 +203,20 @@ class Dentist extends React.Component {
                 note: this.state.newNote
             }
             API.addNote(noteInfo)
-            .then((result) => {
-                //if note empty then alert note cannot be empty
-                
-                //to show new note after added 
-                this.emailSearch();
+                .then((result) => {
+                    //if note empty then alert note cannot be empty
+                    console.log(result)
+                    //to show new note after added 
+                    this.emailSearch();
 
-                if (result.data) {
-                    this.setState({
-                        newNote: "",
-                        addNote: `Note Added for ${result.data.firstName} ${result.data.lastName}`
-                    })
-                }
-            })
-            .catch(err => console.log(err));
+                    if (result.data) {
+                        this.setState({
+                            newNote: "",
+                            addNote: `Note Added for ${result.data.firstName} ${result.data.lastName}`
+                        })
+                    }
+                })
+                .catch(err => console.log(err));
         } else {
             alert("please search for a patient berfore posting a note")
         }
@@ -228,19 +228,19 @@ class Dentist extends React.Component {
         //delete note in db
         // console.log(noteId) 
         API.deleteNote(noteId)
-        .then((result)=> {
-            console.log(result);
-            // refresh note
-            this.emailSearch();
-        }).catch(err=>console.log(err));
+            .then((result) => {
+                console.log(result);
+                // refresh note
+                this.emailSearch();
+            }).catch(err => console.log(err));
     }
     //###############delete note
 
     //***************edit Note */
-    editNote= (id, note) => {
+    editNote = (id, note) => {
         console.log(id)
         //open another page to edit note API
-    
+
     }
     changeNoteContent = () => {
         //API update note
@@ -248,7 +248,30 @@ class Dentist extends React.Component {
     }
 
     //###############end edit note
+
+    //*********dropdown  */
+    _onSelect = (option) => {
+        console.log('You reservationTime ', option.label)
+        this.setState({reservationTime: option})
+    }
+    //##########end
     render() {
+        console.log("Date:", this.state.reservationDate) 
+        console.log("Time:", this.state.reservationTime.value) 
+        // {value: "10", label: "10:00 - 11:00"}
+        const options = [
+            { value: '8', label: '08:00 - 09:00' },
+            { value: '9', label: '09:00 - 10:00' },
+            { value: '10', label: '10:00 - 11:00' },
+            { value: '11', label: '11:00 - 12:00' },
+            { value: '12', label: '12:00 - 13:00' },
+            { value: '13', label: '13:00 - 14:00' },
+            { value: '14', label: '14:00 - 15:00' },
+            { value: '15', label: '15:00 - 16:00' },
+            { value: '16', label: '16:00 - 17:00' },
+        ]
+        const defaultOption = options[0]
+
         return (
             <div>
                 <div className="dentistInfo container">
@@ -313,9 +336,31 @@ class Dentist extends React.Component {
                     <Row className="dentistR2">
 
                         <Col className="patientCard" md="12" xs="12">
+
+                            <a href='https://calendar.google.com/calendar/b/2/r?pli=1'> <strong>Google Calendar</strong></a>
+                            <hr></hr>
                             <a href="https://ahmadsahil2000.youcanbook.me/" target="_blank" rel="noopener noreferrer"><img src="https://youcanbook.me/resources/pics/ycbm-button.png" alt="https://youcanbook.me/resources/pics/ycbm-button.png" style={{ 'borderStyle': "none" }} /></a>
                             <a href="https://app.youcanbook.me/#/bookings" target="_blank" rel="noopener noreferrer" style={{ "paddingLeft": "40px" }}>View Bookings</a>
                             <a href="https://app.youcanbook.me/#/editProfile?id=155f5567-7bcb-47cb-be8a-c27793655fae&section=availability" target="_blank" rel="noopener noreferrer" style={{ "paddingLeft": "20px" }}>Admin</a>
+
+                            <InputGroup>
+                                <InputGroupAddon addonType='prepend'>Reservation Date</InputGroupAddon>
+                                <Input
+                                    name='reservationDate' type='date'
+                                    value={this.state.reservationDate}
+                                    onChange={this.handleInputChange}
+                                >
+                                </Input>
+                                <br></br>
+                                <Dropdown
+                                    disabled={!this.state.reservationDate}
+                                    options={options}
+                                    onChange={this._onSelect}
+                                    value={defaultOption}
+                                    placeholder="Select Apointment Time"
+                                />                            
+                            </InputGroup>
+                            <hr></hr>
                             <Form inline>
                                 <Label for="searchPatients">Patient's Email:</Label>
                                 <Input
@@ -324,10 +369,10 @@ class Dentist extends React.Component {
                                     name="email"
                                     placeholder="chicken@chicken.com"
                                 />
-                                <FormBtn 
+                                <FormBtn
                                     disabled={!this.state.email}
-                                    onClick={this.handleEmailSearch} 
-                                    color="primary" 
+                                    onClick={this.handleEmailSearch}
+                                    color="primary"
                                     size="sm"
                                 > Search
                                 </FormBtn>
@@ -365,21 +410,21 @@ class Dentist extends React.Component {
                                     <h3>Note:</h3>
                                     <br></br>
                                     <div className="note shadow text-left">
-                                        {this.state.note.map((item, i)=>{
+                                        {this.state.note.map((item, i) => {
                                             return (
-                                            
-                                                <h5 
-                                                    key={i} 
+
+                                                <h5
+                                                    key={i}
                                                     id={item._id}
-                                                    // onDoubleClick={()=>{this.editNote(item._id, item.note)}}
+                                                // onDoubleClick={()=>{this.editNote(item._id, item.note)}}
                                                 >
-                                                    <DelBtn 
-                                                            onClick={()=>{this.deleteNote(item._id)}}
+                                                    <DelBtn
+                                                        onClick={() => { this.deleteNote(item._id) }}
                                                     />
-                                                    {i+1}. 
+                                                    {i + 1}.
                                                     {item.note}
                                                 </h5>
-                                                
+
                                             )
                                         })}
                                     </div>
@@ -413,7 +458,7 @@ class Dentist extends React.Component {
                                 >
                                     Add Note
                                 </FormBtn>
-                                <div style={{color: "green", float: "left", marginTop: 5}}>{this.state.addNote}</div>
+                                <div style={{ color: "green", float: "left", marginTop: 5 }}>{this.state.addNote}</div>
                             </div>
                         </Col>
 
