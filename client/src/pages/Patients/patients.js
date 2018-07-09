@@ -13,7 +13,7 @@ class Patient extends React.Component {
         email: "",
         birthday: "",
         phone: "",
-        loggedInId: "",
+        loggedinId: "",
         loggedinType: "",
         imageLink: "",
         editing: false
@@ -26,34 +26,43 @@ class Patient extends React.Component {
         this.getUser(cookieId);
 
         this.setState({
-            loggedInId: cookieId,
+            loggedinId: cookieId,
             loggedinType: type
         })
 
-        this.showImage(cookieId);
-    }
-
-    showImage = (id) => {
-        API.searchById()
-         .then((result) => {
-             console.log(result)
-         })
     }
 
     getUser(id) {
-        API.searchById(id).then((results) => {
-            console.log(results)
-            this.setState({
-                firstName: results.data.firstName,
-                lastName: results.data.lastName,
-                email: results.data.email,
-                birthday: (results.data.birthday ? results.data.birthday : this.state.birthday),
-                phone: (results.data.phone ? results.data.phone : this.state.phone),
-                imageLink: results.data.imageUrl
-            })
-        }).catch(err => {
-            console.log(err)
-        })
+        if(this.state.loggedinType === "local"){
+            API.searchById(id).then((results) => {
+                console.log(results)
+                this.setState({
+                    firstName: results.data.firstName,
+                    lastName: results.data.lastName,
+                    email: results.data.email,
+                    birthday: (results.data.birth_date ? results.data.birth_date.split("T")[0] : this.state.birthday),
+                    phone: (results.data.phone ? results.data.phone : this.state.phone),
+                    imageLink: results.data.imageUrl
+                })
+            }).catch(err => {
+                console.log(err)
+            })    
+        }
+        else {
+            API.searchByGoogleId(id).then((results) => {
+                console.log(results)
+                this.setState({
+                    firstName: results.data.firstName,
+                    lastName: results.data.lastName,
+                    email: results.data.googleEmail,
+                    birthday: (results.data.birth_date ? results.data.birth_date.split("T")[0] : this.state.birthday),
+                    phone: (results.data.phone ? results.data.phone : this.state.phone),
+                    imageLink: results.data.googleImage
+                })
+            }).catch(err => {
+                console.log(err)
+            })    
+        }
     }
 
     handleInputChange = event => {
@@ -63,19 +72,39 @@ class Patient extends React.Component {
         })
     };
 
-    editProfile = () => {
-        (this.state.editing) ? 
-            API.updateById(this.state.loggedInId, {
+    editType(){
+        if(this.state.loggedinType === "local"){
+            API.updateById(this.state.loggedinId, {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
                 email: this.state.email,
-                birthday: this.state.birthday,
+                birth_date: this.state.birthday,
                 phone: this.state.phone,
                 imageUrl: this.state.imageLink         
             }).then(results => {
-                console.log(results);
+                console.log(this.state.birthday)
                 this.setState({ editing: false })
-            })
+            })  
+        }
+        else{
+            API.updateByGoogleId(this.state.loggedinId, {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                googleEmail: this.state.email,
+                birth_date: this.state.birthday,
+                phone: this.state.phone,
+                googleImage: this.state.imageLink         
+            }).then(results => {
+                console.log(this.state.birthday)
+                this.setState({ editing: false })
+            })  
+        }
+        
+    }
+
+    editProfile = () => {
+        (this.state.editing) ? 
+            this.editType()
           : this.setState({ editing: true });
     }
 

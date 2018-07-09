@@ -28,13 +28,21 @@ module.exports = {
     }).catch(err => res.json(err));
   },
   findById: function (req, res) {
-    console.log(req.params.id)
     db.Users
       .findOne({_id: req.params.id})
       .then(dbModel => {
         res.json(dbModel)
       })
       .catch(err => res.status(422).json(err));
+  },
+  findByGoogleId: function(req, res) {
+    db.google_account
+    .findOne({_id: req.params.id})
+      .then(
+        dbModel => {
+          res.json(dbModel)
+        })
+      .catch(err => res.json(err));
   },
   findByEmail: function (req, res) {
     db.Users
@@ -78,6 +86,12 @@ module.exports = {
   },
   update: function (req, res) {
     db.Users
+      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  updateGoogle: function (req, res) {
+    db.google_account
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
