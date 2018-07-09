@@ -23,3 +23,9 @@
     height: 200px;
     overflow: scroll;
 }
+
+#reservationNotice{
+    margin-top: 1rem;
+    float: left;
+    color: black;
+}

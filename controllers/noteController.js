@@ -21,7 +21,6 @@ module.exports = {
           .create(req.body)
           .then(dbModel => {
             // res.json(dbModel)
-            console.log(dbModel._id);
             db.Users
               .findByIdAndUpdate(req.body.id, { $push: { note: dbModel._id }})
               .then((result)=>{res.json(result)})
