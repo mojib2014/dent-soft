@@ -5,6 +5,8 @@ import Photo from "../../components/Photo";
 import { Col, Row, Form, Label, Input } from "reactstrap";
 import { FormBtn } from "../../components/Form";
 import FindInfo from "../../components/FindInfo";
+import DelBtn from "../../components/DelBtn";
+
 
 import API from "../../utils/API";
 
@@ -25,6 +27,7 @@ class Dentist extends React.Component {
         DimageUrl: "",
         notice: "",
         note: [],
+        addNote: "",
         newNote: "",
         newRecord: "",
         DfirstName: "",
@@ -32,7 +35,9 @@ class Dentist extends React.Component {
         Demail: "",
         Dbirthday: "",
         Dphone: "",
-        editing: false
+        editing: false,
+        editNote: false,
+        noteClass: "input-group-text"
     }
 
     componentWillMount() {
@@ -104,7 +109,9 @@ class Dentist extends React.Component {
             .catch(err => {
                 console.log(err)
                 this.setState({
-                    name: "Email does not match, please search another email or add patient"
+                    name: "Email does not match, please search another email or add patient",
+                    phone: "",
+                    Pemail: ""
                 })
             });
     }
@@ -203,22 +210,50 @@ class Dentist extends React.Component {
                 this.emailSearch();
 
                 if (result.data) {
-                    alert(`Note Added for ${result.data.firstName} ${result.data.lastName}`)
+                    this.setState({
+                        newNote: "",
+                        addNote: `Note Added for ${result.data.firstName} ${result.data.lastName}`
+                    })
                 }
-                })
-                .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
         } else {
             alert("please search for a patient berfore posting a note")
         }
     }
     //############### end add note
 
+    //***************delete note
+    deleteNote = (noteId) => {
+        //delete note in db
+        // console.log(noteId) 
+        API.deleteNote(noteId)
+        .then((result)=> {
+            console.log(result);
+            // refresh note
+            this.emailSearch();
+        }).catch(err=>console.log(err));
+    }
+    //###############delete note
+
+    //***************edit Note */
+    editNote= (id, note) => {
+        console.log(id)
+        //open another page to edit note API
+    
+    }
+    changeNoteContent = () => {
+        //API update note
+        console.log('clicked')
+    }
+
+    //###############end edit note
     render() {
         return (
             <div>
                 <div className="dentistInfo container">
                     <Row className="dentistR1">
-                        <Col md="3" xs="3">
+                        <Col md="3" xs="3" className="pt-5 pl-4">
                             <Photo DimageUrl={this.state.DimageUrl} />
                         </Col>
 
@@ -238,24 +273,28 @@ class Dentist extends React.Component {
                         <Col className="patientCard" md="12" xs="12">
                             <h2>Add New Administator Here</h2>
                             <Input
+                                className="mb-1"
                                 value={this.state.firstName}
                                 onChange={this.handleInputChange}
                                 name="firstName"
                                 placeholder="First Name (required)"
                             />
                             <Input
+                                className="mb-1"
                                 value={this.state.lastName}
                                 onChange={this.handleInputChange}
                                 name="lastName"
                                 placeholder="Last Name (required)"
                             />
                             <Input
+                                className="mb-1"
                                 value={this.state.signUpEmail}
                                 onChange={this.handleInputChange}
                                 name="signUpEmail"
                                 placeholder="Email (required)"
                             />
                             <Input
+                                className="mb-1"
                                 type="password"
                                 value={this.state.signUpPassword}
                                 onChange={this.handleInputChange}
@@ -305,6 +344,9 @@ class Dentist extends React.Component {
                             </div>
                             <hr></hr>
                             <div className="recordInfo mb-3">
+
+                            {/* =================================== */}
+                        
                                 <div>
                                     <h3>Record:</h3>
                                     <br></br>
@@ -324,7 +366,21 @@ class Dentist extends React.Component {
                                     <br></br>
                                     <div className="note shadow text-left">
                                         {this.state.note.map((item, i)=>{
-                                            return <h6 key={i} id={item._id}>{i+1}. {item.note}</h6>
+                                            return (
+                                            
+                                                <h5 
+                                                    key={i} 
+                                                    id={item._id}
+                                                    // onDoubleClick={()=>{this.editNote(item._id, item.note)}}
+                                                >
+                                                    <DelBtn 
+                                                            onClick={()=>{this.deleteNote(item._id)}}
+                                                    />
+                                                    {i+1}. 
+                                                    {item.note}
+                                                </h5>
+                                                
+                                            )
                                         })}
                                     </div>
                                 </div>
@@ -349,7 +405,7 @@ class Dentist extends React.Component {
                                     value={this.state.newNote}
                                     onChange={this.handleInputChange}
                                     name="newNote"
-                                    placeholder="Doctors' Note"
+                                    placeholder="add a note here.."
                                 />
                                 <FormBtn
                                     disabled={!this.state.newNote}
@@ -357,6 +413,7 @@ class Dentist extends React.Component {
                                 >
                                     Add Note
                                 </FormBtn>
+                                <div style={{color: "green", float: "left", marginTop: 5}}>{this.state.addNote}</div>
                             </div>
                         </Col>
 

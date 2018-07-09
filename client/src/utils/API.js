@@ -40,14 +40,9 @@ export default {
 
     createPhoto: (photo)=>{
         return axios.post("/api/user/photo", photo)
+    },
+    deleteNote: (id) => {
+        return axios.delete("/api/note/" + id)
     }
-
-    // ,
-    // setCookie: (userId) => {
-    //     return axios.post("/api/cookie", userId);
-    // },
-    // getCookie: () => {
-    //     return axios.get("/api/cookie");
-    // }
 
 }
