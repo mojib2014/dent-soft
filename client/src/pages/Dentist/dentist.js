@@ -5,6 +5,7 @@ import Photo from "../../components/Photo";
 import { Col, Row, Form, Label, Input, InputGroup, InputGroupAddon } from "reactstrap";
 import { FormBtn } from "../../components/Form";
 import FindInfo from "../../components/FindInfo";
+import Upload from "../../components/Upload";
 import DelBtn from "../../components/DelBtn";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -415,6 +416,7 @@ class Dentist extends React.Component {
                             {/* =================================== */}
                         
                                 <div>
+                                    <Upload /> 
                                     <h3>Record:</h3>
                                     <br></br>
                                     <div className="record shadow text-left">

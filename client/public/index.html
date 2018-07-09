@@ -37,7 +37,10 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <div id="root"></div>
+    <div id="root">
+     
+      <!-- <a href="#" id="upload_widget_opener">Upload multiple images</a> -->
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -61,5 +64,11 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/js/mdb.min.js"></script>
+    <!-- <script type="text/javascript">  
+      document.getElementById("upload_widget_opener").addEventListener("click", function() {
+        cloudinary.openUploadWidget({ cloud_name: 'putincake', upload_preset: 'j0thsnot'}, 
+          function(error, result) { console.log(error, result) });
+      }, false);
+    </script> -->
   </body>
 </html>
