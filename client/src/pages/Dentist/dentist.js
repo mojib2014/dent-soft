@@ -282,6 +282,9 @@ class Dentist extends React.Component {
                     <Row className="dentistR2">
 
                         <Col className="patientCard" md="12" xs="12">
+
+                            <a href='https://calendar.google.com/calendar/b/2/r?pli=1'> <strong>Google Calendar</strong></a>
+                            <hr></hr>
                             <a href="https://ahmadsahil2000.youcanbook.me/" target="_blank" rel="noopener noreferrer"><img src="https://youcanbook.me/resources/pics/ycbm-button.png" alt="https://youcanbook.me/resources/pics/ycbm-button.png" style={{ 'borderStyle': "none" }} /></a>
                             <a href="https://app.youcanbook.me/#/bookings" target="_blank" rel="noopener noreferrer" style={{ "paddingLeft": "40px" }}>View Bookings</a>
                             <a href="https://app.youcanbook.me/#/editProfile?id=155f5567-7bcb-47cb-be8a-c27793655fae&section=availability" target="_blank" rel="noopener noreferrer" style={{ "paddingLeft": "20px" }}>Admin</a>

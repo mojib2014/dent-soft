@@ -228,12 +228,6 @@ class Main extends Component {
             <div id="homePage">
                 <Container fluid style={{ height: 700 }}>
                     <Row>
-                        <Col >
-                            <div className="intro">
-                                <p>Great William is Watching You!</p>
-                                <span onClick={() => this.props.changeState("this is clicked")}> click me for demo</span>
-                            </div>
-                        </Col>
                         <Col style={{ paddingLeft: 300, paddingTop: 100 }}>
                             <div className="card mb-5 mt-5" style={{ width: "18rem" }}>
                                 <div className="card-body">
