@@ -9,24 +9,24 @@ const DentistInfo = (props) => {
             <Button className="btn-md" color='primary' onClick={() => props.edit()}>Confirm</Button>
             <InputGroup>
                 <InputGroupAddon addonType='prepend'>First Name</InputGroupAddon>
-                <Input type='text' onChange={props.change} name='firstName' value={props.DfirstName}>First Name: </Input> 
+                <Input onChange={props.Dchange} name='DfirstName' value={props.DfirstName}></Input> 
                 <InputGroupAddon addonType='prepend'>Last Name</InputGroupAddon>
-                <Input onChange={props.change} name='lastName' value={props.DlastName}>Last Name: </Input>
+                <Input onChange={props.Dchange} name='DlastName' value={props.DlastName}></Input>
             </InputGroup>
 
             <InputGroup>
                 <InputGroupAddon addonType='prepend'>Email</InputGroupAddon>
-                <Input onChange={props.change} name='email' value={props.Demail}>Email: </Input>
+                <Input onChange={props.Dchange} name='Demail' value={props.Demail}></Input>
             </InputGroup>
 
             <InputGroup>
                 <InputGroupAddon addonType='prepend'>Birthday</InputGroupAddon>
-                <Input onChange={props.change} name='birthday' type='date' value={props.Dbirthday}>Birthday: </Input>
+                <Input onChange={props.Dchange} name='Dbirthday' type='date' value={props.Dbirthday}></Input>
             </InputGroup>
 
             <InputGroup className="forPadding">
                 <InputGroupAddon addonType='prepend'>Phone</InputGroupAddon>
-                <Input onChange={props.change} name='phone' value={props.Dphone}>Phone: </Input>
+                <Input onChange={props.Dchange} name='Dphone' value={props.Dphone}></Input>
             </InputGroup>
             </Col> 
 
