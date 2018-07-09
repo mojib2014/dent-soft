@@ -80,7 +80,6 @@ class Photo extends React.Component {
   }
 
   render() {
-    console.log(this.props.uploadedFileCloudinaryUrl)
     return (
       <form>
         <div className="FileUpload">

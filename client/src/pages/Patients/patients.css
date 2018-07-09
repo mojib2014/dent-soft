@@ -1,12 +1,12 @@
 .InfoBoxLeft {
-    background-color: lightblue;
+    background-color: rgb(242, 250, 231);
     width: 300px;
     height: 300px;
     float: none;
     margin: 1rem 1rem 1rem auto;
 }
 .InfoBoxRight {
-    background-color: lightblue;
+    background-color: rgb(242, 250, 231);
     width: 300px;
     height: 300px;
     float: none;
