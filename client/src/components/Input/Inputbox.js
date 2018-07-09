@@ -11,35 +11,59 @@ import API from "../../utils/API";
 
 
 class Inputbox extends React.Component  {
-  
-    state = {
+    constructor(props) {
+    super(props);
+
+
+    this.state = {
         record: "",
         note:"",
+        loginId:""
     }
+}
     
+    componentDidMount() {
+        let cookieId = this.readCookie("loggedinId")
+        this.setState({
+            loginId: cookieId
+        })
+        
+      }
+
+    readCookie = a => {
+    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+    }
 
     handleInfoInput = (event) => {
         const {name, value } = event.target;
         this.setState({
             [name]: value
         });
+
     }
 
-    handleSearchById = (event) => {
-        event.preventDefault();
+    
+
+
+
+    
+
+    // handleSearchById = (event) => {
+    //     event.preventDefault();
         
-        let id = this.state.id
-        // console.log(id)
-        API.searchById(id)
-        .then((result)=>{
-            // console.log(result.data)
-            this.setState({
-                record: result.data.record,
-                note: result.data.note
-            })
-        })
-        .catch(err=> console.log(err));
-    }
+    //     let id = this.state.id
+    //     // console.log(id)
+    //     API.searchById(id)
+    //     .then((result)=>{
+    //         // console.log(result.data)
+    //         this.setState({
+    //             record: result.data.record,
+    //             note: result.data.note
+    //         })
+    //     })
+    //     .catch(err=> console.log(err));
+    // }
 
     render(){
         return (
@@ -50,17 +74,24 @@ class Inputbox extends React.Component  {
             <Input 
                 name = "record"
                 value= {this.state.record}
-                onChange={this.handleRecordInput} />
-            <InputGroupAddon addonType="prepend"><Button onClick={this.handleSearchById} className="recordBtn" size="sm">Add Record</Button></InputGroupAddon>
+                onChange={this.handleInfoInput} />
+            
+            <InputGroupAddon addonType="prepend"><Button onClick={this.handleAddRecord} className="recordBtn" size="sm">Add Record</Button></InputGroupAddon>
+            
+            
+            <a href="#" id="upload_widget_opener" >Upload multiple images</a>
+
+
+
           </InputGroup>
 
           <InputGroup>
             <Input 
                 name = "note"
                 value= {this.state.note}
-                onChange={this.handleRecordInput}
+                onChange={this.handleInfoInput}
             />
-            <InputGroupAddon addonType="prepend"><Button onClick={this.handleSearchById} className="noteBtn" size="sm">Add Note</Button></InputGroupAddon>
+            <InputGroupAddon addonType="prepend"><Button onClick={this.handleAddNote} className="noteBtn" size="sm">Add Note</Button></InputGroupAddon>
           </InputGroup>
         
             

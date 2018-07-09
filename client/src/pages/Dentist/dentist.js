@@ -21,7 +21,7 @@ class Dentist extends React.Component {
         signUpEmail: "",
         signUpPassword: "",
         image: "",
-        record: "",
+        record: [],
         firstName: "",
         lastName: "",
         DimageUrl: "",
@@ -29,6 +29,7 @@ class Dentist extends React.Component {
         note: [],
         addNote: "",
         newNote: "",
+        newRecord: "",
         DfirstName: "",
         DlastName: "",
         Demail: "",
@@ -40,6 +41,7 @@ class Dentist extends React.Component {
     }
 
     componentWillMount() {
+        
         let cookieId = this.props.readCookie("loggedinId")
         let type = this.props.readCookie("loggedinType")
 
@@ -53,7 +55,6 @@ class Dentist extends React.Component {
     getDentistInfo = (id) => {
         API.searchById(id)
             .then(result => {
-                // console.log("load dentist info", result)
                 this.setState({
                     DfirstName: result.data.firstName,
                     DlastName: result.data.lastName,
@@ -92,7 +93,8 @@ class Dentist extends React.Component {
         let email = this.state.email
         API.searchByEmail(email)
             .then((result) => {
-                // console.log(result.data.note)
+                console.log("this is patients: ", result.data.record)
+                console.log("this is patients: ", result.data.note)
                 this.setState({
                     name: result.data.lastName + result.data.firstName,
                     phone: result.data.phone,
@@ -160,8 +162,36 @@ class Dentist extends React.Component {
         }
     }
 
-    //##################end New Admin sign up
 
+    //##################end New Admin sign up
+    //****************add record */
+    handleAddRecord = () => {
+        if (this.state.patientId && this.state.newRecord) {
+            //API post note
+           
+            //to write new note into db
+            let recordInfo = {
+                id: this.state.patientId,
+                record: this.state.newRecord
+            }
+
+      
+            API.addRecord(recordInfo)
+            .then((result) => {
+                //if note empty then alert note cannot be empty
+                console.log("this is record result: ", result.data.record)
+                //to show new note after added 
+                this.emailSearch();
+
+                if (result.data) {
+                    alert(`Record Added for ${result.data.firstName} ${result.data.lastName}`)
+                }
+                })
+                .catch(err => console.log(err));
+        } else {
+            alert("please search for a patient berfore posting a record")
+        }
+    }
     //*************** add note */
     handleAddNote = () => {
         if (this.state.patientId && this.state.newNote) {
@@ -358,6 +388,23 @@ class Dentist extends React.Component {
                                 />
                             </div>
                             <hr></hr>
+                            <div className="recordInfo mb-3">
+
+                            {/* =================================== */}
+                        
+                                <div>
+                                    <h3>Record:</h3>
+                                    <br></br>
+                                    <div className="record shadow text-left">
+                                        {this.state.record.map((item, i)=>{
+                                            return <h6 key={i} id={item._id}>{i+1}. {item.record}</h6>
+                                        })}
+                                    </div>
+                                </div>
+                            </div>
+           
+                            <hr></hr>
+                            
                             <div className="noteInfo mb-3">
                                 <div>
                                     <h3>Note:</h3>
@@ -386,6 +433,20 @@ class Dentist extends React.Component {
                             <hr></hr>
                             <div>
                                 <Input
+                                    value={this.state.newRecord}
+                                    onChange={this.handleInputChange}
+                                    name="newRecord"
+                                    placeholder="Patients' Record"
+                                />
+                                <FormBtn
+                                    disabled={!this.state.newRecord}
+                                    onClick={this.handleAddRecord}
+                                >
+                                    Add Record
+                                </FormBtn>
+                            </div>
+                            <div>
+                                <Input
                                     value={this.state.newNote}
                                     onChange={this.handleInputChange}
                                     name="newNote"
@@ -400,6 +461,7 @@ class Dentist extends React.Component {
                                 <div style={{ color: "green", float: "left", marginTop: 5 }}>{this.state.addNote}</div>
                             </div>
                         </Col>
+
                     </Row>
                 </div>
             </div>

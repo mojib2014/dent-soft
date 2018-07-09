@@ -12,8 +12,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findOneAndUpdateGoogle: function (req, res) {
-    console.log(req.body.googleEmail)
-    db.google_account.findOne({ googleEmail: req.body.googleEmail })
+
+    db.google_account.findOne({ email: req.body.googleEmail })
     .then((result) => {
       console.log("presignup", result)
       if (!result) {
@@ -50,6 +50,7 @@ module.exports = {
   findByEmail: function (req, res) {
     db.Users
       .findOne({email: req.params.email})
+      .populate("record")
       .populate("note")  
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
