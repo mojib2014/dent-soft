@@ -21,28 +21,23 @@ export default {
         // console.log("api", id)
         return axios.get("/api/user/get/" + id );
     },
-
     createPhoto: (data) => {
         return axios.post("/api/user/photo",  data);
     },
-
-   
     updateById: (id, object) => {
         return axios.post("/api/user/post/" + id, object);
     },
     addNote: (noteInfo) => {
         return axios.post("/api/note/", noteInfo);
     },
-
     addRecord:(recordInfo) => {
         return axios.post("/api/records/", recordInfo);
     },
-
-    createPhoto: (photo)=>{
-        return axios.post("/api/user/photo", photo)
-    },
     deleteNote: (id) => {
         return axios.delete("/api/note/" + id)
+    },
+    createReservation: (data) => {
+        return axios.post("/api/reservation", data)
     }
 
 }

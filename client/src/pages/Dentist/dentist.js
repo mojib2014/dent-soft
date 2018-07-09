@@ -251,24 +251,39 @@ class Dentist extends React.Component {
 
     //*********dropdown  */
     _onSelect = (option) => {
-        console.log('You reservationTime ', option.label)
-        this.setState({reservationTime: option})
+        this.setState({reservationTime: option.value})
     }
     //##########end
+
+    //***********send reservation */
+    makeReservation = ()=> {
+        console.log('Your reservationTime ', this.state.reservationTime)
+        let reservation = {
+            date: this.state.reservationDate,
+            start_time: this.state.reservationTime,
+            user_id: this.state.loggedInId
+        }
+        API.createReservation(reservation)
+        .then((result)=> {
+            console.log("reservation",result)
+        }) 
+        .catch(err=>{console.log(err); alert("database err, please contact William at 6143773853")})
+    }
+    //###########end reservation
     render() {
-        console.log("Date:", this.state.reservationDate) 
-        console.log("Time:", this.state.reservationTime.value) 
+        // console.log("Date:", this.state.reservationDate) 
+        // console.log("Time:", this.state.reservationTime) 
         // {value: "10", label: "10:00 - 11:00"}
         const options = [
-            { value: '8', label: '08:00 - 09:00' },
-            { value: '9', label: '09:00 - 10:00' },
-            { value: '10', label: '10:00 - 11:00' },
-            { value: '11', label: '11:00 - 12:00' },
-            { value: '12', label: '12:00 - 13:00' },
-            { value: '13', label: '13:00 - 14:00' },
-            { value: '14', label: '14:00 - 15:00' },
-            { value: '15', label: '15:00 - 16:00' },
-            { value: '16', label: '16:00 - 17:00' },
+            { value: '08:00 - 09:00', label: '08:00 - 09:00' },
+            { value: '09:00 - 10:00', label: '09:00 - 10:00' },
+            { value: '10:00 - 11:00', label: '10:00 - 11:00' },
+            { value: '11:00 - 12:00', label: '11:00 - 12:00' },
+            { value: '12:00 - 13:00', label: '12:00 - 13:00' },
+            { value: '13:00 - 14:00', label: '13:00 - 14:00' },
+            { value: '14:00 - 15:00', label: '14:00 - 15:00' },
+            { value: '15:00 - 16:00', label: '15:00 - 16:00' },
+            { value: '16:00 - 17:00', label: '16:00 - 17:00' },
         ]
         const defaultOption = options[0]
 
@@ -358,7 +373,14 @@ class Dentist extends React.Component {
                                     onChange={this._onSelect}
                                     value={defaultOption}
                                     placeholder="Select Apointment Time"
-                                />                            
+                                />        
+                                 <FormBtn
+                                    disabled={!this.state.reservationTime}
+                                    onClick={this.makeReservation}
+                                    color="primary"
+                                    size="sm"
+                                > Confirm Reservation
+                                </FormBtn>                    
                             </InputGroup>
                             <hr></hr>
                             <Form inline>
