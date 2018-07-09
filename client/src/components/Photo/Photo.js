@@ -13,7 +13,7 @@ class Photo extends React.Component {
 
     this.state = {
       uploadedFile: null,
-      uploadedFileCloudinaryUrl: '',
+      uploadedFileCloudinaryUrl: "",
       loginId:'',
       notice: "Profile Image",
       callBackImageLink: ''
@@ -80,6 +80,7 @@ class Photo extends React.Component {
   }
 
   render() {
+    console.log(this.props.uploadedFileCloudinaryUrl)
     return (
       <form>
         <div className="FileUpload">
