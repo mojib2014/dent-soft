@@ -45,10 +45,12 @@ module.exports = {
       .catch(err => res.json(err));
   },
   findByEmail: function (req, res) {
+    console.log(req.params)
     db.Users
       .findOne({email: req.params.email})
-      .populate("record")
-      .populate("note")  
+      .populate("note") 
+      .populate("record") 
+      .populate("reservations")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

@@ -95,8 +95,7 @@ class Dentist extends React.Component {
         let email = this.state.email
         API.searchByEmail(email)
             .then((result) => {
-                console.log("this is patients: ", result.data.record)
-                console.log("this is patients: ", result.data.note)
+                console.log("this is patients: ", result.data)
                 this.setState({
                     name: result.data.lastName + result.data.firstName,
                     phone: result.data.phone,
@@ -297,7 +296,6 @@ class Dentist extends React.Component {
             { value: '15:00 - 16:00', label: '15:00 - 16:00' },
             { value: '16:00 - 17:00', label: '16:00 - 17:00' },
         ]
-        const defaultOption = options[0]
 
         return (
             <div>

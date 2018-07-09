@@ -25,7 +25,6 @@ export default {
         // console.log("api", id)
         return axios.get("/api/user/google/type/" + id );
     },
-
     createPhoto: (data) => {
         return axios.post("/api/user/photo",  data);
     },

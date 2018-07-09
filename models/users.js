@@ -22,7 +22,7 @@ const usersSchema = new Schema({
     token: { type: String, required: false },
     record: [{ type: Schema.Types.ObjectId, required: false, ref: "Record"}],
     note: [{ type: Schema.Types.ObjectId, required: false, ref: "Note" }],
-    reservations: [{ type: String, required: false, ref: "Reservation"}]
+    reservations: [{ type: Schema.Types.ObjectId, required: false, ref: "Reservation"}]
 
 });
 
