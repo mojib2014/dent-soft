@@ -226,7 +226,8 @@ class Dentist extends React.Component {
     }
     //##########end
     render() {
-        console.log(this.state.reservationTime) 
+        console.log("Date:", this.state.reservationDate) 
+        console.log("Time:", this.state.reservationTime.value) 
         // {value: "10", label: "10:00 - 11:00"}
         const options = [
             { value: '8', label: '08:00 - 09:00' },
