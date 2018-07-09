@@ -28,13 +28,24 @@ module.exports = {
     }).catch(err => res.json(err));
   },
   findById: function (req, res) {
-    console.log(req.params.id)
     db.Users
       .findOne({_id: req.params.id})
       .then(dbModel => {
         res.json(dbModel)
       })
       .catch(err => res.status(422).json(err));
+  },
+  findByGoogleId: function(req, res) {
+    db.google_account
+    .findOne({googleEmail: req.body.googleEmail})
+      .then(
+        dbModel => {
+          //hash compare use sync otherwise res in unsync compare is true or false cant sent to front end
+          let auth = bcrypt.compareSync(req.body.password, dbModel.password); 
+          // console.log("cb",auth)
+          res.json({message: auth , _id: dbModel._id, userType: dbModel.userType})
+        })
+      .catch(err => res.json(err));
   },
   findByEmail: function (req, res) {
     db.Users

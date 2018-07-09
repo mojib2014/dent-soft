@@ -38,7 +38,7 @@ class Patient extends React.Component {
                 firstName: results.data.firstName,
                 lastName: results.data.lastName,
                 email: results.data.email,
-                birthday: (results.data.birthday ? results.data.birthday : this.state.birthday),
+                birthday: (results.data.birth_date ? results.data.birth_date.split("T")[0] : this.state.birthday),
                 phone: (results.data.phone ? results.data.phone : this.state.phone),
                 imageLink: results.data.imageUrl
             })
@@ -60,11 +60,11 @@ class Patient extends React.Component {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
                 email: this.state.email,
-                birthday: this.state.birthday,
+                birth_date: this.state.birthday,
                 phone: this.state.phone,
                 imageUrl: this.state.imageLink         
             }).then(results => {
-                console.log(results);
+                console.log(this.state.birthday)
                 this.setState({ editing: false })
             })
           : this.setState({ editing: true });
