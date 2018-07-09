@@ -12,18 +12,21 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findOneAndUpdateGoogle: function (req, res) {
-
-    db.google_account.findOne({ email: req.body.googleEmail })
+    // console.log("google email", req.body.googleEmail)
+    db.google_account.findOne({ googleEmail: req.body.googleEmail })
     .then((result) => {
-      console.log("presignup", result)
+      // console.log("presignup google", result)
       if (!result) {
+        // console.log("oh no create")
         db.google_account
               .create(req.body)
               .then(dbModel => res.json(dbModel))
               //return err for err handling
               .catch(err => res.json(err));
       } else {
-        res.json({message: "Email Already Existed!"})
+        // console.log("presignup google null",result)
+        res.json(result)
+        
       }
     }).catch(err => res.json(err));
   },
@@ -36,6 +39,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findByGoogleId: function(req, res) {
+    console.log("patient page load", req.params.id)
     db.google_account
     .findOne({_id: req.params.id})
       .then(
@@ -70,9 +74,9 @@ module.exports = {
     //make sure the user does not exist
     db.Users.findOne({ email: req.body.email })
       .then((result) => {
-        console.log("presignup", result)
+        console.log("presignup create", result)
         if (!result) {
-          console.log("here",req.body)
+          console.log("here create",req.body)
           bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
             req.body.password = hash;
             db.Users
@@ -100,7 +104,7 @@ module.exports = {
   },
 
   updatePhoto: function (req, res) {
-    console.log("this is =", req.body)
+    // console.log("this is =", req.body)
     db.Users
       .findOneAndUpdate({ _id: req.body.id }, { $set: { imageUrl: req.body.url }})
       .then(dbModel => res.json(dbModel))
