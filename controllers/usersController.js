@@ -40,13 +40,9 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findByGoogleId: function(req, res) {
-<<<<<<< HEAD
     console.log("patient page load", req.params.id)
     db.google_account
     .findOne({_id: req.params.id})
-=======
-    db.google_account.findOne({_id: req.params.id})
->>>>>>> 3fc8197902803e8d720fd96f212885d0d99020e8
       .then(
         dbModel => {
           res.json(dbModel)

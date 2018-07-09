@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Input, InputGroup, InputGroupAddon, Button } from "reactstrap";
+import { Col} from "reactstrap";
 import "./Notes.css";
 
 const Notes = ({children}) => {

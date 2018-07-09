@@ -91,7 +91,7 @@ class Dentist extends React.Component {
                     imageUrl: this.state.DimageUrl      
             }).then(results => {
                 this.setState({ editing: false })
-            }) 
+            }).catch(err=>{alert("phone number must be integers")})
          : this.setState({ editing: true });
     }
 
@@ -108,7 +108,7 @@ class Dentist extends React.Component {
             .then((result) => {
                 console.log("this is patients: ", result.data)
                 this.setState({
-                    name: result.data.lastName + result.data.firstName,
+                    name: result.data.firstName+ " " +result.data.lastName,
                     phone: result.data.phone,
                     Pemail: result.data.email,
                     record: result.data.record,
