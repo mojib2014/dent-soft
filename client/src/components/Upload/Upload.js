@@ -4,7 +4,7 @@ import request from 'superagent';
 import './Upload.css';
 
 const CLOUDINARY_UPLOAD_PRESET = 'j0thsnot';
-const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/putincake/image/upload";
+const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/putincake/File/upload";
 
 class Upload extends React.Component {
   constructor(props) {
@@ -16,18 +16,18 @@ class Upload extends React.Component {
     };
   }
 
-  onImageDrop(files) {
+  onFileDrop(files) {
     this.setState({
       uploadedFile: files[0]
     });
 
-    this.handleImageUpload(files[0]);
+    this.handleFileUpload(files[0]);
   }
 
-  handleImageUpload(file) {
+  handleFileUpload(file) {
     let upload = request.post(CLOUDINARY_UPLOAD_URL)
-                     .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-                     .field('file', file);
+      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+      .field('file', file);
 
     upload.end((err, response) => {
       if (err) {
@@ -47,15 +47,15 @@ class Upload extends React.Component {
       <form>
         <div className="FileUpload">
           <Dropzone
-            onDrop={this.onImageDrop.bind(this)}
+            onDrop={this.onFileDrop.bind(this)}
             multiple={false}
-            accept="image/*">
+            accept="File/*">
             <div>
-          {this.state.uploadedFileCloudinaryUrl === '' ? null :
-          <div>
-            <img src={this.state.uploadedFileCloudinaryUrl} />
-          </div>}
-        </div>
+              {this.state.uploadedFileCloudinaryUrl === '' ? null :
+                <div>
+                  <img src={this.state.uploadedFileCloudinaryUrl} />
+                </div>}
+            </div>
           </Dropzone>
         </div>
 
