@@ -6,7 +6,7 @@ const DentistInfo = (props) => {
     return (
         props.editing ? 
             <Col  className="InfoBoxRight"> 
-            <h2>Profile Information</h2> <Button color='primary' onClick={() => props.edit()}>Confirm</Button>
+            <Button className="btn-md" color='primary' onClick={() => props.edit()}>Confirm</Button>
             <InputGroup>
                 <InputGroupAddon addonType='prepend'>First Name</InputGroupAddon>
                 <Input type='text' onChange={props.change} name='firstName' value={props.DfirstName}>First Name: </Input> 
@@ -33,7 +33,7 @@ const DentistInfo = (props) => {
             : 
 
             <Col className="InfoBoxRight"> 
-            <h2>William!You're the hottest dentist in the world!</h2> <Button color='primary' onClick={() => props.edit()}>Edit</Button>
+            <Button className="btn-md" color='primary' onClick={() => props.edit()}>Edit</Button>
             <ul>
             <li>Name: {props.DfirstName} {props.DlastName}</li>
             <li>Email: {props.Demail}</li>
