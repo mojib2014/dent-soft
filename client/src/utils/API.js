@@ -21,6 +21,10 @@ export default {
         // console.log("api", id)
         return axios.get("/api/user/get/" + id );
     },
+    searchByGoogleId: (id) => {
+        // console.log("api", id)
+        return axios.get("/api/user/google/type/" + id );
+    },
 
     createPhoto: (data) => {
         return axios.post("/api/user/photo",  data);
@@ -29,6 +33,9 @@ export default {
    
     updateById: (id, object) => {
         return axios.post("/api/user/post/" + id, object);
+    },
+    updateByGoogleId: (id, object) => {
+        return axios.post("/api/user/google/type/" + id, object);
     },
     addNote: (noteInfo) => {
         return axios.post("/api/note/", noteInfo);

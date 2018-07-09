@@ -37,13 +37,10 @@ module.exports = {
   },
   findByGoogleId: function(req, res) {
     db.google_account
-    .findOne({googleEmail: req.body.googleEmail})
+    .findOne({_id: req.params.id})
       .then(
         dbModel => {
-          //hash compare use sync otherwise res in unsync compare is true or false cant sent to front end
-          let auth = bcrypt.compareSync(req.body.password, dbModel.password); 
-          // console.log("cb",auth)
-          res.json({message: auth , _id: dbModel._id, userType: dbModel.userType})
+          res.json(dbModel)
         })
       .catch(err => res.json(err));
   },
@@ -89,6 +86,12 @@ module.exports = {
   },
   update: function (req, res) {
     db.Users
+      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  updateGoogle: function (req, res) {
+    db.google_account
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

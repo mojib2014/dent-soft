@@ -8,6 +8,11 @@ router
   .post(usersController.findOneAndUpdateGoogle);
 
 router
+  .route("/google/type/:id")
+  .get(usersController.findByGoogleId)
+  .post(usersController.updateGoogle)
+
+router
   .route("/signup")
   .get(usersController.findAll)
   .post(usersController.create);
