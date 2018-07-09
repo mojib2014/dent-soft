@@ -1,9 +1,10 @@
 import React from "react";
-import { Col, Row, Container } from "reactstrap";
+import { Col, Row, Container, ListGroup, ListGroupItemx, Badge } from "reactstrap";
 import API from "../../utils/API";
 import "./patients.css";
 import Profile from "../../components/Profile";
 import Photo from "../../components/Photo/Photo";
+import Notes from "../../components/NotesPatient";
 
 
 class Patient extends React.Component {
@@ -16,6 +17,7 @@ class Patient extends React.Component {
         loggedinId: "",
         loggedinType: "",
         imageLink: "",
+        note: [],
         editing: false
     }
 
@@ -23,17 +25,18 @@ class Patient extends React.Component {
         let cookieId = this.props.readCookie("loggedinId")
         let type = this.props.readCookie("loggedinType")
 
-        this.getUser(cookieId);
+        this.getUser(cookieId, type);
 
         this.setState({
             loggedinId: cookieId,
             loggedinType: type
         })
 
+        
     }
 
-    getUser(id) {
-        if(this.state.loggedinType === "local"){
+    getUser(id, type) {
+        if(type === "local"){
             API.searchById(id).then((results) => {
                 console.log(results)
                 this.setState({
@@ -42,7 +45,8 @@ class Patient extends React.Component {
                     email: results.data.email,
                     birthday: (results.data.birth_date ? results.data.birth_date.split("T")[0] : this.state.birthday),
                     phone: (results.data.phone ? results.data.phone : this.state.phone),
-                    imageLink: results.data.imageUrl
+                    imageLink: results.data.imageUrl,
+                    note: results.data.note
                 })
             }).catch(err => {
                 console.log(err)
@@ -140,10 +144,13 @@ class Patient extends React.Component {
                     <Col md="4" className="InfoBoxLeft">
                         <h2>Files/Reports</h2>
                     </Col>
-
-                    <Col md="7" className="InfoBoxRight">
-                        <h2>Dentist Notes</h2>
-                    </Col>
+                    <Notes>        
+                        {this.state.note.map(n =>{
+                            return (
+                                <li>{n.note}</li>
+                            )
+                        })}
+                    </Notes>
                 </Row>
                 <Row className="appointments">
                     <Col md="4" className="InfoBoxLeft">

@@ -38,7 +38,9 @@ class Dentist extends React.Component {
         Dphone: "",
         editing: false,
         reservationDate: "",
-        reservationTime: "" 
+        reservationTime: "",
+        reservationDetail: "",
+        reservationNotice: ""
     }
 
     componentWillMount() {
@@ -61,7 +63,7 @@ class Dentist extends React.Component {
                     DlastName: result.data.lastName,
                     Demail: result.data.email,
                     Dphone: result.data.phone,
-                    Dbirthday: result.data.birth_date,
+                    Dbirthday: (result.data.birth_date ? result.data.birth_date.split("T")[0] : this.state.birthday),
                     DimageUrl: result.data.imageUrl
                 })
             })
@@ -80,7 +82,18 @@ class Dentist extends React.Component {
     }
 
     editProfile = () => {
-        (this.state.editing) ? this.setState({ editing: false }) : this.setState({ editing: true });
+        (this.state.editing) ? 
+            API.updateById(this.state.loggedInId, {
+                firstName: this.state.DfirstName,
+                    lastName: this.state.DlastName,
+                    email: this.state.Demail,
+                    phone: this.state.Dphone,
+                    birth_date: this.state.Dbirthday,
+                    imageUrl: this.state.DimageUrl      
+            }).then(results => {
+                this.setState({ editing: false })
+            }) 
+         : this.setState({ editing: true });
     }
 
 
@@ -262,11 +275,21 @@ class Dentist extends React.Component {
         let reservation = {
             date: this.state.reservationDate,
             start_time: this.state.reservationTime,
-            user_id: this.state.loggedInId
+            reservationDetail: this.state.reservationDetail,
+            user_id: this.state.patientId
         }
         API.createReservation(reservation)
         .then((result)=> {
-            console.log("reservation",result)
+            console.log(result)
+            if (result.status === 200 && result.data) {
+                this.setState({
+                    reservationNotice: "Reservation Added!",
+                    reservationDetail: "",
+                    reservationTime: "",
+                    reservationDate: ""
+                })
+                //need to push reservation to user
+            }
         }) 
         .catch(err=>{console.log(err); alert("database err, please contact William at 6143773853")})
     }
@@ -358,31 +381,7 @@ class Dentist extends React.Component {
                             <a href="https://ahmadsahil2000.youcanbook.me/" target="_blank" rel="noopener noreferrer"><img src="https://youcanbook.me/resources/pics/ycbm-button.png" alt="https://youcanbook.me/resources/pics/ycbm-button.png" style={{ 'borderStyle': "none" }} /></a>
                             <a href="https://app.youcanbook.me/#/bookings" target="_blank" rel="noopener noreferrer" style={{ "paddingLeft": "40px" }}>View Bookings</a>
                             <a href="https://app.youcanbook.me/#/editProfile?id=155f5567-7bcb-47cb-be8a-c27793655fae&section=availability" target="_blank" rel="noopener noreferrer" style={{ "paddingLeft": "20px" }}>Admin</a>
-
-                            <InputGroup>
-                                <InputGroupAddon addonType='prepend'>Reservation Date</InputGroupAddon>
-                                <Input
-                                    name='reservationDate' type='date'
-                                    value={this.state.reservationDate}
-                                    onChange={this.handleInputChange}
-                                >
-                                </Input>
-                                <br></br>
-                                <Dropdown
-                                    disabled={!this.state.reservationDate}
-                                    options={options}
-                                    onChange={this._onSelect}
-                                    value={defaultOption}
-                                    placeholder="Select Apointment Time"
-                                />        
-                                 <FormBtn
-                                    disabled={!this.state.reservationTime}
-                                    onClick={this.makeReservation}
-                                    color="primary"
-                                    size="sm"
-                                > Confirm Reservation
-                                </FormBtn>                    
-                            </InputGroup>
+                            
                             <hr></hr>
                             <Form inline>
                                 <Label for="searchPatients">Patient's Email:</Label>
@@ -411,10 +410,45 @@ class Dentist extends React.Component {
                                 />
                             </div>
                             <hr></hr>
-                            <div className="recordInfo mb-3">
-
-                            {/* =================================== */}
-                        
+                            <p style={{float: "left"}}>Note: Must search for a patient before making reservation</p>
+                            <InputGroup>
+                                <InputGroupAddon addonType='prepend'>Reservation Date</InputGroupAddon>
+                                <Input
+                                    disabled={!this.state.patientId}
+                                    className="dropDown"
+                                    name='reservationDate' 
+                                    type='date'
+                                    value={this.state.reservationDate}
+                                    onChange={this.handleInputChange}
+                                >
+                                </Input>
+                                <Dropdown
+                                    disabled={!this.state.reservationDate}
+                                    options={options}
+                                    onChange={this._onSelect}
+                                    value={this.state.reservationTime}
+                                    placeholder="Select Apointment Time"
+                                />       
+                                <Input
+                                    name='reservationDetail' 
+                                    type='string'
+                                    value={this.state.reservationDetail}
+                                    onChange={this.handleInputChange}
+                                    placeholder="Reservation detail"
+                                >
+                                </Input>
+                            </InputGroup>
+                            <FormBtn
+                                disabled={!(this.state.reservationDate && this.state.reservationTime && this.state.reservationDetail)}
+                                onClick={this.makeReservation}
+                                color="primary"
+                                size="sm"
+                            > Reserve
+                            </FormBtn>   
+                            <div id="reservationNotice">{this.state.reservationNotice}</div>
+                            <br></br><br></br>            
+                            <hr></hr>
+                            <div className="recordInfo mb-3">                        
                                 <div>
                                     <Upload /> 
                                     <h3>Record:</h3>

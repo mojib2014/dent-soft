@@ -30,14 +30,14 @@ module.exports = {
   findById: function (req, res) {
     db.Users
       .findOne({_id: req.params.id})
+      .populate("note")
       .then(dbModel => {
         res.json(dbModel)
       })
       .catch(err => res.status(422).json(err));
   },
   findByGoogleId: function(req, res) {
-    db.google_account
-    .findOne({_id: req.params.id})
+    db.google_account.findOne({_id: req.params.id})
       .then(
         dbModel => {
           res.json(dbModel)
@@ -101,6 +101,14 @@ module.exports = {
     console.log("this is =", req.body)
     db.Users
       .findOneAndUpdate({ _id: req.body.id }, { $set: { imageUrl: req.body.url }})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+  populateGoogleNotes: function (req, res) {
+    db.google_account
+      .findOne({_id: req.params.id})
+      .populate("note")  
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
