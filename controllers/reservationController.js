@@ -17,10 +17,16 @@ module.exports = {
           .catch(err => res.status(422).json(err));
       },
       create: function(req, res) {
-        console.log(req.body)
         db.Reservation
           .create(req.body)
-          .then(dbModel => res.json(dbModel))
+          .then(dbModel => {
+            //push id to user
+            // console.log("patientId", req.body.user_id)
+            db.Users
+            .findByIdAndUpdate(req.body.user_id, { $push: { reservations: dbModel._id }})
+            .then((result)=>{res.json(result)})
+            .catch(err => res.status(422).json(err))          
+          })
           .catch(err => res.status(422).json(err));
       },
       update: function(req, res) {
