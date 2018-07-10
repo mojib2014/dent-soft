@@ -105,7 +105,7 @@ class App extends Component {
                 Welcome Back
               </h3>
               <button 
-                className="btn btn-dark p-2 logOut"
+                className="btn btn-dark p-2 mr-5 logOut"
                 onClick={this.logOut}
               >
               logout

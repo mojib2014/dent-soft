@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const usersSchema = new Schema({
     userType: {type: String, required: false},
     firstName: { type: String, required: true},
-    lastName: {type: String, required: true},
+    lastName: {type: String, required: false},
     email: {type: String, match: [/.+@.+\..+/, "Please enter a valid e-mail address"]},
     password: { type: String, required: true },
     imageUrl: {type: String, required: false},
