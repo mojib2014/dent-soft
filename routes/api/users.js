@@ -37,9 +37,4 @@ router
   .route("/post/:id")
   .post(usersController.update);
 
-router
-  .route("/google/notes/:id")
-  .get(usersController.populateGoogleNotes)
-
-
 module.exports = router;
