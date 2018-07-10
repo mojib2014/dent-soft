@@ -46,9 +46,6 @@ export default {
     deleteRecord: (id) => {
         return axios.delete("/api/records/" + id)
     },
-    populateGoogleNotes: (id) => {
-        return axios.get("/api/user/notes/" + id)
-    },
     createReservation: (data) => {
         return axios.post("/api/reservation", data)
     }
