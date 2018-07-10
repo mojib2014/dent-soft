@@ -230,7 +230,7 @@ class Main extends Component {
             <div id="homePage">
                 <Container fluid style={{ height: 700 }}>
                     <Row>
-                        <Col style={{ paddingLeft: 300, paddingTop: 100 }}>
+                        <Col className="loginMove">
                             <div className="card mb-5 mt-5" style={{ width: "18rem" }}>
                                 <div className="card-body">
                                     {this.state.isSignUpClicked ? (

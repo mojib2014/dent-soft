@@ -376,7 +376,7 @@ class Dentist extends React.Component {
             <div>
                 <div className="dentistInfo container">
                     <Row className="dentistR1">
-                        <Col md="3" xs="3" className="pt-5 pl-4">
+                        <Col md="3" xs="5" className="pt-5 pl-4">
                             <Photo DimageUrl={this.state.DimageUrl} />
                         </Col>
 
