@@ -97,7 +97,7 @@ class Patient extends React.Component {
             }).then(results => {
                 console.log(this.state.birthday)
                 this.setState({ editing: false })
-            })  
+            }).catch(err =>alert("Numbers only please"))
         }
         else{
             API.updateByGoogleId(this.state.loggedinId, {
@@ -110,7 +110,7 @@ class Patient extends React.Component {
             }).then(results => {
                 console.log(this.state.birthday)
                 this.setState({ editing: false })
-            })  
+            }) .catch(err => alert("Numbers only please"))
         }
         
     }
@@ -153,7 +153,7 @@ class Patient extends React.Component {
                     <Files>
                         {this.state.record.map(r =>{
                             return (
-                                <li><a href={r.recordUrl}>{r.recordName}</a></li>
+                                <li><a href={r.recordUrl} target="_blank">{r.recordName}</a></li>
                             )
                         })}
                     </Files>

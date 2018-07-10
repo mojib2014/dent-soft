@@ -130,8 +130,21 @@ module.exports = {
     // console.log("this is =", req.body)
     db.Users
       .findOneAndUpdate({ _id: req.body.id }, { $set: { imageUrl: req.body.url }})
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => {
+        if(dbModel === null) {
+        db.google_account
+        .findOneAndUpdate({ _id: req.body.id }, { $set: { googleImage: req.body.url }})
+        .then(dbModel => {
+          res.json(dbModel)
+      })
       .catch(err => res.status(422).json(err));
+      // console.log("here");
+    }
+      else{
+        res.json(dbModel)
+      }
+    })
+    .catch(err => res.status(422).json(err));
   },
   
   remove: function (req, res) {
