@@ -25,7 +25,6 @@ export default {
         // console.log("api", id)
         return axios.get("/api/user/google/type/" + id );
     },
-
     createPhoto: (data) => {
         return axios.post("/api/user/photo",  data);
     },
@@ -38,11 +37,14 @@ export default {
     addNote: (noteInfo) => {
         return axios.post("/api/note/", noteInfo);
     },
+    deleteNote: (id) => {
+        return axios.delete("/api/note/" + id)
+    },
     addRecord:(recordInfo) => {
         return axios.post("/api/records/", recordInfo);
     },
-    deleteNote: (id) => {
-        return axios.delete("/api/note/" + id)
+    deleteRecord: (id) => {
+        return axios.delete("/api/records/" + id)
     },
     populateGoogleNotes: (id) => {
         return axios.get("/api/user/notes/" + id)
