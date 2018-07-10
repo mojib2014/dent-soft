@@ -7,6 +7,7 @@ import { FormBtn } from "../../components/Form";
 import FindInfo from "../../components/FindInfo";
 import DelBtn from "../../components/DelBtn";
 import Dropdown from 'react-dropdown';
+import Upload from "../../components/Upload";
 import 'react-dropdown/style.css';
 import API from "../../utils/API";
 
@@ -91,7 +92,7 @@ class Dentist extends React.Component {
                     imageUrl: this.state.DimageUrl      
             }).then(results => {
                 this.setState({ editing: false })
-            }) 
+            }).catch(err=>{alert("phone number must be integers")})
          : this.setState({ editing: true });
     }
 
@@ -106,10 +107,9 @@ class Dentist extends React.Component {
         let email = this.state.email
         API.searchByEmail(email)
             .then((result) => {
-                console.log("this is patients: ", result.data.record)
-                console.log("this is patients: ", result.data.note)
+                console.log("this is patients: ", result.data)
                 this.setState({
-                    name: result.data.lastName + result.data.firstName,
+                    name: result.data.firstName+ " " +result.data.lastName,
                     phone: result.data.phone,
                     Pemail: result.data.email,
                     record: result.data.record,
@@ -199,8 +199,8 @@ class Dentist extends React.Component {
                 if (result.data) {
                     alert(`Record Added for ${result.data.firstName} ${result.data.lastName}`)
                 }
-                })
-                .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
         } else {
             alert("please search for a patient berfore posting a record")
         }
@@ -293,6 +293,54 @@ class Dentist extends React.Component {
         .catch(err=>{console.log(err); alert("database err, please contact William at 6143773853")})
     }
     //###########end reservation
+
+    //**********Record file Upload */
+    fileUpload = ()=> {
+        //must change to window
+        //use .env if possible
+        window.cloudinary.openUploadWidget({ cloud_name: 'putincake', upload_preset: 'j0thsnot'},
+        
+        (error, result) => {
+            // write into database if file upload successful
+            if (error) {
+                console.log(error)
+                alert("file upload failed, please try again")
+            } else {
+                console.log(result)  //[{},{}...]
+                this.setState({record: result})
+                result.forEach((file)=>{
+                    let newRecord={
+                        id: this.state.patientId,
+                        recordName: file.original_filename,
+                        recordUrl: file.secure_url
+                    }   
+                    API.addRecord(newRecord)
+                    .then(data=>{
+                        console.log("record written into db", data);
+                        this.emailSearch();
+
+                        if (result.data) {
+                            alert(`Record Added`)
+                        }
+                    }).catch(err=>{
+                        console.log("failed to write records into database", err)
+                        alert("err occurred when writing file into database, please check connection or contact website admin. 6143773853")
+                    })
+                }) 
+            }
+        })
+      }
+
+      deleteRecord = (recordId) => {
+        API.deleteRecord(recordId)
+        .then((result) => {
+            console.log(result);
+            // refresh note
+            this.emailSearch();
+        }).catch(err => console.log(err));
+      }
+    //##########end fileupload
+
     render() {
         // console.log("Date:", this.state.reservationDate) 
         // console.log("Time:", this.state.reservationTime) 
@@ -308,7 +356,6 @@ class Dentist extends React.Component {
             { value: '15:00 - 16:00', label: '15:00 - 16:00' },
             { value: '16:00 - 17:00', label: '16:00 - 17:00' },
         ]
-        const defaultOption = options[0]
 
         return (
             <div>
@@ -450,15 +497,24 @@ class Dentist extends React.Component {
                             <div className="recordInfo mb-3">                        
                                 <div>
                                     <h3>Record:</h3>
-                                    <br></br>
-                                    <div className="record shadow text-left">
+                                    <br></br><br></br>
+                                    <div className="note shadow text-left">
                                         {this.state.record.map((item, i)=>{
-                                            return <h6 key={i} id={item._id}>{i+1}. {item.record}</h6>
+                                            return(
+                                                <h6 key={i}>
+                                                    <DelBtn
+                                                        onClick={() => { this.deleteRecord(item._id) }}
+                                                    />
+                                                    <a href={item.recordUrl} target="_blank" id={item._id}>
+                                                        {i+1}. {item.recordName}
+                                                    </a>
+                                                </h6>
+                                            ) 
                                         })}
                                     </div>
                                 </div>
                             </div>
-           
+                                        
                             <hr></hr>
                             
                             <div className="noteInfo mb-3">
@@ -488,18 +544,10 @@ class Dentist extends React.Component {
                             </div>
                             <hr></hr>
                             <div>
-                                <Input
-                                    value={this.state.newRecord}
-                                    onChange={this.handleInputChange}
-                                    name="newRecord"
-                                    placeholder="Patients' Record"
+                                <Upload 
+                                    patientId={this.state.patientId}
+                                    fileUpload={this.fileUpload} 
                                 />
-                                <FormBtn
-                                    disabled={!this.state.newRecord}
-                                    onClick={this.handleAddRecord}
-                                >
-                                    Add Record
-                                </FormBtn>
                             </div>
                             <div>
                                 <Input

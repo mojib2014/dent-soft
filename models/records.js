@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const recordsSchema = new Schema({
     
-    record: { type: String, required: true } 
+    recordName: { type: String, required: true },
+    recordUrl: { type: String, required: true } 
 });
 
 const Record = mongoose.model("Record", recordsSchema);
