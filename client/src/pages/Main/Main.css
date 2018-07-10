@@ -64,3 +64,13 @@
     }
     
  }
+
+@media screen and (max-width: 500px) {
+    :root {
+        width: 100%;
+    }
+    html {
+        width: 100%;
+        margin: 0;
+    }
+}

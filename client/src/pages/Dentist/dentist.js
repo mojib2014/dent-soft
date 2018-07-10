@@ -108,8 +108,8 @@ class Dentist extends React.Component {
         let email = this.state.email
         API.searchByEmail(email)
             .then((result) => {
-                if(result.data.googleId === null){
-                   console.log("this is patients: ", result.data)
+                if(!result.data.googleId){
+                //    console.log("this is patients: ", result.data)
                     this.setState({
                         name: result.data.firstName+ " " +result.data.lastName,
                         phone: result.data.phone,
@@ -133,6 +133,7 @@ class Dentist extends React.Component {
                         patientId: result.data._id
                     }) 
                 }
+                console.log(this.state);
             })
             .catch(err => {
                 console.log(err)
@@ -514,12 +515,15 @@ class Dentist extends React.Component {
                                     var today = new Date()
                                     today = today.toISOString().split("T")[0]
 
-                                    if(reservations.date > today)
-                                        return (
+                                    if(reservations.date > today){
+                                         return (
                                             <h6>Date: {reservations.date}
                                             Start Time: {reservations.start_time}
                                             Details: {reservations.reservationDetail}</h6>
                                         )
+                                    }
+                                    else return null
+                                       
                                 })
                                 : <h6>No Reservations</h6>}
                             </div>
@@ -543,6 +547,13 @@ class Dentist extends React.Component {
                                             ) 
                                         })}
                                     </div>
+                                    <div>
+                                <Upload 
+                                    patientId={this.state.patientId}
+                                    fileUpload={this.fileUpload} 
+                                />
+                            </div>
+                            <br/><br/>
                                 </div>
                             </div>
                                         
@@ -574,12 +585,6 @@ class Dentist extends React.Component {
                                 </div>
                             </div>
                             <hr></hr>
-                            <div>
-                                <Upload 
-                                    patientId={this.state.patientId}
-                                    fileUpload={this.fileUpload} 
-                                />
-                            </div>
                             <div>
                                 <Input
                                     value={this.state.newNote}
