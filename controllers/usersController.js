@@ -12,19 +12,19 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findOneAndUpdateGoogle: function (req, res) {
-    // console.log("google email", req.body.googleEmail)
+    console.log("google email", req.body)
     db.google_account.findOne({ googleEmail: req.body.googleEmail })
     .then((result) => {
-      // console.log("presignup google", result)
+      console.log("presignup google", result)
       if (!result) {
-        // console.log("oh no create")
+        console.log("oh no create")
         db.google_account
               .create(req.body)
               .then(dbModel => res.json(dbModel))
               //return err for err handling
               .catch(err => res.json(err));
       } else {
-        // console.log("presignup google null",result)
+        console.log("presignup google null",result)
         res.json(result)
         
       }
@@ -34,6 +34,8 @@ module.exports = {
     db.Users
       .findOne({_id: req.params.id})
       .populate("note")
+      .populate("reservations")
+      .populate("record")
       .then(dbModel => {
         res.json(dbModel)
       })
@@ -43,6 +45,9 @@ module.exports = {
     console.log("patient page load", req.params.id)
     db.google_account
     .findOne({_id: req.params.id})
+      .populate("note")
+      .populate("reservations")
+      .populate("record")
       .then(
         dbModel => {
           res.json(dbModel)
@@ -56,7 +61,24 @@ module.exports = {
       .populate("note") 
       .populate("record") 
       .populate("reservations")
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => {
+        console.log(dbModel);
+        if(dbModel === null) {
+          db.google_account
+          .findOne({googleEmail: req.params.email})
+          .populate("note") 
+          .populate("record") 
+          .populate("reservations")
+          .then(dbModel => {
+            res.json(dbModel)
+        })
+        .catch(err => res.status(422).json(err));
+        // console.log("here");
+      }
+        else{
+          res.json(dbModel)
+        }
+      })
       .catch(err => res.status(422).json(err));
   },
   findByEmailLocalLogin: function(req, res) {
@@ -108,14 +130,6 @@ module.exports = {
     // console.log("this is =", req.body)
     db.Users
       .findOneAndUpdate({ _id: req.body.id }, { $set: { imageUrl: req.body.url }})
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-
-  populateGoogleNotes: function (req, res) {
-    db.google_account
-      .findOne({_id: req.params.id})
-      .populate("note")  
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

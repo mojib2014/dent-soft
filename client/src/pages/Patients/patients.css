@@ -1,16 +1,24 @@
 .InfoBoxLeft {
-    background-color: rgb(242, 250, 231);
+    background-color: darkgray;
     width: 300px;
     height: 300px;
     float: none;
     margin: 1rem 1rem 1rem auto;
 }
 .InfoBoxRight {
-    background-color: rgb(242, 250, 231);
+    background-color: darkgray;
     width: 300px;
     height: 300px;
     float: none;
     margin: 1rem auto 1rem 1rem;
+}
+
+.InfoBoxFull {
+    background-color:darkgray;
+    height: 300px;
+    float: none;
+    margin: 1rem auto;
+    box-shadow: 50px;
 }
 
 h2 {

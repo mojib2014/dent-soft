@@ -128,7 +128,7 @@ class Patient extends React.Component {
         return (
             <Container fluid>
                 <Row className="profile">
-                    <Col md="4" className="InfoBoxLeft">
+                    <Col md="4" className="InfoBoxLeft rounded shadow-lg">
                         <Photo DimageUrl={this.state.imageLink}/>
                     </Col>
                     <Profile firstName={this.state.firstName}
@@ -141,7 +141,7 @@ class Patient extends React.Component {
                         edit={this.editProfile} />
                 </Row>
                 <Row className="notifications">
-                    <Col md="4" className="InfoBoxLeft">
+                    <Col md="4" className="InfoBoxLeft rounded shadow-lg">
                         <h2>Files/Reports</h2>
                     </Col>
                     <Notes>        
@@ -153,13 +153,8 @@ class Patient extends React.Component {
                     </Notes>
                 </Row>
                 <Row className="appointments">
-                    <Col md="4" className="InfoBoxLeft">
+                    <Col md="11" className="InfoBoxFull rounded shadow-lg">
                         <h2>Current Booking</h2>
-                    </Col>
-
-                    <Col md="7" className="InfoBoxRight">
-                        <h2>Make a Booking</h2>
-
                     </Col>
                 </Row>
             </Container>

@@ -7,7 +7,7 @@ const googleSchema = new Schema({
     googleImage: {type: String, required: true},
     googleEmail: {type: String, match: [/.+@.+\..+/, "Please enter a valid e-mail address"]},
     firstName: { type: String, required: true},
-    lastName: {type: String, required: true},
+    lastName: {type: String, required: false},
     profileImage: { type: String, required: false },
     phone: { type: Number, required: false },
     birth_date: { type: Date, required: false },
@@ -19,9 +19,9 @@ const googleSchema = new Schema({
     provider_id: { type: String, required: false },
     provider_pic: { type: String, required: false },
     token: { type: String, required: false },
-    record: { type: String, required: false  },
-    note: { type: String, required: false },
-    reservations: { type: String, required: false }
+    record: [{ type: Schema.Types.ObjectId, required: false, ref: "Record"}],
+    note: [{ type: Schema.Types.ObjectId, required: false, ref: "Note" }],
+    reservations: [{ type: Schema.Types.ObjectId, required: false, ref: "Reservation"}]
 })
 
 const Google_Account = mongoose.model("google_account", googleSchema);
