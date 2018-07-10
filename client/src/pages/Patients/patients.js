@@ -5,6 +5,8 @@ import "./patients.css";
 import Profile from "../../components/Profile";
 import Photo from "../../components/Photo/Photo";
 import Notes from "../../components/NotesPatient";
+import Booking from "../../components/Booking";
+import Files from "../../components/Files";
 
 
 class Patient extends React.Component {
@@ -18,6 +20,8 @@ class Patient extends React.Component {
         loggedinType: "",
         imageLink: "",
         note: [],
+        reservations: [],
+        record: [],
         editing: false
     }
 
@@ -38,7 +42,6 @@ class Patient extends React.Component {
     getUser(id, type) {
         if(type === "local"){
             API.searchById(id).then((results) => {
-                console.log(results)
                 this.setState({
                     firstName: results.data.firstName,
                     lastName: results.data.lastName,
@@ -46,7 +49,9 @@ class Patient extends React.Component {
                     birthday: (results.data.birth_date ? results.data.birth_date.split("T")[0] : this.state.birthday),
                     phone: (results.data.phone ? results.data.phone : this.state.phone),
                     imageLink: results.data.imageUrl,
-                    note: results.data.note
+                    note: (results.data.note ? results.data.note : this.state.note),
+                    record: (results.data.record ? results.data.record : this.state.record),
+                    reservations: (results.data.reservations ? results.data.reservations : this.state.reservations)
                 })
             }).catch(err => {
                 console.log(err)
@@ -61,8 +66,12 @@ class Patient extends React.Component {
                     email: results.data.googleEmail,
                     birthday: (results.data.birth_date ? results.data.birth_date.split("T")[0] : this.state.birthday),
                     phone: (results.data.phone ? results.data.phone : this.state.phone),
-                    imageLink: results.data.googleImage
+                    imageLink: results.data.googleImage,
+                    note: (results.data.note ? results.data.note : this.state.note),
+                    record: (results.data.record ? results.data.record : this.state.record),
+                    reservations: (results.data.reservations ? results.data.reservations : this.state.reservations)
                 })
+                console.log(this.state.reservations);
             }).catch(err => {
                 console.log(err)
             })    
@@ -141,9 +150,13 @@ class Patient extends React.Component {
                         edit={this.editProfile} />
                 </Row>
                 <Row className="notifications">
-                    <Col md="4" className="InfoBoxLeft rounded shadow-lg">
-                        <h2>Files/Reports</h2>
-                    </Col>
+                    <Files>
+                        {this.state.record.map(r =>{
+                            return (
+                                <li><a href={r.recordUrl}>{r.recordName}</a></li>
+                            )
+                        })}
+                    </Files>
                     <Notes>        
                         {this.state.note.map(n =>{
                             return (
@@ -153,9 +166,11 @@ class Patient extends React.Component {
                     </Notes>
                 </Row>
                 <Row className="appointments">
-                    <Col md="11" className="InfoBoxFull rounded shadow-lg">
-                        <h2>Current Booking</h2>
-                    </Col>
+                    <Booking
+                        date={this.state.reservations.length > 0 ? this.state.reservations[this.state.reservations.length - 1].date : null} 
+                        time={this.state.reservations.length > 0 ? this.state.reservations[this.state.reservations.length - 1].start_time : null} 
+                        detail={this.state.reservations.length > 0 ? this.state.reservations[this.state.reservations.length - 1].reservationDetail : null} 
+                    />
                 </Row>
             </Container>
         )
