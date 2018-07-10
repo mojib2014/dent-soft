@@ -17,12 +17,10 @@ module.exports = {
           .catch(err => res.status(422).json(err));
       },
       create: function(req, res) {
-  
+        console.log("record create",req.body)
         db.Records
         .create(req.body)
         .then(dbModel => {
-          // res.json(dbModel)
-          console.log(dbModel._id);
           db.Users
             .findByIdAndUpdate(req.body.id, { $push: { record: dbModel._id }})
             .then((result)=>{res.json(result)})
@@ -30,21 +28,6 @@ module.exports = {
         })
         .catch(err => res.status(422).json(err));
     },
-
-      // create: function(req, res) {
-      //   // console.log("controller", req.body)
-      //   db.Records
-      //     .create(req.body)
-      //     .then(dbModel => {
-      //       // res.json(dbModel)
-      //       console.log(dbModel._id);
-      //       db.Users
-      //         .findByIdAndUpdate(req.body.id, { $push: { record: dbModel._id }})
-      //         .then((result)=>{res.json(result)})
-      //         .catch(err => res.status(422).json(err))
-      //     })
-      //     .catch(err => res.status(422).json(err));
-      // },
       update: function(req, res) {
         db.Records
           .findOneAndUpdate({ _id: req.params.id }, req.body)
@@ -52,6 +35,7 @@ module.exports = {
           .catch(err => res.status(422).json(err));
       },
       remove: function(req, res) {
+        console.log("record ",req.params.id)
         db.Records
           .findById({ _id: req.params.id })
           .then(dbModel => dbModel.remove())

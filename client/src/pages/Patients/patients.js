@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row, Container, ListGroup, ListGroupItemx, Badge } from "reactstrap";
+import { Col, Row, Container } from "reactstrap";
 import API from "../../utils/API";
 import "./patients.css";
 import Profile from "../../components/Profile";
