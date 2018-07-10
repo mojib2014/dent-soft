@@ -23,7 +23,20 @@ module.exports = {
             // res.json(dbModel)
             db.Users
               .findByIdAndUpdate(req.body.id, { $push: { note: dbModel._id }})
-              .then((result)=>{res.json(result)})
+              .then((result)=>{
+                if(result === null) {
+                  db.google_account
+                  .findByIdAndUpdate(req.body.id, { $push: { note: dbModel._id }})
+                  .then(results => {
+                    res.json(results)
+                })
+                .catch(err => res.status(422).json(err));
+                // console.log("here");
+              }
+                else{
+                  res.json(result)
+                }
+              })
               .catch(err => res.status(422).json(err))
           })
           .catch(err => res.status(422).json(err));
