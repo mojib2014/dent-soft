@@ -4,7 +4,7 @@ import { Col, Input, InputGroup, InputGroupAddon, Button } from "reactstrap";
 const Profile = (props) => {
     return (
         props.editing ? 
-            <Col md="7" className="InfoBoxRight"> 
+            <Col md="7" className="InfoBoxRight rounded"> 
             <h2>Profile Information</h2> <Button color='primary' onClick={() => props.edit()}>Confirm</Button>
             <InputGroup>
                 <InputGroupAddon addonType='prepend'>First Name</InputGroupAddon>
@@ -26,7 +26,7 @@ const Profile = (props) => {
             </InputGroup>
             </Col> 
             : 
-            <Col md="7" className="InfoBoxRight"> 
+            <Col md="7" className="InfoBoxRight rounded"> 
             <h2>Profile Information</h2> <Button color='primary' onClick={() => props.edit()}>Edit</Button>
             <ul>
             <li>Name: {props.firstName} {props.lastName}</li>
