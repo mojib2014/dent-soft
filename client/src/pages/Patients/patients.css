@@ -39,3 +39,17 @@ button{
     float: right;
     font-size: 20pt;
 }
+
+@media screen and (max-width: 500px) {
+    .InfoBoxLeft {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+    } 
+    
+    .InfoBoxRight {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
