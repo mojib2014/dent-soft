@@ -57,13 +57,13 @@ DS provides user-friendly and comprehensive functionalities, covering treatment 
 
 #### Tools:
 * MongoDB Server & Mongoose
-<img src="https://webassets.mongodb.com/_com_assets/cms/mongodb-logo-rgb-j6w271g1xn.jpg" width="100">
+<img src="https://webassets.mongodb.com/_com_assets/cms/mongodb-logo-rgb-j6w271g1xn.jpg" width="200">
 * Google Authentication
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" width="100">
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" width="200">
 * Dropzone and Cloudinary for File & Image Uploads
-<img src="http://www.dropzonejs.com/images/new-logo.svg" width="100">
-<img src="https://res.cloudinary.com/cloudinary/image/upload/c_scale,w_500/v1/logo/for_white_bg/cloudinary_logo_for_white_bg.png" width="100">
+<img src="http://www.dropzonejs.com/images/new-logo.svg" width="200">
+<img src="https://res.cloudinary.com/cloudinary/image/upload/c_scale,w_500/v1/logo/for_white_bg/cloudinary_logo_for_white_bg.png" width="200">
 * React.js
-<img src="https://cdn-images-1.medium.com/max/675/1*oi8WLwC2u0EEI1j9uKmwWg.png" width="100">
+<img src="https://cdn-images-1.medium.com/max/675/1*oi8WLwC2u0EEI1j9uKmwWg.png" width="200">
 * Reactstrap (React Bootstrap package)
-<img src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" width="100">
+<img src="https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/012015/bootstrap.png?itok=GTbtFeUj" width="200">
