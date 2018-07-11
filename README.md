@@ -62,7 +62,6 @@ DS provides user-friendly and comprehensive functionalities, covering treatment 
 <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" width="100">
 * Dropzone and Cloudinary for File & Image Uploads
 <img src="http://www.dropzonejs.com/images/new-logo.svg" width="100">
-![Cloudinary](https://res.cloudinary.com/cloudinary/image/upload/c_sc
 <img src="https://res.cloudinary.com/cloudinary/image/upload/c_scale,w_500/v1/logo/for_white_bg/cloudinary_logo_for_white_bg.png" width="100">
 * React.js
 <img src="https://cdn-images-1.medium.com/max/675/1*oi8WLwC2u0EEI1j9uKmwWg.png" width="100">
