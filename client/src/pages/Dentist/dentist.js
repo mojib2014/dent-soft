@@ -562,7 +562,7 @@ class Dentist extends React.Component {
                             <div className="noteInfo mb-3">
                                 <div>
                                     <h3>Note:</h3>
-                                    <br></br>
+                                    <br></br><br></br> 
                                     <div className="note shadow text-left">
                                         {this.state.note.map((item, i) => {
                                             return (
