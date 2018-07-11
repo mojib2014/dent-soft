@@ -7,6 +7,7 @@ import Patients from "./pages/Patients";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 
+
 class App extends Component {
 
   state = {
@@ -101,9 +102,11 @@ class App extends Component {
             "Hello"
           ) : (
             <div>
-              <h3 id="status">
-                Welcome Back
-              </h3>
+              <div style={{marginRight: 150, marginTop: 5}}>
+                <h3 style={{color: "white"}}>
+                  Welcome Back
+                </h3>
+              </div>
               <button 
                 className="btn btn-dark p-2 logOut"
                 onClick={this.logOut}
