@@ -108,14 +108,8 @@ class Dentist extends React.Component {
         let email = this.state.email
         API.searchByEmail(email)
             .then((result) => {
-<<<<<<< HEAD
-                console.log("this is patients: ", result.data)
-
-                if(!result.data.googleId){
-=======
                 if(!result.data.googleId){
                 //    console.log("this is patients: ", result.data)
->>>>>>> f408008fc605b7fbb3944e200e867d773a004402
                     this.setState({
                         name: result.data.firstName+ " " +result.data.lastName,
                         phone: result.data.phone,
@@ -139,10 +133,7 @@ class Dentist extends React.Component {
                         patientId: result.data._id
                     }) 
                 }
-<<<<<<< HEAD
-=======
                 console.log(this.state);
->>>>>>> f408008fc605b7fbb3944e200e867d773a004402
             })
             .catch(err => {
                 console.log(err)
