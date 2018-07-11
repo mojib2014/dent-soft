@@ -9,9 +9,9 @@ DS provides user-friendly and comprehensive functionalities, covering treatment 
 
 ## Features
 - Login system
-[Local Signup](client/src/assets/images/dsLocalSignup.gif)
-[Local Login](client/src/assets/images/dsLocalLogin.gif)
-[Google Login](client/src/assets/images/dsGoogleLogin.gif)
+![Local Signup](client/src/assets/images/dsLocalSignup.gif)
+![Local Login](client/src/assets/images/dsLocalLogin.gif)
+![Google Login](client/src/assets/images/dsGoogleLogin.gif)
 - Special Doctor view optimised for usability given that it is to be used on a touch screen for the soul purpose of checking a given day's appointments and adding notes and treatments for an appointment
 - Secretary view designed to make everything easily and quickly reached
 - Supports patients having health plans
@@ -23,7 +23,7 @@ DS provides user-friendly and comprehensive functionalities, covering treatment 
 
 ### Users of the DS:
 #### Administrator.
-[Dentist Login](client/src/assets/images/dsDentistLogin.gif)
+![Dentist Login](client/src/assets/images/dsDentistLogin.gif)
     Add a new doctor.
     Add a new receptionist.
     Delete a doctor.
@@ -32,38 +32,38 @@ DS provides user-friendly and comprehensive functionalities, covering treatment 
 #### Doctor.
     Add a medical examination.
     Add a medical detailed plan.
-[Dentist File Methods](client/src/assets/images/dsDentistFileMethods.gif)
+![Dentist File Methods](client/src/assets/images/dsDentistFileMethods.gif)
     Add a treatment.
     Add an external file.
 #### Receptionist. 
-[Dentist Patient Lookup](client/src/assets/images/dsDentistEmailLookup.gif)
+![Dentist Patient Lookup](client/src/assets/images/dsDentistEmailLookup.gif)
     Add new patient information.   
     Update patient information.
-[Dentist Appointment](client/src/assets/images/dsDentistReservation.gif)
+![Dentist Appointment](client/src/assets/images/dsDentistReservation.gif)
     Add a new appointment.
     Update an appointment.
     Delete an appointment.
-[Dentist Note Add](client/src/assets/images/dsDentistNote.gif)
+![Dentist Note Add](client/src/assets/images/dsDentistNote.gif)
     Add notes for specific patients.
     Delete notes.
 #### Patient.
-[Patient Profile Edit](client/src/assets/images/dsProfileEdit.gif)
+!![Patient Profile Edit](client/src/assets/images/dsProfileEdit.gif)
     Edit basic profile information.
-[Patient Image Upload](client/src/assets/images/dsPatientPage.gif)
+!![Patient Image Upload](client/src/assets/images/dsPatientPage.gif)
     Upload and view profile image.
-[Patient Information](client/src/assets/images/dsPatientPage.gif)
+!![Patient Information](client/src/assets/images/dsPatientPage.gif)
     View Notes, Appointments, and Documents given by dentist.
 
 
 #### Tools:
 * MongoDB Server & Mongoose
-[MongoDB](https://webassets.mongodb.com/_com_assets/cms/mongodb-logo-rgb-j6w271g1xn.jpg)
+!![MongoDB](https://webassets.mongodb.com/_com_assets/cms/mongodb-logo-rgb-j6w271g1xn.jpg)
 * Google Authentication
-[Google](https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg)
+![Google](https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg)
 * Dropzone and Cloudinary for File & Image Uploads
-[Dropzone](http://www.dropzonejs.com/images/new-logo.svg)
-[Cloudinary](https://res.cloudinary.com/cloudinary/image/upload/c_scale,w_500/v1/logo/for_white_bg/cloudinary_logo_for_white_bg.png)
+![Dropzone](http://www.dropzonejs.com/images/new-logo.svg)
+![Cloudinary](https://res.cloudinary.com/cloudinary/image/upload/c_scale,w_500/v1/logo/for_white_bg/cloudinary_logo_for_white_bg.png)
 * React.js
-[React](https://cdn-images-1.medium.com/max/675/1*oi8WLwC2u0EEI1j9uKmwWg.png)
+![React](https://cdn-images-1.medium.com/max/675/1*oi8WLwC2u0EEI1j9uKmwWg.png)
 * Reactstrap (React Bootstrap package)
-[Bootstrap](https://getbootstrap.com/assets/brand/bootstrap-solid.svg)
+![Bootstrap](https://getbootstrap.com/assets/brand/bootstrap-solid.svg)
