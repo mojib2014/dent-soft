@@ -59,7 +59,7 @@ class Patient extends React.Component {
         }
         else {
             API.searchByGoogleId(id).then((results) => {
-                console.log(results)
+                // console.log(results)
                 this.setState({
                     firstName: results.data.firstName,
                     lastName: results.data.lastName,
@@ -71,7 +71,7 @@ class Patient extends React.Component {
                     record: (results.data.record ? results.data.record : this.state.record),
                     reservations: (results.data.reservations ? results.data.reservations : this.state.reservations)
                 })
-                console.log(this.state.reservations);
+                // console.log(this.state.reservations);
             }).catch(err => {
                 console.log(err)
             })    
@@ -95,7 +95,7 @@ class Patient extends React.Component {
                 phone: this.state.phone,
                 imageUrl: this.state.imageLink         
             }).then(results => {
-                console.log(this.state.birthday)
+                // console.log(this.state.birthday)
                 this.setState({ editing: false })
             }).catch(err =>alert("Numbers only please"))
         }
@@ -108,7 +108,7 @@ class Patient extends React.Component {
                 phone: this.state.phone,
                 googleImage: this.state.imageLink         
             }).then(results => {
-                console.log(this.state.birthday)
+                // console.log(this.state.birthday)
                 this.setState({ editing: false })
             }) .catch(err => alert("Numbers only please"))
         }

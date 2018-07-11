@@ -40,7 +40,7 @@ class Main extends Component {
     }
 
     checkLogIn = (loggedInId) => {
-        console.log("APP", loggedInId)
+        // console.log("APP", loggedInId)
         if (!loggedInId === "") {
             this.setState({
                 loggedInId: loggedInId
@@ -61,7 +61,7 @@ class Main extends Component {
             })
 
             const responseGoogle = (response) => {
-                console.log(response);
+                // console.log(response);
 
                 let googleUser = {
                     googleId: response.googleId,
@@ -74,7 +74,7 @@ class Main extends Component {
                 //check if google Id existed, findOne and Create use {upsert: true} in findOne and Update
                 API.googleLogin(googleUser)
                     .then((result) => {
-                        console.log(result.data);
+                        // console.log(result.data);
                         if (result.status === 200 && result.data !== "") {
                             //set cookie if user is in our database data is not null
                             this.props.createCookie("loggedinId", result.data._id, 1)
@@ -83,12 +83,12 @@ class Main extends Component {
                             this.redirect(result.data.userType);
                         }
                         else {
-                            console.log("some thing went wrong, erro code: ", result.status)
+                            // console.log("some thing went wrong, erro code: ", result.status)
                             document.getElementById("failLoginNotice").innerHTML = `some thing went wrong, erro code: ${result.status}`;
                         }
                     }).catch(err => { console.log(err) })
 
-                console.log(googleUser)
+                // console.log(googleUser)
 
             }
             ReactDOM.render(
@@ -156,7 +156,7 @@ class Main extends Component {
 
             API.createAccount(newPatient)
                 .then((result) => {
-                    console.log(result);
+                    // console.log(result);
                     //sign up err handling
                     if (result.data._id) {
                         // alert("new user created, redirect to login")

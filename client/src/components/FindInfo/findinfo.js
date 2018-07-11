@@ -12,7 +12,7 @@ class FindInfo extends React.Component {
                         {this.props.userImage ? (
                             <img src={this.props.userImage} style={{height: 200, width: 200}} alt="User" />
                         ) : (
-                            <h5>No progile image Available</h5>
+                            <h5>No profile image Available</h5>
                         )}
                     </Col>
                     <Col>
