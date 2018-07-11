@@ -6,6 +6,8 @@ import Dentist from "./pages/Dentist";
 import Patients from "./pages/Patients";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
+import "./App.css";
+
 
 class App extends Component {
 

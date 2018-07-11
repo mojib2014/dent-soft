@@ -5,9 +5,9 @@ import Photo from "../../components/Photo";
 import { Col, Row, Form, Label, Input, InputGroup, InputGroupAddon } from "reactstrap";
 import { FormBtn } from "../../components/Form";
 import FindInfo from "../../components/FindInfo";
+import Upload from "../../components/Upload";
 import DelBtn from "../../components/DelBtn";
 import Dropdown from 'react-dropdown';
-import Upload from "../../components/Upload";
 import 'react-dropdown/style.css';
 import API from "../../utils/API";
 
@@ -562,7 +562,7 @@ class Dentist extends React.Component {
                             <div className="noteInfo mb-3">
                                 <div>
                                     <h3>Note:</h3>
-                                    <br></br>
+                                    <br></br><br></br>
                                     <div className="note shadow text-left">
                                         {this.state.note.map((item, i) => {
                                             return (

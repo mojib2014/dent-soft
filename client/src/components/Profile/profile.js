@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Input, InputGroup, InputGroupAddon, Button } from "reactstrap";
+import "./Profile.css";
 
 const Profile = (props) => {
     return (
@@ -27,7 +28,7 @@ const Profile = (props) => {
             </Col> 
             : 
             <Col md="7" className="InfoBoxRight rounded"> 
-            <h2>Profile Information</h2> <Button color='primary' onClick={() => props.edit()}>Edit</Button>
+            <h2>Profile Information</h2> <Button color='primary' onClick={() => props.edit()}><i class="fas fa-user-edit">EDIT</i></Button>
             <ul>
             <li>Name: {props.firstName} {props.lastName}</li>
             <li>Email: {props.email}</li>

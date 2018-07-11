@@ -3,7 +3,7 @@ import "./Nav.css";
 import { Navbar } from "reactstrap";
 
 const Nav = ({children}) => (
-  <Navbar className="navbar navbar-expand-lg navbar-dark bg-primary">
+  <Navbar className="navbar navbar-dark bg-primary">
     {children}
   </Navbar>
 );

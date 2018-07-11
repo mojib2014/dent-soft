@@ -25,11 +25,13 @@
         padding-left: 0px;
         padding-top: 100px;
     }
+
     .card {
         margin: 0 auto;
     }
     
  }
+
  @media screen and (min-width: 736px) and (max-width: 1023px) {
     #homePage {
         width:100%;
@@ -37,6 +39,7 @@
        
         /* margin: 1rem auto 1rem 1rem; */
     }
+
     .card {
         margin: 0 auto;
     }
@@ -45,7 +48,11 @@
         padding-left: 0px;
         padding-top: 100px;
     }
+
  }
+
+
+ 
  @media screen and (min-width: 667px) and(max-width: 735) {
     #homePage {
         width:100%;
@@ -54,6 +61,7 @@
        
         /* margin: 1rem auto 1rem 1rem; */
     }
+
     .loginMove {
         padding-left: 0px;
         padding-top: 100px;
