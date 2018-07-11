@@ -6,7 +6,6 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-
 .loginMove {
     padding-left: 300px;
     padding-top: 100px;
@@ -15,16 +14,13 @@
 .card {
     padding-left: 300;
     padding-top: 100;
-
 } */
-
 @media screen and (max-width: 1024px) {
     #homePage {
         width:100%;
         text-align: center;
         /* margin: 1rem auto 1rem 1rem; */
     }
-
     .loginMove {
         padding-left: 0px;
         padding-top: 100px;
@@ -56,6 +52,7 @@
  }
 
 
+ 
  @media screen and (min-width: 667px) and(max-width: 735) {
     #homePage {
         width:100%;
@@ -75,3 +72,13 @@
     }
     
  }
+
+@media screen and (max-width: 500px) {
+    :root {
+        width: 100%;
+    }
+    html {
+        width: 100%;
+        margin: 0;
+    }
+}

@@ -5,7 +5,7 @@ import "./DentistInfo.css";
 const DentistInfo = (props) => {
     return (
         props.editing ? 
-            <Col  className="InfoBoxRight"> 
+            <Col  className="InfoBoxRight" md ="8" xs="8"> 
             <Button className="btn-md" color='primary' onClick={() => props.edit()}>Confirm</Button>
             <InputGroup>
                 <InputGroupAddon addonType='prepend'>First Name</InputGroupAddon>
@@ -32,7 +32,7 @@ const DentistInfo = (props) => {
 
             : 
 
-            <Col className="InfoBoxRight"> 
+            <Col className="InfoBoxRight" md ="8" xs="8"> 
             <Button className="btn-md" color='primary' onClick={() => props.edit()}>Edit</Button>
             <ul>
             <li>Name: {props.DfirstName} {props.DlastName}</li>

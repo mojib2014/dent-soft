@@ -6,6 +6,7 @@ import Dentist from "./pages/Dentist";
 import Patients from "./pages/Patients";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
+import "./App.css";
 
 
 class App extends Component {
@@ -103,7 +104,7 @@ class App extends Component {
           ) : (
             <div>
               <div style={{marginRight: 150, marginTop: 5}}>
-                <h3 style={{color: "white"}}>
+                <h3 style={{color: 'white'}}>
                   Welcome Back
                 </h3>
               </div>

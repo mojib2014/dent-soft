@@ -4,9 +4,9 @@ import "./Notes.css";
 
 const Notes = ({children}) => {
     return (
-        <Col md="7" className="InfoBoxRight list-overflow-container rounded" id="noteList">
+        <Col md="7" className="InfoBoxRight list-overflow-container rounded">
             <h2>Notes from your Dentist:</h2>
-            <ul className="list-group">
+            <ul className="list-group" id="noteList">
                 {children}
             </ul>
         </Col>      
