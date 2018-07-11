@@ -9,9 +9,9 @@ DS provides user-friendly and comprehensive functionalities, covering treatment 
 
 ## Features
 * Login system
-<img src="client/src/assets/images/dsLocalSignup.gif" width="700">
-<img src="client/src/assets/images/dsLocalLogin.gif" width="700">
-<img src="client/src/assets/images/dsGoogleLogin.gif" width="700">
+`<img src="client/src/assets/images/dsLocalSignup.gif" width="700">`
+`<img src="client/src/assets/images/dsLocalLogin.gif" width="700">`
+`<img src="client/src/assets/images/dsGoogleLogin.gif" width="700">`
 * Special Doctor view optimised for usability given that it is to be used on a touch screen for the soul purpose of checking a given day's appointments and adding notes and treatments for an appointment
 * Secretary view designed to make everything easily and quickly reached
 * Supports patients having health plans
@@ -23,7 +23,7 @@ DS provides user-friendly and comprehensive functionalities, covering treatment 
 
 ### Users of the DS:
 #### Administrator.
-<img src="client/src/assets/images/dsDentistLogin.gif" width="700">
+`<img src="client/src/assets/images/dsDentistLogin.gif" width="700">`
 * Add a new doctor.
 * Add a new receptionist.
 * Delete a doctor.
@@ -32,38 +32,38 @@ DS provides user-friendly and comprehensive functionalities, covering treatment 
 #### Doctor.
 * Add a medical examination.
 * Add a medical detailed plan.
-<img src="client/src/assets/images/dsDentistFileMethods.gif" width="700">
+`<img src="client/src/assets/images/dsDentistFileMethods.gif" width="700">`
 * Add a treatment.
 * Add an external file.
 #### Receptionist. 
-<img src="client/src/assets/images/dsDentistEmailLookup.gif" width="700">
+`<img src="client/src/assets/images/dsDentistEmailLookup.gif" width="700">`
 * Add new patient information.   
 * Update patient information.
-<img src="client/src/assets/images/dsDentistReservation.gif" width="700">
+`<img src="client/src/assets/images/dsDentistReservation.gif" width="700">`
 * Add a new appointment.
 * Update an appointment.
 * Delete an appointment.
-<img src="client/src/assets/images/dsDentistNote.gif" width="700">
+`<img src="client/src/assets/images/dsDentistNote.gif" width="700">`
 * Add notes for specific patients.
 * Delete notes.
 #### Patient.
-<img src="client/src/assets/images/dsProfileEdit.gif" width="700">
+`<img src="client/src/assets/images/dsProfileEdit.gif" width="700">`
 * Edit basic profile information.
-<img src="client/src/assets/images/dsPatientPage.gif" width="700">
+`<img src="client/src/assets/images/dsPatientPage.gif" width="700">`
 * Upload and view profile image.
-<img src="client/src/assets/images/dsPatientPage.gif" width="700">
+`<img src="client/src/assets/images/dsPatientPage.gif" width="700">`
 * View Notes, Appointments, and Documents given by dentist.
 
 
 #### Tools:
 * MongoDB Server & Mongoose
-<img src="https://webassets.mongodb.com/_com_assets/cms/mongodb-logo-rgb-j6w271g1xn.jpg" width="200">
+`<img src="https://webassets.mongodb.com/_com_assets/cms/mongodb-logo-rgb-j6w271g1xn.jpg" width="200">`
 * Google Authentication
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" width="200">
+`<img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" width="200">`
 * Dropzone and Cloudinary for File & Image Uploads
-<img src="http://www.dropzonejs.com/images/new-logo.svg" width="200">
-<img src="https://res.cloudinary.com/cloudinary/image/upload/c_scale,w_500/v1/logo/for_white_bg/cloudinary_logo_for_white_bg.png" width="200">
+`<img src="http://www.dropzonejs.com/images/new-logo.svg" width="200">`
+`<img src="https://res.cloudinary.com/cloudinary/image/upload/c_scale,w_500/v1/logo/for_white_bg/cloudinary_logo_for_white_bg.png" width="200">`
 * React.js
-<img src="https://cdn-images-1.medium.com/max/675/1*oi8WLwC2u0EEI1j9uKmwWg.png" width="200">
+`<img src="https://cdn-images-1.medium.com/max/675/1*oi8WLwC2u0EEI1j9uKmwWg.png" width="200">`
 * Reactstrap (React Bootstrap package)
-<img src="https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/012015/bootstrap.png?itok=GTbtFeUj" width="200">
+`<img src="https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/012015/bootstrap.png?itok=GTbtFeUj" width="200">`
