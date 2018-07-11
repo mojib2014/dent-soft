@@ -12,3 +12,9 @@ h3 {
     float: left;
 }
 
+@media screen and (max-width: 600px) {
+    .emailSearchInfo{
+        display: block;
+    }
+    
+}
