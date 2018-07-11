@@ -1,4 +1,4 @@
-# Dental-Connect
+# Dent Soft 
 
 
 [👉  Live demo 👈](https://dent-soft.herokuapp.com/)

@@ -133,7 +133,7 @@ class Dentist extends React.Component {
                         patientId: result.data._id
                     }) 
                 }
-                console.log(this.state);
+                // console.log(this.state);
             })
             .catch(err => {
                 console.log(err)
@@ -161,7 +161,7 @@ class Dentist extends React.Component {
 
             API.createAccount(newPatient)
                 .then((result) => {
-                    console.log(result);
+                    // console.log(result);
                     //sign up err handling
                     if (result.data._id) {
                         // alert("new user created")
@@ -208,7 +208,7 @@ class Dentist extends React.Component {
             API.addRecord(recordInfo)
             .then((result) => {
                 //if note empty then alert note cannot be empty
-                console.log("this is record result: ", result.data.record)
+                // console.log("this is record result: ", result.data.record)
                 //to show new note after added 
                 this.emailSearch();
 
@@ -234,7 +234,7 @@ class Dentist extends React.Component {
             API.addNote(noteInfo)
                 .then((result) => {
                     //if note empty then alert note cannot be empty
-                    console.log(result)
+                    // console.log(result)
                     //to show new note after added 
                     this.emailSearch();
 
@@ -258,7 +258,7 @@ class Dentist extends React.Component {
         // console.log(noteId) 
         API.deleteNote(noteId)
             .then((result) => {
-                console.log(result);
+                // console.log(result);
                 // refresh note
                 this.emailSearch();
             }).catch(err => console.log(err));
@@ -267,13 +267,13 @@ class Dentist extends React.Component {
 
     //***************edit Note */
     editNote = (id, note) => {
-        console.log(id)
+        // console.log(id)
         //open another page to edit note API
 
     }
     changeNoteContent = () => {
         //API update note
-        console.log('clicked')
+        // console.log('clicked')
     }
 
     //###############end edit note
@@ -286,7 +286,7 @@ class Dentist extends React.Component {
 
     //***********send reservation */
     makeReservation = ()=> {
-        console.log('Your reservationTime ', this.state.reservationTime)
+        // console.log('Your reservationTime ', this.state.reservationTime)
         let reservation = {
             date: this.state.reservationDate,
             start_time: this.state.reservationTime,
@@ -295,7 +295,7 @@ class Dentist extends React.Component {
         }
         API.createReservation(reservation)
         .then((result)=> {
-            console.log(result)
+            // console.log(result)
             if (result.status === 200 && result.data) {
                 this.setState({
                     reservationNotice: "Reservation Added!",
@@ -322,7 +322,7 @@ class Dentist extends React.Component {
                 console.log(error)
                 alert("file upload failed, please try again")
             } else {
-                console.log(result)  //[{},{}...]
+                // console.log(result)  //[{},{}...]
                 this.setState({record: result})
                 result.forEach((file)=>{
                     let newRecord={
@@ -332,7 +332,7 @@ class Dentist extends React.Component {
                     }   
                     API.addRecord(newRecord)
                     .then(data=>{
-                        console.log("record written into db", data);
+                        // console.log("record written into db", data);
                         this.emailSearch();
 
                         if (result.data) {
@@ -350,7 +350,7 @@ class Dentist extends React.Component {
       deleteRecord = (recordId) => {
         API.deleteRecord(recordId)
         .then((result) => {
-            console.log(result);
+            // console.log(result);
             // refresh note
             this.emailSearch();
         }).catch(err => console.log(err));

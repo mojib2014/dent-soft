@@ -25,9 +25,9 @@ class App extends Component {
       this.createCookie("loggedinId", "logged out", 1)
       window.location.href = "/";
     } else {
-      console.log("login id", cookieId)
-      console.log("type", type) //google or local
-      console.log("userType", userType)//admin or patient
+      // console.log("login id", cookieId)
+      // console.log("type", type) //google or local
+      // console.log("userType", userType)//admin or patient
       this.setState({
         loggedInId: cookieId,
         userType: userType
@@ -57,7 +57,7 @@ class App extends Component {
   }
 
   checkLogIn = (loggedInId) => {
-    console.log("APP", loggedInId)
+    // console.log("APP", loggedInId)
     if (!loggedInId === "") {
       this.setState({
         loggedInId: loggedInId
