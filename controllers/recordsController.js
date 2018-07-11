@@ -17,7 +17,7 @@ module.exports = {
           .catch(err => res.status(422).json(err));
       },
       create: function(req, res) {
-        console.log("record create",req.body)
+        // console.log("record create",req.body)
         db.Records
         .create(req.body)
         .then(dbModel => {
@@ -48,7 +48,7 @@ module.exports = {
           .catch(err => res.status(422).json(err));
       },
       remove: function(req, res) {
-        console.log("record ",req.params.id)
+        // console.log("record ",req.params.id)
         db.Records
           .findById({ _id: req.params.id })
           .then(dbModel => dbModel.remove())

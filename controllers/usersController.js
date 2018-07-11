@@ -12,10 +12,10 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findOneAndUpdateGoogle: function (req, res) {
-    console.log("google email", req.body)
+    // console.log("google email", req.body)
     db.google_account.findOne({ googleEmail: req.body.googleEmail })
     .then((result) => {
-      console.log("presignup google", result)
+      // console.log("presignup google", result)
       if (!result) {
         console.log("oh no create")
         db.google_account
@@ -24,7 +24,7 @@ module.exports = {
               //return err for err handling
               .catch(err => res.json(err));
       } else {
-        console.log("presignup google null",result)
+        // console.log("presignup google null",result)
         res.json(result)
         
       }
@@ -42,7 +42,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findByGoogleId: function(req, res) {
-    console.log("patient page load", req.params.id)
+    // console.log("patient page load", req.params.id)
     db.google_account
     .findOne({_id: req.params.id})
       .populate("note")
@@ -55,14 +55,14 @@ module.exports = {
       .catch(err => res.json(err));
   },
   findByEmail: function (req, res) {
-    console.log(req.params)
+    // console.log(req.params)
     db.Users
       .findOne({email: req.params.email})
       .populate("note") 
       .populate("record") 
       .populate("reservations")
       .then(dbModel => {
-        console.log(dbModel);
+        // console.log(dbModel);
         if(dbModel === null) {
           db.google_account
           .findOne({googleEmail: req.params.email})
@@ -97,9 +97,9 @@ module.exports = {
     //make sure the user does not exist
     db.Users.findOne({ email: req.body.email })
       .then((result) => {
-        console.log("presignup create", result)
+        // console.log("presignup create", result)
         if (!result) {
-          console.log("here create",req.body)
+          // console.log("here create",req.body)
           bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
             req.body.password = hash;
             db.Users
