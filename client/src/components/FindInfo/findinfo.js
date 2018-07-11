@@ -7,7 +7,7 @@ class FindInfo extends React.Component {
     render() {
         return (
             <div className="container">
-                <Row>
+                <Row className="emailSearchInfo">
                     <Col className="pic-col">
                         {this.props.userImage ? (
                             <img src={this.props.userImage} style={{height: 200, width: 200}} alt="User" />
