@@ -8,6 +8,7 @@
 }
 
 .patientCard{
+    background-color: rgb(245, 243, 243);
         box-shadow: 2px 2px 5px 000;
 }
 
@@ -22,6 +23,7 @@
 .note{
     height: 200px;
     overflow: scroll;
+    background-color: white;
 }
 
 #reservationNotice{
@@ -29,3 +31,4 @@
     float: left;
     color: black;
 }
+

@@ -1,24 +1,27 @@
 .InfoBoxLeft {
-    background-color: darkgray;
+    background-color: rgb(245, 243, 243);
     width: 300px;
     height: 300px;
     float: none;
     margin: 1rem 1rem 1rem auto;
+    box-shadow: 6px 6px 5px 000;
 }
 .InfoBoxRight {
-    background-color: darkgray;
+    background-color: rgb(245, 243, 243);
     width: 300px;
     height: 300px;
     float: none;
     margin: 1rem auto 1rem 1rem;
+    box-shadow: 6px 6px 5px 000;
 }
 
 .InfoBoxFull {
-    background-color:darkgray;
+    background-color:rgb(245, 243, 243);
     height: 300px;
     float: none;
     margin: 1rem auto;
     box-shadow: 50px;
+    box-shadow: 6px 6px 5px 000;
 }
 
 h2 {
@@ -26,10 +29,12 @@ h2 {
 }
 
 ul {
+    margin-top: 10px;
     list-style-type: none;
 }
 
 li {
+    color: black;
     font-size: 18pt;
     text-align: left;
     margin-top: 1rem;
@@ -38,4 +43,27 @@ li {
 button{
     float: right;
     font-size: 20pt;
+}
+
+p{
+    margin-top: 30px;
+    color: black;
+}
+
+body{
+    background-color: rgba(192, 223, 248, 0.863);
+}
+
+@media screen and (max-width: 500px) {
+    .InfoBoxLeft {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+    } 
+    
+    .InfoBoxRight {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+    }
 }
