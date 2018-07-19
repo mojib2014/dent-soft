@@ -3,6 +3,8 @@
 
 [👉  Live demo 👈](https://dent-soft.herokuapp.com/)
 
+admin login: momo@yahoo.com  
+psw: jjj111
 
 ## Description
 Dent Soft (DS)
